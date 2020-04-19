@@ -1,8 +1,7 @@
-from flask import Flask, render_template,request,send_from_directory,session,flash
+from flask import Flask, render_template,request
 import re
-from werkzeug.security import check_password_hash, generate_password_hash
-from app import app
 
+app = Flask(__name__)
 
 
 #for testing
@@ -15,3 +14,10 @@ def index():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('error.html'), 404
+      
+
+   
+if __name__ == '__main__':
+
+    app.run( port='5000',threaded=True)
+
