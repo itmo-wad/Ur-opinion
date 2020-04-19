@@ -2,7 +2,7 @@ from flask import Flask, render_template,request,send_from_directory,session,fla
 import re
 from werkzeug.security import check_password_hash, generate_password_hash
 from app import app
-from db import get_db
+
 
 
 #for testing
