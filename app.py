@@ -1,5 +1,6 @@
 from flask import Flask, render_template,request
 import re
+from routes import *
 
 app = Flask(__name__)
 
@@ -8,7 +9,9 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/index')
 def index():
-    return "Hello, World!"
+    return index_routes()
+    
+    
 
 #error page    
 @app.errorhandler(404)
