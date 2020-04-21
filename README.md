@@ -14,3 +14,4 @@ This service provides a platform for exchanging ideas between the team and doing
 
 - The teacher wants to get the best students ’ideas on a specific topic for adoption during the teaching process, so he asks them to do a brainstorming process for these ideas.
 
+![Demo:](https://github.com/itmo-wad/Ur-opinion/blob/master/demo.gif?raw=true)
