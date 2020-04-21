@@ -9,8 +9,17 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/index')
 def index():
-    return index_routes()
+    return log_r()
     
+#login page
+@app.route('/login')
+def log():
+    return log_r()
+
+#register pasge
+@app.route('/register')
+def reg():
+    return reg_r()
     
 
 #error page    
@@ -23,4 +32,3 @@ def page_not_found(e):
 if __name__ == '__main__':
 
     app.run( port='5000',threaded=True)
-
