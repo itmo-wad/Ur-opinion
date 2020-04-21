@@ -20,6 +20,7 @@ def log():
 @app.route('/register')
 def reg():
     return reg_r()
+
     
 
 #error page    

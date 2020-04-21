@@ -1,6 +1,7 @@
 from flask import Flask, render_template,request
 import re
 
+
 def index_r():
     return "Welcome to Ur-opinion!"
 
@@ -11,3 +12,4 @@ def log_r():
 #register page
 def reg_r():
     return render_template('register.html')  
+
