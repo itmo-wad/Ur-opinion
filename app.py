@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/index')
 def index():
-    return log_r()
+    return index_r()
     
 #login page
 @app.route('/login')

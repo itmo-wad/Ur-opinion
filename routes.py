@@ -3,7 +3,7 @@ import re
 
 
 def index_r():
-    return "Welcome to Ur-opinion!"
+    return render_template('index.html') 
 
 #login page
 def log_r():

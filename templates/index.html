@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Ur-Opinion</title>
+
+  <link rel="stylesheet" media="all" href="/static/css/style.css" />
+
+  <script src="/static/js/jquery-3.5.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#btn_in_progress").click(function () {
+        $("#content").load("in_progress_page");
+      });
+
+
+      $("#btn_created_by_me").click(function () {
+        $("#content").load("created_by_me_page");
+      });
+
+      $("#btn_shared_with_me").click(function () {
+        $("#content").load("shared_with_me_page");
+      });
+
+      $("#btn_archived").click(function () {
+        $("#content").load("archived_page");
+      });
+
+      $("#btn_new_task").click(function () {
+        $("#content").load("new_task_page");
+      });
+
+    });
+  </script>
+
+
+
+</head>
+
+<body>
+
+  <!-- Main navbar -->
+  <div class="navbar navbar-expand-md navbar-dark bg-indigo navbar-static">
+
+    <!-- Header with logo -->
+    <div class="navbar-brand">
+      <img src="/static/logo.png" class="logo" />
+      <span>
+        Ur-Opinion
+      </span>
+    </div>
+    <!-- /header with logo -->
+
+
+    <!-- Navbar content -->
+    <div class="collapse navbar-collapse" id="navbar-mobile">
+
+
+      <ul class="navbar-nav ml-auto">
+
+        <!-- ghadeer acount symbole -->
+        <li class="nav-item dropdown dropdown-user">
+          <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
+            <span>Ghadeer Darwesh</span>
+          </a>
+
+
+          <!-- drop down from account icon -->
+          <div class="dropdown-menu dropdown-menu-right">
+
+            <a href="/dashboard" class="dropdown-item" data-disable-with="Please wait .."><i class="icon-home2"></i>
+              Dashboard</a>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" data-disable-with="Please wait .." href="/account">
+              <i class="icon-cog5"></i> Account settings
+            </a>
+            <a class="dropdown-item" data-disable-with="Please wait .." href="/billing">
+              <i class="fa fa-sliders"></i> Billing settings
+            </a>
+            <a class="dropdown-item" data-disable-with="Please wait .." href="/logout">
+              <i class="icon-switch2"></i> Logout
+            </a>
+          </div>
+
+
+        </li>
+      </ul>
+    </div>
+    <!-- /navbar content -->
+  </div>
+  <!-- /main navbar -->
+
+  <!-- Page content -->
+  <div class="page-content">
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+
+      <!-- dashboad  -->
+      <div class="page-header page-header-light">
+        <div class="page-header-content header-elements-md-inline">
+          <div class="page-title d-flex">
+            <h4> <span class="font-weight-semibold">Tasks Dashboard</span> </h4>
+            <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+          </div>
+
+
+
+          <!-- tasks in dashboard -->
+          <div class="card-body p-0">
+
+
+
+            <button class="nav-link " id="btn_in_progress" data-remote="true">
+              In Progress
+            </button>
+
+            <button class="nav-link " id="btn_created_by_me" data-remote="true">
+              Created By Me
+            </button>
+
+
+            <button class="nav-link " id="btn_shared_with_me" data-remote="true">
+              Shared With Me
+            </button>
+
+
+            <button class="nav-link " id="btn_archived" data-remote="true">
+              Archived
+            </button>
+
+          </div>
+
+
+          <!-- new task button -->
+          <div class="header-elements d-none">
+            <button class="nav-link " id="btn_new_task">
+              New Task
+            </button> </div>
+        </div>
+      </div>
+
+      <!-- Content area -->
+      <div class="content">
+        <!-- Inner container -->
+        <div class="d-md-flex align-items-md-start">
+
+
+
+
+          <!-- Right content -->
+          <div class="w-100">
+
+            <!-- Basic card -->
+            <div class="card border-left-1 border-left-blue-400 rounded-left-0">
+              <div class="card-header">
+                <h6 class="card-title">Testing one single application</h6>
+              </div>
+
+              <div class="card-body" id="content">
+                put tasks here
+
+
+
+              </div>
+
+            </div>
+            <!-- /basic card -->
+          </div>
+          <!-- /right content -->
+        </div>
+        <!-- /inner container -->
+      </div>
+      <!-- /content area -->
+
+      <!-- Footer -->
+      <div class="navbar navbar-expand-lg navbar-light">
+        <div class="text-center d-lg-none w-100">
+          <button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse"
+            data-target="#navbar-footer">
+            <i class="icon-unfold mr-2"></i>
+            Footer
+          </button>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar-footer">
+          <span class="navbar-text">
+            ITMO WAD 2020
+          </span>
+
+        </div>
+      </div>
+
+      <!-- /footer -->
+
+    </div>
+    <!-- /main content -->
+
+  </div>
+  <!-- /page content -->
+
+</body>
+
+</html>
