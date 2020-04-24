@@ -8,7 +8,7 @@ import pymongo
 
 #client = pymongo.MongoClient("mongodb://<dbuser>:<password>@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 #db = client["dbname"]
-client = os.environ.get('MongoDb', None)
+client = pymongo.MongoClient(os.environ.get('MongoDb', None))
 db = client.get_default_database()
 
 #get users' collection
