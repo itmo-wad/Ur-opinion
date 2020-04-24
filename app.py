@@ -16,19 +16,32 @@ def index():
 #login page
 @app.route('/login', methods=['GET','POST'])
 def log():
-   
-    if request.referrer.endswith('register') :
-            username = request.form.get('username')
-            password = request.form.get('password')
-            email    = request.form.get('email')
-            fullname = request.form.get('fullname')
+    
+    
+    if request.method == 'POST':
+        
+        #check if from reg page
+        if request.referrer.endswith('register') :
+                username = request.form.get('username')
+                password = request.form.get('password')
+                email    = request.form.get('email')
+                fullname = request.form.get('fullname')
+                return reg_r(username,password,email,fullname)
+        
+        #check if from login page
+        elif request.referrer.endswith('login'):
+                username = request.form.get('username')
+                password = request.form.get('password')
+                return log_r(username,password)
             
-            return log_r(username,password,email,fullname)
+    #if method is Get
+    else:
+        return render_template('login.html')
 
 #register pasge
 @app.route('/register')
 def reg():
-    return reg_r()
+    return render_template('register.html')  
 
     
 
