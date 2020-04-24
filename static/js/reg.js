@@ -9,12 +9,14 @@ function AlertPass() {
 
 function Validate() {
     var username = document.getElementById("username").value;
+    var fullname = document.getElementById("fullname").value;
     var email = document.getElementById("email").value;
     var password = document.getElementById("pass").value;
     var confirmPassword = document.getElementById("c_pass").value;
 
+
     
-    if (username === "" || email === "" || password ==="" || confirmPassword==="") {
+    if (username === "" || email === "" || password ==="" || confirmPassword==="" || fullname==="") {
         alert("You have to fill all the fields");
         return false;
 

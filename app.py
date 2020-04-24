@@ -4,6 +4,8 @@ from routes import *
 
 app = Flask(__name__)
 
+#secret key for the session
+app.secret_key = "super secret key"
 
 #for testing
 @app.route('/')
@@ -12,9 +14,16 @@ def index():
     return index_r()
     
 #login page
-@app.route('/login')
+@app.route('/login', methods=['GET','POST'])
 def log():
-    return log_r()
+   
+    if request.referrer.endswith('register') :
+            username = request.form.get('username')
+            password = request.form.get('password')
+            email    = request.form.get('email')
+            fullname = request.form.get('fullname')
+            
+            return log_r(username,password,email,fullname)
 
 #register pasge
 @app.route('/register')
