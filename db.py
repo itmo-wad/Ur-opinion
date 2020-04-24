@@ -3,8 +3,9 @@ import re
 import pymongo
 
 #connect to datatbase
-client = pymongo.MongoClient("mongodb+srv://admin:P%40ssword%23%2A@cluster0-rkjc0.mongodb.net/test?retryWrites=true&w=majority")
-db = client["moon"]
+#client = pymongo.MongoClient("mongodb+srv://admin:P%40ssword%23%2A@cluster0-rkjc0.mongodb.net/test?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb://admin:P29069921@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
+db = client["heroku_kmd3257w"]
 
 #get users' collection
 users = db["users"]
