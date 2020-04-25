@@ -6,7 +6,7 @@
   <title>Ur-Opinion</title>
 
   <link rel="stylesheet" media="all" href="/static/css/style.css" />
-
+  <script type="text/javascript" src="/static/js/script.js"></script>
   <script src="/static/js/jquery-3.5.0.min.js"></script>
   <script>
     $(document).ready(function () {
@@ -44,12 +44,13 @@
   <div class="navbar navbar-expand-md navbar-dark bg-indigo navbar-static">
 
     <!-- Header with logo -->
-    <div class="navbar-brand">
+
+    <a class="navbar-brand" href="/">
       <img src="/static/logo.png" class="logo" />
       <span>
         Ur-Opinion
       </span>
-    </div>
+    </a>
     <!-- /header with logo -->
 
 
@@ -59,31 +60,15 @@
 
       <ul class="navbar-nav ml-auto">
 
-        <!-- ghadeer acount symbole -->
-        <li class="nav-item dropdown dropdown-user">
-          <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-            <span>Ghadeer Darwesh</span>
-          </a>
-
-
-          <!-- drop down from account icon -->
-          <div class="dropdown-menu dropdown-menu-right">
-
-            <a href="/dashboard" class="dropdown-item" data-disable-with="Please wait .."><i class="icon-home2"></i>
-              Dashboard</a>
-
-            <div class="dropdown-divider"></div>
-
-            <a class="dropdown-item" data-disable-with="Please wait .." href="/account">
-              <i class="icon-cog5"></i> Account settings
-            </a>
-            <a class="dropdown-item" data-disable-with="Please wait .." href="/billing">
-              <i class="fa fa-sliders"></i> Billing settings
-            </a>
-            <a class="dropdown-item" data-disable-with="Please wait .." href="/logout">
-              <i class="icon-switch2"></i> Logout
-            </a>
+        <!--  account symbole -->
+        <div class="dropdown">
+          <button onclick="myFunction()" class="dropbtn">Ghadeer Darwesh</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
           </div>
+        </div>
 
 
         </li>
@@ -178,13 +163,7 @@
 
       <!-- Footer -->
       <div class="navbar navbar-expand-lg navbar-light">
-        <div class="text-center d-lg-none w-100">
-          <button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse"
-            data-target="#navbar-footer">
-            <i class="icon-unfold mr-2"></i>
-            Footer
-          </button>
-        </div>
+
 
         <div class="navbar-collapse collapse" id="navbar-footer">
           <span class="navbar-text">
