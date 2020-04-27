@@ -19,7 +19,7 @@
   <div class="form-style">
     <h2>Sign up to Ur-Opinion</h2>
 
-    <form method="POST" action="/register">
+    <form method="POST" action="{{ url_for('reg')}}">
 
       <i class="fa fa-user icon"> </i>
       <input type="text" id="username" name="username" placeholder="User Name" autocomplete="off"/>
@@ -44,5 +44,5 @@
 
       
     </form>
-    <a href="/">Home Page</a>
+    <a href="{{ url_for('index')}}">Home Page</a>
   </div>

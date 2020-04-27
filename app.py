@@ -5,6 +5,7 @@ import logging
 from routes import *
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 #secret key for the session
 app.secret_key = "super secret key"
@@ -13,6 +14,11 @@ app.secret_key = "super secret key"
 def favicon():
     return send_from_directory("static/img", "favicon.ico", mimetype="image/vnd.microsoft.icon")
 
+@app.before_request
+def clear_trailing():
+    rp = request.path 
+    if rp != '/' and rp.endswith('/'):
+        return redirect(rp[:-1])
 
 #main page
 @app.route('/')
