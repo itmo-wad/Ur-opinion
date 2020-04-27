@@ -9,6 +9,11 @@ app = Flask(__name__)
 #secret key for the session
 app.secret_key = "super secret key"
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory("static/img", "favicon.ico", mimetype="image/vnd.microsoft.icon")
+
+
 #main page
 @app.route('/')
 @app.route('/index')
