@@ -29,7 +29,7 @@ def index():
     
       #check if the user logged in, if not redirect to login html
     if session.get('logged_in'):
-          index_r()
+          return index_r()
           
           
     else:
