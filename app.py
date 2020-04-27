@@ -1,13 +1,26 @@
 from flask import Flask, render_template,request,redirect
 import re
+import requests
 from logging.handlers import RotatingFileHandler
 import logging
+
 from routes import *
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 #secret key for the session
 app.secret_key = "super secret key"
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory("static/img", "favicon.ico", mimetype="image/vnd.microsoft.icon")
+
+@app.before_request
+def clear_trailing():
+    rp = request.path 
+    if rp != '/' and rp.endswith('/'):
+        return redirect(rp[:-1])
 
 #main page
 @app.route('/')
@@ -16,7 +29,7 @@ def index():
     
       #check if the user logged in, if not redirect to login html
     if session.get('logged_in'):
-        return index_r()
+          return index_r()
           
           
     else:
@@ -78,6 +91,13 @@ def logout():
 def page_not_found(e):
     return render_template('error.html'), 404
  
+@app.errorhandler(500)
+def internal_error(e):
+    requests.post("https://notify.bot.codex.so/u/1L9N0D7I", {"message": f"*Exception* on the server: '{str(e)}'" , "parse_mode":"Markdown"})
+    #Team 3
+    #requests.post("https://notify.bot.codex.so/u/8B2LDPRZ", {"message": f"*Exception* on the server: '{str(e)}'" , "parse_mode":"Markdown"})
+    return str(e), 500
+    
 # logging     
 handler = logging.handlers.RotatingFileHandler('logs/app.log',maxBytes=32 , backupCount=2)
 handler.setLevel(logging.DEBUG)
