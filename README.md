@@ -22,13 +22,13 @@ This service provides a platform for exchanging ideas between the team and doing
 2.	Choose technologies stack
 3.	Make github project page with description
 4.	Create Front-end part:
-•	Login and Register Form
-•	Home page with tasks dashboard
-•	Account setting page
-•	Form to create new task
+•	Login and Register Form  
+•	Home page with tasks dashboard  
+•	Account setting page  
+•	Form to create new task  
 5.	Create Back-end part:
-•	Create database to storage user’s info and tasks
-•	Programming based on the website interface and functions
+•	Create database to storage user’s info and tasks  
+•	Programming based on the website interface and functions  
 6.	Deploy
 
 **Workflow:**
