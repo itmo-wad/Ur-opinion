@@ -1,5 +1,7 @@
 from flask import Flask, render_template,request,redirect
 import re
+from logging.handlers import RotatingFileHandler
+import logging
 from routes import *
 
 app = Flask(__name__)
@@ -75,9 +77,17 @@ def logout():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('error.html'), 404
-      
+ 
+# logging     
+handler = logging.handlers.RotatingFileHandler('logs/app.log',maxBytes=32 , backupCount=2)
+handler.setLevel(logging.DEBUG)
+handler.setFormatter(logging.Formatter('%(asctime)s [in %(pathname)s:%(lineno)d]: %(message)s'))
 
-   
+app.logger.addHandler(handler)
+app.logger.setLevel(logging.DEBUG)
+app.logger.info('This message goes to stderr and app.log')   
+
+
 if __name__ == '__main__':
 
     app.run( port='5000',threaded=True)
