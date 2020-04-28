@@ -22,27 +22,30 @@
     <form method="POST" action="{{ url_for('reg')}}">
 
       <i class="fa fa-user icon"> </i>
-      <input type="text" id="username" name="username" placeholder="User Name" autocomplete="off"/>
+      <input type="text" id="username" name="username" placeholder="User Name" autocomplete="off" />
 
       <i class="fa fa-user icon"> </i>
-      <input type="text" id="fullname" name="fullname" placeholder="Full Name" autocomplete="off"/>
+      <input type="text" id="fullname" name="fullname" placeholder="Full Name" autocomplete="off" />
 
       <i class="fa fa-envelope icon"> </i>
-      <input type="email" id="email" name="email" placeholder="Your Email" autocomplete="off"/>
+      <input type="email" id="email" name="email" placeholder="Your Email" autocomplete="off" />
 
       <i class="fa fa-key icon"> </i>
-      <input type="password" id="pass" name="password" placeholder="Password"  />
+      <input type="password" id="pass" name="password" placeholder="Password" />
 
       <i class="fa fa-key icon"> </i>
-      <input type="password" id ="c_pass" name="re_password" placeholder="Repeat Password" onchange="AlertPass()"/>
+      <input type="password" id="c_pass" name="re_password" placeholder="Repeat Password" onchange="AlertPass()" />
 
       {% for message in get_flashed_messages() %}
       <p class="error">{{ message }}</p>
       {% endfor %}
 
-      <input type="submit" id="submit" value="Register"  onclick="return Validate();"/>
+      <input type="submit" id="submit" value="Register" onclick="return Validate();" />
 
-      
+
     </form>
-    <a href="{{ url_for('index')}}">Home Page</a>
+    Or already have an account:
+    <br />
+    <br />
+    <a href="{{ url_for('index')}}" style="color: rgb(10, 18, 95); font-weight: bold;">SIGN IN</a>
   </div>
