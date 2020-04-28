@@ -6,6 +6,8 @@
   <title>Ur-Opinion</title>
 
   <link rel="stylesheet" media="all" href="/static/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/style_login.css">
+  <script type="text/javascript" src="/static/js/reg.js"></script>
   <script type="text/javascript" src="/static/js/script.js"></script>
   <script src="/static/js/jquery-3.5.0.min.js"></script>
   <script>
@@ -28,7 +30,7 @@
       });
 
       $("#btn_new_task").click(function () {
-        $("#content").load("new_task_page");
+        $("#content").load("newtask_page");
       });
 
     });
@@ -124,7 +126,7 @@
 
           <!-- new task button -->
           <div class="header-elements d-none">
-            <button class="nav-link " id="btn_new_task">
+            <button class="nav-link " id="btn_new_task" onclick="show_perview()">
               New Task
             </button> </div>
         </div>
@@ -183,6 +185,26 @@
   </div>
   <!-- /page content -->
 
+
+  <!-- div for new task button-->
+  <div id="preview" class="prev_block">
+    <span class="helper"></span>
+    <div id="div_content" class="div_content form-style">
+      <h2 style="color: white; font-weight: bold; margin: 0;">Create New Task</h2>
+      <form method="POST" action="{{ url_for('reg')}}">
+
+        <input type="text" id="taskname" name="taskname" placeholder="Add Task Name" autocomplete="off" />
+
+        <input type="text" id="taskdesc" name="taskdesc" placeholder="Add task description" autocomplete="off" />
+
+        {% for message in get_flashed_messages() %}
+        <p class="error">{{ message }}</p>
+        {% endfor %}
+        <input type="submit" id="submit" value="Publish" onclick="return Validate(); " disabled />
+        <div class="nav-link btndiv " onclick="hide_perview()">Close</div>
+    </div>
+  </div>
+  <!-- /div for new task button-->
 </body>
 
 </html>
