@@ -1,5 +1,4 @@
-
-.form-style{
+.form-style {
 	font-family: 'Open Sans Condensed', arial, sans;
 	width: 500px;
 	padding: 30px;
@@ -8,7 +7,8 @@
 	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
 
 }
-.form-style h2{
+
+.form-style h2 {
 	background: #4D4D4D;
 	text-transform: uppercase;
 	font-family: 'Open Sans Condensed', sans-serif;
@@ -18,11 +18,11 @@
 	padding: 20px;
 	margin: -30px -30px 30px -30px;
 }
+
 .form-style input[type="text"],
 .form-style input[type="email"],
 .form-style input[type="password"],
-.form-style select 
-{
+.form-style select {
 	box-sizing: border-box;
 	outline: none;
 	display: block;
@@ -39,8 +39,8 @@
 
 }
 
-.form-style input[type="button"], 
-.form-style input[type="submit"]{
+.form-style input[type="button"],
+.form-style input[type="submit"] {
 	box-shadow: inset 0px 1px 0px 0px #45D6D6;
 	background-color: #2CBBBB;
 	border: 1px solid #27A0A0;
@@ -54,22 +54,23 @@
 	text-transform: uppercase;
 	margin: 0px auto;
 }
-.form-style input[type="button"]:hover, 
+
+.form-style input[type="button"]:hover,
 .form-style input[type="submit"]:hover {
-	background:linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
-	background-color:#34CACA;
+	background: linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
+	background-color: #34CACA;
 }
 
 
- 
-.icon { 
-	position: absolute; 
-	padding: 10px; 
-	color: green; 
-	min-width: 50px; 
-	text-align: center; 
-} 
 
-.error{
+.icon {
+	position: absolute;
+	padding: 10px;
+	color: green;
+	min-width: 50px;
+	text-align: center;
+}
+
+.error {
 	color: red;
 }

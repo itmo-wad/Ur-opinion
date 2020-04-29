@@ -179,11 +179,23 @@ h6 {
     display: block;
     padding: .625rem 1.25rem;
     margin: 10px;
+    color: rgb(59, 1, 1);
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-variant: normal;
+    text-transform: capitalize;
+    font-size: 12pt;
+
 }
 
 .nav-link:focus,
 .nav-link:hover {
-    text-decoration: none
+
+    text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+    transition: all 0.4s ease 0s;
+
 }
 
 
@@ -207,11 +219,21 @@ h6 {
     padding-top: 1.00002rem;
     padding-bottom: 1.00002rem;
     margin-right: 1.25rem;
-    font-size: 15pt;
-    font-weight: bold;
+
+
     line-height: inherit;
     white-space: nowrap;
     outline: none;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 15pt;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: uppercase;
 }
 
 .navbar-brand:focus,
@@ -803,6 +825,7 @@ body {
     cursor: pointer;
     margin-right: 0px;
     font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
 }
 
 .dropbtn:hover,
@@ -856,7 +879,7 @@ body {
     top: 0;
     width: 100%;
     z-index: 10000;
-
+    left: 0;
 }
 
 .prev_block .helper {
@@ -883,16 +906,28 @@ body {
 }
 
 .btndiv {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    width: 20%;
+    float: left;
     -webkit-appearance: button;
     outline: black;
     background-color: cadetblue;
     font-weight: bold;
 }
 
-.btndiv:hover {
+.btninput {
+    width: 20%;
+
+    -webkit-appearance: button;
+    outline: black;
+    background-color: #aee108;
+    font-weight: bold;
+    float: right;
+    color: darkred;
+
+}
+
+.btndiv:hover,
+.btninput:hover {
     color: rgb(228, 13, 13);
 
 }
