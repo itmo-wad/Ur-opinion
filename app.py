@@ -29,7 +29,7 @@ def index():
     
       #check if the user logged in, if not redirect to login html
     if session.get('logged_in'):
-          return index_r()
+         return index_r()
           
           
     else:
@@ -80,6 +80,16 @@ def reg():
          #if get method , or user already exists        
         return render_template('register.html')  
 
+
+#new task div    
+# @app.route('/newtask')
+# def newtask():
+#      if (request.remote_addr != "127.0.0.1") :
+#          return render_template('error.html'), 404
+     
+#      return render_template('newtask.html')
+ 
+    
 #logout page    
 @app.route('/logout')
 def logout():
@@ -90,6 +100,7 @@ def logout():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('error.html'), 404
+
  
 @app.errorhandler(500)
 def internal_error(e):
@@ -110,4 +121,4 @@ app.logger.info('This message goes to stderr and app.log')
 
 if __name__ == '__main__':
 
-    app.run( port='5000',threaded=True)
+    app.run(host='0.0.0.0', port='5000',threaded=True)

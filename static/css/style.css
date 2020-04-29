@@ -275,6 +275,14 @@ h6 {
 
     }
 
+    .loginlogo {
+
+        border-radius: 50px;
+        width: 40px;
+        height: 40px;
+
+    }
+
     .navbar-expand-md .navbar-nav {
         -ms-flex-direction: row;
         flex-direction: row
@@ -582,7 +590,7 @@ a.text-default:hover {
 
 .navbar-light {
     color: rgba(51, 51, 51, .75);
-    background-image: linear-gradient(to right, rgba(44, 40, 40, 0), rgb(43, 2, 2));
+    background-image: linear-gradient(to right, rgba(44, 40, 40, 0), rgb(100, 4, 4));
 }
 
 .content+.navbar-light {
@@ -772,7 +780,7 @@ body {
 }
 
 .bg-indigo {
-    background-image: linear-gradient(to right, rgba(44, 40, 40, 0), rgb(43, 2, 2));
+    background-image: linear-gradient(to right, rgba(44, 40, 40, 0), rgb(155, 2, 2));
 }
 
 .border-left-blue-400 {
@@ -787,17 +795,19 @@ body {
 
 .dropbtn {
     background: none;
-    color: white;
+    color: rgb(255, 255, 255);
     padding: 16px;
+    padding-right: 0px;
     font-size: 16px;
     border: none;
     cursor: pointer;
-    margin-right: 20px;
+    margin-right: 0px;
+    font-weight: bold;
 }
 
 .dropbtn:hover,
 .dropbtn:focus {
-    color: blue;
+    color: rgb(15, 224, 224);
 
 }
 
@@ -817,6 +827,7 @@ body {
     border-radius: 20px;
     text-align: center;
     right: 0px;
+    font-weight: bold;
 }
 
 .dropdown-content a {
@@ -832,4 +843,56 @@ body {
 
 .show {
     display: block;
+}
+
+.prev_block {
+
+    background: rgba(0, 0, 0, .4);
+    cursor: pointer;
+    display: none;
+    height: 100%;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
+
+}
+
+.prev_block .helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.prev_block>div {
+    background-color: #fff;
+    box-shadow: 10px 10px 60px #555;
+    display: inline-block;
+    width: 50vw;
+    height: 500px;
+    max-width: 50vw;
+    min-height: 50vh;
+    vertical-align: middle;
+    position: relative;
+    border-radius: 8px;
+    padding: 15px;
+    width: 100%;
+    font-family: 'Open Sans Condensed', arial, sans;
+
+}
+
+.btndiv {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    -webkit-appearance: button;
+    outline: black;
+    background-color: cadetblue;
+    font-weight: bold;
+}
+
+.btndiv:hover {
+    color: rgb(228, 13, 13);
+
 }

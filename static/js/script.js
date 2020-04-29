@@ -6,7 +6,7 @@ function myFunction() {
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function (event) {
-    if (!event.target.matches('.dropbtn')) {
+    if (!event.target.matches('.dropbtn') && !event.target.matches('.loginlogo')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
         var i;
         for (i = 0; i < dropdowns.length; i++) {
@@ -17,3 +17,21 @@ window.onclick = function (event) {
         }
     }
 }
+
+/* show adn hid div for new task and account setting
+ */
+function show_perview(name, title, text) {
+
+    var dev_block = document.getElementById("preview");
+
+    dev_block.style.display = "block";
+
+
+
+};
+
+
+function hide_perview() {
+    var test = document.getElementById("preview");
+    test.style.display = "none";
+};
