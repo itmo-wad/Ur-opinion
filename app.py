@@ -21,10 +21,11 @@ def clear_trailing():
     rp = request.path 
     if rp != '/' and rp.endswith('/'):
         return redirect(rp[:-1])
+    if rp.endswith("index"):
+        return redirect(rp[:-5])
 
 #main page
 @app.route('/')
-@app.route('/index')
 def index():
     
       #check if the user logged in, if not redirect to login html
@@ -85,20 +86,17 @@ def reg():
 @app.route('/teams')
 def newtask():
       # use the host of the server
-       # if (request.remote_addr != "127.0.0.1") :
-       #     return render_template('error.html'), 404
-       # return render_template('teams.html')
+        # if (request.remote_addr != "127.0.0.1") :
+        #     return render_template('error.html'), 404
+        # return render_template('teams.html')
      
     
-    if (request.remote_addr != "10.33.206.158") :
-           return render_template('error.html'), 404
-    return render_template('teams.html')
-
-    #for testing on heroku
-    # if (request.referrer != "https://ur-opinion.herokuapp.com/") :
-    #   return render_template('error.html'), 404
     
-    # return render_template('teams.html')
+    #for testing on heroku
+    if (request.referrer != "https://ur-opinion.herokuapp.com/") :
+      return render_template('error.html'), 404
+    
+    return render_template('teams.html')
  
     
 #logout page    
