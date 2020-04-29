@@ -27,12 +27,13 @@ body {
 .form-style h2 {
 	background: #4D4D4D;
 	text-transform: uppercase;
-	font-family: 'Open Sans Condensed', sans-serif;
-	color: #797979;
+	font-family: initial;
+	color: white;
 	font-size: 18px;
-	font-weight: 100;
+	font-weight: bold;
 	padding: 20px;
 	margin: -30px -30px 30px -30px;
+	text-align: center;
 }
 
 .form-style input[type="text"],
