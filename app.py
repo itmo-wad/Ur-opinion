@@ -82,12 +82,12 @@ def reg():
 
 
 #new task div    
-# @app.route('/newtask')
-# def newtask():
-#      if (request.remote_addr != "127.0.0.1") :
-#          return render_template('error.html'), 404
+@app.route('/teams')
+def newtask():
+      if (request.remote_addr != "127.0.0.1") :
+          return render_template('error.html'), 404
      
-#      return render_template('newtask.html')
+      return render_template('teams.html')
  
     
 #logout page    
