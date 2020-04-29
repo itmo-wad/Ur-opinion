@@ -84,8 +84,17 @@ def reg():
 #new task div    
 @app.route('/teams')
 def newtask():
+      # use the host of the server
+      # if (request.remote_addr != "127.0.0.1") :
+      #     return render_template('error.html'), 404
+      # return render_template('teams.html')
+     
     
-      return render_template('teams.html')
+    #for testing on heroku
+    if (request.referrer != "https://ur-opinion.herokuapp.com/") :
+      return render_template('error.html'), 404
+    
+    return render_template('teams.html')
  
     
 #logout page    
