@@ -7,6 +7,10 @@
 
   <link rel="stylesheet" media="all" href="/static/css/style.css" />
   <link rel="stylesheet" type="text/css" href="/static/css/style_login.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/style_my_teams.css">
+
+
+
   <script type="text/javascript" src="/static/js/reg.js"></script>
   <script type="text/javascript" src="/static/js/script.js"></script>
   <script src="/static/js/jquery-3.5.0.min.js"></script>
@@ -33,6 +37,9 @@
         $("#content").load("newtask_page");
       });
 
+      $("#my_teams").click(function () {
+        $("#content").load("teams");
+      });
     });
   </script>
 
@@ -67,7 +74,7 @@
           <button onclick="myFunction()" class="dropbtn">Ghadeer Darwesh </button>
           <img src="/static/img/login.png" class="loginlogo" onclick="myFunction()" />
           <div id="myDropdown" class="dropdown-content">
-            <a href="#home">Home</a>
+            <a id="my_teams" href="#MyTeams">My Teams</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
             <a href="/logout">Logout</a>
@@ -126,7 +133,7 @@
 
           <!-- new task button -->
           <div class="header-elements d-none">
-            <button class="nav-link " id="btn_new_task" onclick="show_perview()">
+            <button class="nav-link " id="btn_new_task" onclick="show_new_task()">
               New Task
             </button> </div>
         </div>
@@ -145,9 +152,7 @@
 
             <!-- Basic card -->
             <div class="card border-left-1 border-left-blue-400 rounded-left-0">
-              <div class="card-header">
-                <h6 class="card-title">Testing one single application</h6>
-              </div>
+
 
               <div class="card-body" id="content">
                 put tasks here
@@ -201,7 +206,7 @@
         <p class="error">{{ message }}</p>
         {% endfor %}
         <input type="submit" id="submit" value="Publish" onclick="return Validate(); " disabled />
-        <div class="nav-link btndiv " onclick="hide_perview()">Close</div>
+        <div class="nav-link btndiv " onclick="hide_new_task()">Close</div>
     </div>
   </div>
   <!-- /div for new task button-->
