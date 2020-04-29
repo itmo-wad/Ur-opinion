@@ -91,6 +91,8 @@ def newtask():
      
     
     #for testing on heroku
+    print("gggggggggggggggggggggggg")
+    print(request.remote_addr)
     if (request.referrer != "https://ur-opinion.herokuapp.com/") :
       return render_template('error.html'), 404
     
