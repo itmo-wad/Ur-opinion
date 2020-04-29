@@ -33,12 +33,12 @@
         $("#content").load("archived_page");
       });
 
-      $("#btn_new_task").click(function () {
-        $("#content").load("newtask_page");
-      });
+      // $("#btn_new_task").click(function () {
+      //   $("#content").load("newtask_page");
+      // });
 
       $("#my_teams").click(function () {
-        $("#content").load("/teams");
+        $("#content").load("teams");
       });
     });
   </script>
@@ -74,7 +74,7 @@
           <button onclick="myFunction()" class="dropbtn">Ghadeer Darwesh </button>
           <img src="/static/img/login.png" class="loginlogo" onclick="myFunction()" />
           <div id="myDropdown" class="dropdown-content">
-            <a id="my_teams" href="#MyTeams">My Teams</a>
+            <a id="my_teams">My Teams</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
             <a href="/logout">Logout</a>
