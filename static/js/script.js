@@ -33,6 +33,7 @@ function show_new_task(name, title, text) {
 function hide_new_task() {
     var test = document.getElementById("preview");
     test.style.display = "none";
+    
 };
 
 

@@ -12,7 +12,7 @@
 	background: #4D4D4D;
 	text-transform: uppercase;
 	font-family: 'Open Sans Condensed', sans-serif;
-	color: #797979;
+	color: #fcf8f8;
 	font-size: 18px;
 	font-weight: 100;
 	padding: 20px;
@@ -60,16 +60,17 @@
 }
 
 .btn_create_team {
-	color: rgb(23, 8, 238) !important;
-	text-transform: uppercase;
-	text-decoration: none;
-	float: right;
-
-	vertical-align: middle;
-	border-radius: 50px;
-	display: inline-block;
+	position: relative;
+	transition: all ease-in-out .15s;
+	background: none;
+	font-weight: bold;
+	border-radius: 100px;
 	border: none;
-	transition: all 0.4s ease 0s;
+	font-size: 14pt;
+	color: rgb(59, 1, 1);
+	font-family: "Times New Roman", Times, serif;
+	float: right;
+	vertical-align: middle;
 }
 
 .btn_create_team:hover {
@@ -77,7 +78,8 @@
 	-webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
 	-moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
 	transition: all 0.4s ease 0s;
-	outline: none;
+	background: none;
+	cursor: pointer;
 }
 
 .btn_create_team:focus {
