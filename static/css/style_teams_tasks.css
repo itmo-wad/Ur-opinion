@@ -1,4 +1,4 @@
-.form-style-teams {
+.form-style-teams-tasks {
 	font-family: 'Open Sans Condensed', arial, sans;
 	width: 700px;
 	padding: 30px;
@@ -8,7 +8,7 @@
 
 }
 
-.form-style-teams h2 {
+.form-style-teams-tasks h2 {
 	background: #4D4D4D;
 	text-transform: uppercase;
 	font-family: 'Open Sans Condensed', sans-serif;
@@ -24,10 +24,10 @@
 
 }
 
-.form-style-teams input[type="text"],
-.form-style-teams input[type="email"],
-.form-style-teams input[type="password"],
-.form-style-teams select {
+.form-style-teams-tasks input[type="text"],
+.form-style-teams-tasks input[type="email"],
+.form-style-teams-tasks input[type="password"],
+.form-style-teams-tasks select {
 	box-sizing: border-box;
 	outline: none;
 	display: block;
