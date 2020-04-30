@@ -33,12 +33,12 @@
         $("#content").load("archived_page");
       });
 
-      // $("#btn_new_task").click(function () {
-      //   $("#content").load("newtask_page");
-      // });
+      $("#btn_new_task").click(function () {
+        $("#preview").load("/newtask");
+      });
 
       $("#my_teams").click(function () {
-        $("#content").load("teams");
+        $("#content").load("/teams");
       });
     });
   </script>
@@ -75,8 +75,8 @@
           <img src="/static/img/login.png" class="loginlogo" onclick="myFunction()" />
           <div id="myDropdown" class="dropdown-content">
             <a id="my_teams">My Teams</a>
+            <a href="#settings">Settings</a>
             <a href="#about">About</a>
-            <a href="#contact">Contact</a>
             <a href="/logout">Logout</a>
           </div>
         </div>
@@ -193,23 +193,11 @@
 
   <!-- div for new task button-->
   <div id="preview" class="prev_block">
-    <span class="helper"></span>
-    <div id="div_content" class="div_content form-style">
-      <h2 style="color: white; font-weight: bold; margin: 0;">Create New Task</h2>
-      <form method="POST" action="{{ url_for('reg')}}">
 
-        <input type="text" id="taskname" name="taskname" placeholder="Add Task Name" autocomplete="off" />
-
-        <input type="text" id="taskdesc" name="taskdesc" placeholder="Add task description" autocomplete="off" />
-
-        {% for message in get_flashed_messages() %}
-        <p class="error">{{ message }}</p>
-        {% endfor %}
-        <input type="submit" id="submit" value="Publish" onclick="return Validate(); " disabled />
-        <div class="nav-link btndiv " onclick="hide_new_task()">Close</div>
-    </div>
   </div>
   <!-- /div for new task button-->
+
+
 </body>
 
 </html>

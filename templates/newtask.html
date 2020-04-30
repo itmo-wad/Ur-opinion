@@ -1,0 +1,27 @@
+<html>
+
+<head>
+  <title>New Task</title>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" type="text/css" href="/static/css/style_login.css"> -->
+  <!-- <script type="text/javascript" src="/static/js/script.js"></script> -->
+</head>
+
+<body>
+  <span class="helper"></span>
+  <div id="div_content" class="div_content form-style">
+    <h2 style="color: white; font-weight: bold; margin: 0;">Create New Task</h2>
+    <form method="POST" action="{{ url_for('reg')}}">
+
+      <input type="text" id="taskname" name="taskname" placeholder="Add Task Name" autocomplete="off" />
+
+      <input type="text" id="taskdesc" name="taskdesc" placeholder="Add task description" autocomplete="off" />
+
+      {% for message in get_flashed_messages() %}
+      <p class="error">{{ message }}</p>
+      {% endfor %}
+      <input type="submit" id="submit" value="Publish" onclick="return Validate(); " disabled />
+      <div class="nav-link btndiv " onclick="hide_new_task()">Close</div>
+  </div>
+
+</body>
