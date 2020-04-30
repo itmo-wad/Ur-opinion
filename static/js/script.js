@@ -38,12 +38,19 @@ function hide_new_task() {
 
 
 
-function show_new_team(name, title, text) {
+function show_new_team() {
+
 
     var dev_block = document.getElementById("preview_team");
     dev_block.style.display = "block";
 
-
+    // remove additional input fields.
+    var last_chq_no = $('#total_chq').val();
+    while (last_chq_no > 1) {
+        $('#mem_'+last_chq_no).remove();
+        last_chq_no--;
+        $('#total_chq').val(last_chq_no);
+      }
 
 };
 
@@ -52,3 +59,22 @@ function hide_new_team() {
     var test = document.getElementById("preview_team");
     test.style.display = "none";
 };
+
+function add_input_field(){
+    var new_chq_no = parseInt($('#total_chq').val())+1;
+    var new_input="<input type='text' id='mem_"+new_chq_no+"' name='mem_"+new_chq_no+"' placeholder='Add Username for Team member'  autocomplete='off'>";
+    $('#new_chq').append(new_input);
+    $('#total_chq').val(new_chq_no)
+  }
+
+
+
+//   function remove_input_field(){
+//       var last_chq_no = $('#total_chq').val();
+ 
+//       if(last_chq_no>1){
+//         $('#mem_'+last_chq_no).remove();
+//         $('#total_chq').val(last_chq_no-1);
+        
+//       }
+//     }

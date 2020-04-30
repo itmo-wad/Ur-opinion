@@ -19,30 +19,45 @@
     <!-- div for new team-->
     <div id="preview_team" class="prev_block">
       <span class="helper"></span>
+
       <div id="div_content" class="div_content form-style-teams">
+
         <h2 style="color: white; font-weight: bold; margin: 0;">Create New Team</h2>
+
         <form method="POST" action="{{ url_for('reg')}}" style=" height: 400px;">
+
           <div style="top: 0; height: 80%; overflow-y: auto;">
+
             <input type="text" id="teamname" name="teamname" placeholder="Add Team Name" autocomplete="off" />
 
             <input type="text" id="teamdesc" name="teamdesc" placeholder="Add Team description" autocomplete="off" />
 
 
             <br />
-            Team Members:
+            TEAM MEMBERS
+            <Span onclick="add_input_field()" class="nav-link" style="float: right;">Add Member</Span>
             <br />
-            <input type="text" id="teammem" name="teammem" placeholder="Add Username for Team member"
-              autocomplete="off" />
 
+            <div id="new_chq">
+            <input type="text" id="mem_1" name="mem_1" placeholder="Add Username for Team member"  autocomplete="off" />
+
+           
+              <input type="hidden" value="1" id="total_chq">
+            </div>
 
             {% for message in get_flashed_messages() %}
             <p class="error">{{ message }}</p>
-            {% endfor %}
+             {% endfor %}
+
           </div>
+
           <input class="nav-link btninput " type="submit" id="submit" value="SAVE" onclick="return Validate(); "
             disabled />
+
           <div class="nav-link btndiv " onclick="hide_new_team()">Close</div>
+
         </form>
+
       </div>
     </div>
     <!-- /div for newteam -->
