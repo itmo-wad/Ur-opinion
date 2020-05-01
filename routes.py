@@ -5,6 +5,7 @@ from db import *
 
 def index_r():
     msg = session.get("msg")
+    session["msg"]=""
     return render_template('index.html',msg=msg) 
 
 #login page
