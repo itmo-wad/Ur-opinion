@@ -27,7 +27,7 @@
 
         <form method="POST" action="{{ url_for('reg')}}" style=" height: 400px;">
 
-          <div style="top: 0; height: 80%; overflow-y: auto;">
+          <div style="top: 0; height: 90%; overflow-y: auto;">
 
             <input type="text" id="teamname" name="teamname" placeholder="Add Team Name" autocomplete="off" />
 
@@ -36,26 +36,34 @@
 
             <br />
             TEAM MEMBERS
-            <Span onclick="add_input_field()" class="nav-link" style="float: right;">Add Member</Span>
+
             <br />
 
-            <div id="new_chq">
-            <input type="text" id="mem_1" name="mem_1" placeholder="Add Username for Team member"  autocomplete="off" />
+            <div class="div_new_mem" id="new_chq">
 
-           
-              <input type="hidden" value="1" id="total_chq">
+              <input type="text" id="mem_add" name="mem_add" placeholder="Add Username for a Team Member"
+                autocomplete="off" />
+
+              <Span id="teams_clear_list" onclick="teams_clear_list()" class="nav-link"> Clear</Span>
+
+              <Span id="teams_add_mem" onclick="teams_add_mem()" class="nav-link">Add</Span>
+              <!-- <input type="hidden" value="1" id="total_chq"> -->
             </div>
 
+
+
+            <textarea class="textarea_mem" id="mem_list" name="mem_list" placeholder="Team Members" autocomplete="off"
+              disabled></textarea>
             {% for message in get_flashed_messages() %}
             <p class="error">{{ message }}</p>
-             {% endfor %}
+            {% endfor %}
 
           </div>
 
           <input class="nav-link btninput " type="submit" id="submit" value="SAVE" onclick="return Validate(); "
             disabled />
 
-          <div class="nav-link btndiv " onclick="hide_new_team()">Close</div>
+          <div class="nav-link btndiv " onclick="hide_new_team()">CLOSE</div>
 
         </form>
 
