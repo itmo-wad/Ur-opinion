@@ -11,9 +11,13 @@ import pymongo
 client = pymongo.MongoClient(os.environ.get('MongoDb', None))
 db = client.get_default_database()
 
+
 #get users' collection
 users = db["users"]
 users.create_index("username")
+
+#get teams collection
+teams = db["teams"]
 
 
 def add_user_to_db(username, password,email,fullname):
@@ -37,3 +41,23 @@ def check_pass_in_db(username,password):
             return True
         
 
+def check_exist_team(teamname,username):
+
+        team = teams.find_one({
+    '$and': [
+        {'username': username},
+        {'teamname': teamname} ]})
+
+        if team:
+            return True
+        else :
+            return False
+        
+def add_team(username,teamname,desc,taskid) :
+    teams.insert({
+            "username": username,
+            "teamname": teamname,
+            "desc"   : desc,
+            "taskid": taskid
+        })
+        

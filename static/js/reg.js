@@ -7,6 +7,16 @@ function AlertPass() {
     }
 }
 
+
+// function to check empty or contains only spaces 
+function check_spaces(str){
+    if (!str.replace(/\s/g, '').length || str === "") {
+        return true;
+      }
+return false;
+};
+
+
 function Validate() {
     var username = document.getElementById("username").value;
     var fullname = document.getElementById("fullname").value;
@@ -14,18 +24,20 @@ function Validate() {
     var password = document.getElementById("pass").value;
     var confirmPassword = document.getElementById("c_pass").value;
 
-
-    
-    if (username === "" || email === "" || password ==="" || confirmPassword==="" || fullname==="") {
-        alert("You have to fill all the fields");
+    if (check_spaces(username) || check_spaces(password)  || check_spaces(password)  || check_spaces(confirmPassword)  || check_spaces(fullname) ) {
+        alert("Fill all the fields");
         return false;
-
     }
+    
+    // if (username === "" || password === "" || password ==="" || confirmPassword==="" || fullname==="") {
+    //     alert("Fill all the fields");
+    //     return false;
+
+    // }
 
     if (password != confirmPassword) {
         alert("Passwords do not match.");
-        return false;
-       
+        return false;       
     }
 
  

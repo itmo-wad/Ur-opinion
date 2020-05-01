@@ -7,15 +7,19 @@
 
   <link rel="stylesheet" media="all" href="/static/css/style.css" />
   <link rel="stylesheet" type="text/css" href="/static/css/style_login.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/style_teams_tasks.css">
+
   <script type="text/javascript" src="/static/js/reg.js"></script>
   <script type="text/javascript" src="/static/js/script.js"></script>
+  <script type="text/javascript" src="/static/js/script_tasks.js"></script>
+  <script type="text/javascript" src="/static/js/script_teams.js"></script>
   <script src="/static/js/jquery-3.5.0.min.js"></script>
+
   <script>
     $(document).ready(function () {
       $("#btn_in_progress").click(function () {
         $("#content").load("in_progress_page");
       });
-
 
       $("#btn_created_by_me").click(function () {
         $("#content").load("created_by_me_page");
@@ -30,13 +34,14 @@
       });
 
       $("#btn_new_task").click(function () {
-        $("#content").load("newtask_page");
+        $("#preview").load("/newtask");
       });
 
+      $("#my_teams").click(function () {
+        $("#content").load("/teams");
+      });
     });
   </script>
-
-
 
 </head>
 
@@ -54,26 +59,26 @@
     </a>
     <!-- /header with logo -->
 
-
     <!-- Navbar content -->
     <div class="collapse navbar-collapse" id="navbar-mobile">
-
 
       <ul class="navbar-nav ml-auto">
 
         <!--  account symbole -->
         <div class="dropdown">
 
-          <button onclick="myFunction()" class="dropbtn">Ghadeer Darwesh </button>
-          <img src="/static/img/login.png" class="loginlogo" onclick="myFunction()" />
-          <div id="myDropdown" class="dropdown-content">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-            <a href="/logout">logout</a>
-          </div>
-        </div>
+          <button onclick="showdrop()" class="dropbtn">Ghadeer Darwesh </button>
 
+          <img src="/static/img/login.png" class="loginlogo" onclick="showdrop()" />
+
+          <div id="myDropdown" class="dropdown-content">
+            <a id="my_teams">My Teams</a>
+            <a href="#settings">Settings</a>
+            <a href="#about">About</a>
+            <a href="/logout">Logout</a>
+          </div>
+
+        </div>
 
         </li>
       </ul>
@@ -96,12 +101,8 @@
             <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
           </div>
 
-
-
           <!-- tasks in dashboard -->
           <div class="card-body p-0">
-
-
 
             <button class="nav-link " id="btn_in_progress" data-remote="true">
               In Progress
@@ -111,11 +112,9 @@
               Created By Me
             </button>
 
-
             <button class="nav-link " id="btn_shared_with_me" data-remote="true">
               Shared With Me
             </button>
-
 
             <button class="nav-link " id="btn_archived" data-remote="true">
               Archived
@@ -123,39 +122,43 @@
 
           </div>
 
-
           <!-- new task button -->
           <div class="header-elements d-none">
-            <button class="nav-link " id="btn_new_task" onclick="show_perview()">
+            <button class="nav-link " id="btn_new_task" onclick="show_new_task()">
               New Task
             </button> </div>
         </div>
       </div>
 
+
       <!-- Content area -->
       <div class="content">
         <!-- Inner container -->
+
         <div class="d-md-flex align-items-md-start">
-
-
-
 
           <!-- Right content -->
           <div class="w-100">
 
             <!-- Basic card -->
             <div class="card border-left-1 border-left-blue-400 rounded-left-0">
-              <div class="card-header">
-                <h6 class="card-title">Testing one single application</h6>
-              </div>
 
               <div class="card-body" id="content">
                 put tasks here
-
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <script>
+                  var messages = {{ messages | safe }};
+                  for (var i = 0; i < messages.length; i++) {
+                    alert(messages[i]);
+                  }
+                </script>
+                {% endif %}
+                {% endwith %}
+                <p id="divtoload" style="display:none;">{{msg}}</p>
 
 
               </div>
-
             </div>
             <!-- /basic card -->
           </div>
@@ -167,7 +170,6 @@
 
       <!-- Footer -->
       <div class="navbar navbar-expand-lg navbar-light">
-
 
         <div class="navbar-collapse collapse" id="navbar-footer">
           <span class="navbar-text">
@@ -185,26 +187,12 @@
   </div>
   <!-- /page content -->
 
-
   <!-- div for new task button-->
   <div id="preview" class="prev_block">
-    <span class="helper"></span>
-    <div id="div_content" class="div_content form-style">
-      <h2 style="color: white; font-weight: bold; margin: 0;">Create New Task</h2>
-      <form method="POST" action="{{ url_for('reg')}}">
 
-        <input type="text" id="taskname" name="taskname" placeholder="Add Task Name" autocomplete="off" />
-
-        <input type="text" id="taskdesc" name="taskdesc" placeholder="Add task description" autocomplete="off" />
-
-        {% for message in get_flashed_messages() %}
-        <p class="error">{{ message }}</p>
-        {% endfor %}
-        <input type="submit" id="submit" value="Publish" onclick="return Validate(); " disabled />
-        <div class="nav-link btndiv " onclick="hide_perview()">Close</div>
-    </div>
   </div>
   <!-- /div for new task button-->
+
 </body>
 
 </html>

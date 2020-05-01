@@ -172,22 +172,15 @@ h6 {
     font-size: .9375rem
 }
 
-
-
-
-.nav-link {
-    display: block;
-    padding: .625rem 1.25rem;
-    margin: 10px;
-}
-
-.nav-link:focus,
 .nav-link:hover {
-    text-decoration: none
+
+    text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+    transition: all 0.4s ease 0s;
+    background-color: rgb(148, 83, 83);
+
 }
-
-
-
 
 .navbar {
     position: relative;
@@ -207,11 +200,21 @@ h6 {
     padding-top: 1.00002rem;
     padding-bottom: 1.00002rem;
     margin-right: 1.25rem;
-    font-size: 15pt;
-    font-weight: bold;
+
+
     line-height: inherit;
     white-space: nowrap;
     outline: none;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 15pt;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: uppercase;
 }
 
 .navbar-brand:focus,
@@ -283,12 +286,14 @@ h6 {
 
     }
 
+    .loginlogo:hover {
+        cursor: pointer;
+    }
+
     .navbar-expand-md .navbar-nav {
         -ms-flex-direction: row;
         flex-direction: row
     }
-
-
 
     .navbar-expand-md .navbar-collapse {
         display: -ms-flexbox !important;
@@ -473,15 +478,15 @@ a.text-default:hover {
 .nav-link {
     position: relative;
     transition: all ease-in-out .15s;
-    background-color: aliceblue;
+    background: none;
     font-weight: bold;
     border-radius: 100px;
-}
+    border: none;
+    font-size: 12pt;
+    color: rgb(59, 1, 1);
+    font-family: "Times New Roman", Times, serif;
+    padding: .625rem 1.25rem;
 
-@media screen and (prefers-reduced-motion:reduce) {
-    .nav-link {
-        transition: none
-    }
 }
 
 .navbar {
@@ -565,8 +570,6 @@ a.text-default:hover {
     .navbar-expand-md.navbar-dark .navbar-collapse {
         border-top: 1px solid rgba(255, 255, 255, .1)
     }
-
-
 }
 
 @media (min-width:768px) {
@@ -803,13 +806,24 @@ body {
     cursor: pointer;
     margin-right: 0px;
     font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
 }
 
-.dropbtn:hover,
+.dropbtn:hover {
+    text-shadow: 0px 0px 6px;
+    -moz-box-shadow: 0px 5px 40px -10px;
+    transition: all 0.4s ease 0s;
+    background: none;
+    cursor: pointer;
+    color: rgb(10, 224, 231);
+
+}
+
 .dropbtn:focus {
-    color: rgb(15, 224, 224);
 
+    outline: none;
 }
+
 
 .dropdown {
     position: relative;
@@ -839,6 +853,7 @@ body {
 
 .dropdown a:hover {
     background-color: #ddd;
+    cursor: pointer;
 }
 
 .show {
@@ -856,7 +871,7 @@ body {
     top: 0;
     width: 100%;
     z-index: 10000;
-
+    left: 0;
 }
 
 .prev_block .helper {
@@ -883,16 +898,49 @@ body {
 }
 
 .btndiv {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    width: 20%;
+    height: 40px;
+    float: left;
     -webkit-appearance: button;
     outline: black;
-    background-color: cadetblue;
+
     font-weight: bold;
+    margin: 15px;
+    left: 0;
+    bottom: 0;
+
+    vertical-align: bottom;
+
+    position: absolute;
 }
 
-.btndiv:hover {
+.btninput {
+    width: 20%;
+    height: 40px;
+    -webkit-appearance: button;
+    outline: black;
+
+    font-weight: bold;
+    float: right;
+    color: darkred;
+    margin: 15px;
+    right: 0;
+    bottom: 0;
+
+    vertical-align: bottom;
+
+    position: absolute;
+}
+
+.btndiv:hover,
+.btninput:hover {
     color: rgb(228, 13, 13);
+
+
+}
+
+.btndiv:focus,
+.btninput:focus {
+    outline: none;
 
 }

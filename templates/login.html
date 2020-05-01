@@ -14,30 +14,36 @@
 
 <body>
 
-
-  <div class="form-style">
-    <h2>Login to Ur-opinion</h2>
-
-    <form method="POST" action="{{ url_for('log')}}">
-
-      <i class="fa fa-user icon"> </i>
-      <input type="text" name="username" placeholder="Your Name" autocomplete="off" />
+  <div class="container">
 
 
-      <i class="fa fa-key icon"> </i>
-      <input type="password" name="password" placeholder="Password" />
+    <div class="form-style">
+      <h2>Login to Ur-opinion</h2>
+
+      <form method="POST" action="{{ url_for('log')}}">
+
+        <i class="fa fa-user icon"> </i>
+        <input type="text" name="username" placeholder="Your Name" autocomplete="off" />
 
 
-      {% for message in get_flashed_messages() %}
-      <p class="error">{{ message }}</p>
-      {% endfor %}
-
-      <input type="submit" value="Login" />
+        <i class="fa fa-key icon"> </i>
+        <input type="password" name="password" placeholder="Password" />
 
 
-    </form>
-    Don't have an account?
-    <br />
-    <br />
-    <a href="register" style="color: rgb(10, 18, 95); font-weight: bold;">SIGN UP</a>
+        {% for message in get_flashed_messages() %}
+        <p class="error">{{ message }}</p>
+        {% endfor %}
+
+        <input type="submit" value="Login" style="margin-right: 0;" />
+
+
+      </form>
+      <div style="text-align: center;">
+        Don't have an account?
+        <br />
+
+        <a href="{{ url_for('reg')}}" style="color: rgb(10, 18, 95); ">SIGN UP</a>
+      </div>
+
+    </div>
   </div>

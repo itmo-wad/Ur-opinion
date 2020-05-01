@@ -1,0 +1,64 @@
+<html>
+
+<head>
+  <title>My Teams</title>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" type="text/css" href="/static/css/style_teams_tasks.css"> -->
+  <!-- <script type="text/javascript" src="/static/js/script.js"></script> -->
+</head>
+
+<body>
+
+  <div class="form-style-teams-tasks">
+
+    <h2>My Teams
+      <a class="btn_create_team" onclick="show_new_team()">Create New Team</a>
+    </h2>
+
+    <!-- div for new team-->
+    <div id="preview_team" class="prev_block">
+      <span class="helper"></span>
+
+      <div id="div_content" class="div_content form-style-teams-tasks">
+
+        <h2 style="color: white; font-weight: bold; margin: 0;">Create New Team</h2>
+
+        <form method="POST" action="{{ url_for('addteam')}}" style=" height: 400px;">
+
+          <div style="top: 0; height: 90%; overflow-y: auto;">
+
+            <input type="text" id="teamname" name="teamname" placeholder="Add Team Name" autocomplete="off" />
+
+            <input type="text" id="teamdesc" name="teamdesc" placeholder="Add Team description" autocomplete="off" />
+
+            <br />
+            TEAM MEMBERS
+            <br />
+
+            <div class="div_new_mem" id="new_chq">
+
+              <input type="text" id="mem_add" name="mem_add" placeholder="Add Username for a Team Member"
+                autocomplete="off" />
+
+              <Span id="teams_clear_list" onclick="teams_clear_list()" class="nav-link"> Clear</Span>
+
+              <Span id="teams_add_mem" onclick="teams_add_mem()" class="nav-link">Add</Span>
+              <!-- <input type="hidden" value="1" id="total_chq"> -->
+            </div>
+
+            <textarea class="textarea_mem" id="mem_list" name="mem_list" placeholder="Team Members" autocomplete="off"
+              readonly></textarea>
+
+          </div>
+
+          <input class="nav-link btninput " type="submit" id="submit" value="SAVE"
+            onclick="return Validate_new_team()" />
+
+          <div class="nav-link btndiv " onclick="hide_new_team()">CLOSE</div>
+
+        </form>
+
+      </div>
+    </div>
+    <!-- /div for newteam -->
+  </div>
