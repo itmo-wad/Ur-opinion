@@ -122,7 +122,7 @@ def newtask():
     #for testing on heroku
     if (request.referrer != "https://ur-opinion.herokuapp.com/") :
       return render_template('error.html'), 404    
-    return render_template('teams.html')    
+    return render_template('newtask.html')    
  
     
 #logout page    
