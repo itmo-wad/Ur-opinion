@@ -148,11 +148,7 @@
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
                 <script>
-                  var messages = {
-                    {
-                      messages | safe
-                    }
-                  };
+                  var messages = {{ messages | safe }};
                   for (var i = 0; i < messages.length; i++) {
                     alert(messages[i]);
                   }
