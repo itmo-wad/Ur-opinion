@@ -18,10 +18,7 @@
 	padding: 20px;
 	margin: -30px -30px 30px -30px;
 	font-weight: bold;
-
 	font-family: "Times New Roman", Times, serif;
-
-
 }
 
 .form-style-teams-tasks input[type="text"],
@@ -41,12 +38,7 @@
 	margin-top: 10px;
 	font: 16px Arial, Helvetica, sans-serif;
 	height: 45px;
-
-
 }
-
-
-
 
 .icon {
 	position: absolute;
@@ -83,25 +75,21 @@
 }
 
 .btn_create_team:focus {
-
 	outline: none;
 }
 
 .div_new_mem {
-
 	width: 100%;
 	display: inline-block;
 }
 
 .div_new_mem input[type="text"] {
-
 	width: 70%;
 	float: left;
 	margin-top: 0;
 }
 
 .div_new_mem span {
-
 	width: 15%;
 	float: right;
 	font-size: 12pt;

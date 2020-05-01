@@ -21,7 +21,7 @@ body {
 	background: #FFFFFF;
 	margin: 10px auto;
 	box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.22);
-	background: linear-gradient(to right , rgba(0, 0, 0, 0), rgb(255, 255, 255) 20%);
+	background: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(255, 255, 255) 20%);
 
 }
 
@@ -78,8 +78,6 @@ body {
 	background: linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
 	background-color: #34CACA;
 }
-
-
 
 .icon {
 	position: absolute;

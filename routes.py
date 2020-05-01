@@ -1,12 +1,13 @@
 from flask import Flask, render_template,request,send_from_directory,session,flash,redirect
 import re
 from db import *
-
-
-        
+ 
 
 def index_r():
-  return render_template('index.html') 
+    msg = session.get("msg")
+    print("dddddddddddddddddddd")
+    print(msg)
+    return render_template('index.html',msg=msg) 
 
 #login page
 def reg_r(username,password,email,fullname):
@@ -28,6 +29,7 @@ def log_r(username,password):
     if check_user_in_db(username):
             if check_pass_in_db(username, password):
                 session['logged_in'] = True
+                session['username'] = username
                 return True
             else :
                 flash('Wrong Password!')
@@ -38,3 +40,19 @@ def log_r(username,password):
                     
     return False
 
+
+
+#add new team
+def addteam_r(teamname , desc , members):
+    
+   #split members by spaces 
+   memlist = members.splitlines()
+   username  = session.get('username')
+   
+   if check_exist_team(teamname,username):
+       flash('Team already exists!')
+       return False
+   
+   add_team(username,teamname,desc,"taskid") 
+   flash('Team was added successfully!')
+   return True    

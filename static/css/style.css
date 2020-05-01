@@ -172,8 +172,6 @@ h6 {
     font-size: .9375rem
 }
 
-
-
 .nav-link:hover {
 
     text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
@@ -183,9 +181,6 @@ h6 {
     background-color: rgb(148, 83, 83);
 
 }
-
-
-
 
 .navbar {
     position: relative;
@@ -291,12 +286,14 @@ h6 {
 
     }
 
+    .loginlogo:hover {
+        cursor: pointer;
+    }
+
     .navbar-expand-md .navbar-nav {
         -ms-flex-direction: row;
         flex-direction: row
     }
-
-
 
     .navbar-expand-md .navbar-collapse {
         display: -ms-flexbox !important;
@@ -573,8 +570,6 @@ a.text-default:hover {
     .navbar-expand-md.navbar-dark .navbar-collapse {
         border-top: 1px solid rgba(255, 255, 255, .1)
     }
-
-
 }
 
 @media (min-width:768px) {
@@ -815,18 +810,18 @@ body {
 }
 
 .dropbtn:hover {
-	text-shadow: 0px 0px 6px;
-	-moz-box-shadow: 0px 5px 40px -10px ;
-	transition: all 0.4s ease 0s;
-	background: none;
+    text-shadow: 0px 0px 6px;
+    -moz-box-shadow: 0px 5px 40px -10px;
+    transition: all 0.4s ease 0s;
+    background: none;
     cursor: pointer;
     color: rgb(10, 224, 231);
-    
+
 }
 
 .dropbtn:focus {
 
-	outline: none;
+    outline: none;
 }
 
 
@@ -908,20 +903,20 @@ body {
     float: left;
     -webkit-appearance: button;
     outline: black;
-   
+
     font-weight: bold;
     margin: 15px;
-left: 0;
-bottom: 0;
+    left: 0;
+    bottom: 0;
 
-vertical-align: bottom;
+    vertical-align: bottom;
 
-position: absolute;
+    position: absolute;
 }
 
 .btninput {
     width: 20%;
-height: 40px;
+    height: 40px;
     -webkit-appearance: button;
     outline: black;
 
@@ -931,14 +926,21 @@ height: 40px;
     margin: 15px;
     right: 0;
     bottom: 0;
-    
+
     vertical-align: bottom;
-    
+
     position: absolute;
 }
 
 .btndiv:hover,
 .btninput:hover {
     color: rgb(228, 13, 13);
+
+
+}
+
+.btndiv:focus,
+.btninput:focus {
+    outline: none;
 
 }

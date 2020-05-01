@@ -30,14 +30,12 @@ def index():
     
       #check if the user logged in, if not redirect to login html
     if session.get('logged_in'):
-         return index_r()
-          
+         return index_r()          
           
     else:
         return redirect("/login", code=302)
-        
-    
-    
+   
+  
 #login page
 @app.route('/login', methods=['GET','POST'])
 def log():
@@ -50,7 +48,7 @@ def log():
     else:
          #post method
         if request.method == 'POST':
-                username = request.form.get('username')
+                username = request.form.get('username').strip()
                 password = request.form.get('password')
                 if log_r(username,password) :
                     return redirect("/")
@@ -71,10 +69,10 @@ def reg():
     else:
         #post method
         if request.method == 'POST':
-                username = request.form.get('username')
+                username = request.form.get('username').strip()
                 password = request.form.get('password')
-                email    = request.form.get('email')
-                fullname = request.form.get('fullname')
+                email    = request.form.get('email').strip()
+                fullname = request.form.get('fullname').strip()
                 if reg_r(username,password,email,fullname):
                      return redirect("/login")
                  
@@ -84,7 +82,7 @@ def reg():
 
 #new team div    
 @app.route('/teams')
-def newteam():
+def teams():
       # use the host of the server
          # if (request.remote_addr != "127.0.0.1") :
          #     return render_template('error.html'), 404
@@ -95,19 +93,37 @@ def newteam():
       return render_template('error.html'), 404    
     return render_template('teams.html')
  
+ 
+#route to add new teams 
+@app.route('/addteam',methods=['POST'])    
+def addteam():
+     #for loggined users
+    if session.get('logged_in'):
+          name = request.form.get('teamname').strip()
+          desc = request.form.get('teamdesc').strip()
+          members = request.form.get('mem_list').strip()
+          
+          addteam_r(name , desc , members)
+          session["msg"]="loadteams"
+          return redirect("/")
+       
+    else:
+        return redirect("/login", code=302)   
+       
     
 #new task div    
 @app.route('/newtask')
 def newtask():
       # use the host of the server
-         # if (request.remote_addr != "127.0.0.1") :
-         #     return render_template('error.html'), 404
-         # return render_template('newtask.html')  
+         if (request.remote_addr != "127.0.0.1") :
+             return render_template('error.html'), 404
+         return render_template('newtask.html')  
     
     #for testing on heroku
-    if (request.referrer != "https://ur-opinion.herokuapp.com/") :
-      return render_template('error.html'), 404    
-    return render_template('newtask.html')    
+    #if (request.referrer != "https://ur-opinion.herokuapp.com/") :
+     # return render_template('error.html'), 404    
+   # return render_template('teams.html')    
+ 
     
 #logout page    
 @app.route('/logout')

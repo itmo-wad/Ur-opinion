@@ -9,13 +9,11 @@
 
 <body>
 
-
   <div class="form-style-teams-tasks">
+
     <h2>My Teams
       <a class="btn_create_team" onclick="show_new_team()">Create New Team</a>
     </h2>
-
-
 
     <!-- div for new team-->
     <div id="preview_team" class="prev_block">
@@ -25,7 +23,7 @@
 
         <h2 style="color: white; font-weight: bold; margin: 0;">Create New Team</h2>
 
-        <form method="POST" action="{{ url_for('reg')}}" style=" height: 400px;">
+        <form method="POST" action="{{ url_for('addteam')}}" style=" height: 400px;">
 
           <div style="top: 0; height: 90%; overflow-y: auto;">
 
@@ -33,10 +31,8 @@
 
             <input type="text" id="teamdesc" name="teamdesc" placeholder="Add Team description" autocomplete="off" />
 
-
             <br />
             TEAM MEMBERS
-
             <br />
 
             <div class="div_new_mem" id="new_chq">
@@ -50,18 +46,13 @@
               <!-- <input type="hidden" value="1" id="total_chq"> -->
             </div>
 
-
-
             <textarea class="textarea_mem" id="mem_list" name="mem_list" placeholder="Team Members" autocomplete="off"
-              disabled></textarea>
-            {% for message in get_flashed_messages() %}
-            <p class="error">{{ message }}</p>
-            {% endfor %}
+              readonly></textarea>
 
           </div>
 
-          <input class="nav-link btninput " type="submit" id="submit" value="SAVE" onclick="return Validate(); "
-            disabled />
+          <input class="nav-link btninput " type="submit" id="submit" value="SAVE"
+            onclick="return Validate_new_team()" />
 
           <div class="nav-link btndiv " onclick="hide_new_team()">CLOSE</div>
 
