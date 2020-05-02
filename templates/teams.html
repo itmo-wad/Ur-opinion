@@ -16,7 +16,13 @@
     </h2>
 
     <!-- list teams -->
-    <div>
+    <div class="list-teams">
+
+      <ol>
+        {% for team in teamslist %}
+        <li><a href="#">{{team}}</a></li>
+        {% endfor %}
+      </ol>
 
     </div>
     <!-- /list teams -->

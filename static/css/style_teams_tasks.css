@@ -109,3 +109,61 @@
 	color: black;
 	line-height: 200%;
 }
+
+
+.list-teams {
+	width: 410px;
+	margin: 0 auto;
+}
+
+.list-teams ol {
+	list-style-type: none;
+	/* list-style-type: decimal !ie; IE 7- hack */
+	margin: 0;
+	margin-left: 1em;
+	padding: 0;
+	counter-reset: li-counter;
+}
+
+.list-teams ol li {
+	position: relative;
+	margin-bottom: 1.5em;
+	padding: 0.5em;
+	background-color: #F0D756;
+	padding-left: 58px;
+}
+
+.list-teams a {
+	text-decoration: none;
+	color: black;
+	font-size: 15px;
+	font-family: 'Raleway', sans-serif;
+}
+
+.list-teams li:hover {
+	box-shadow: inset -1em 0 #6CD6CC;
+	-webkit-transition: box-shadow 0.5s;
+	/* For Safari 3.1 to 6.0 */
+	transition: box-shadow 0.5s;
+}
+
+.list-teams ol li:before {
+	position: absolute;
+	top: -0.3em;
+	left: -0.5em;
+	width: 1.8em;
+	height: 1.2em;
+	font-size: 2em;
+	line-height: 1.2;
+	font-weight: bold;
+	text-align: center;
+	color: white;
+	background-color: #6CD6CC;
+	transform: rotate(-20deg);
+	-ms-transform: rotate(-20deg);
+	-webkit-transform: rotate(-20deg);
+	z-index: 99;
+	overflow: hidden;
+	content: counter(li-counter);
+	counter-increment: li-counter;
+}

@@ -8,9 +8,10 @@ import pymongo
 
 #client = pymongo.MongoClient("mongodb://<dbuser>:<password>@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 #db = client["dbname"]
-client = pymongo.MongoClient(os.environ.get('MongoDb', None))
+#client = pymongo.MongoClient(os.environ.get('MongoDb', None))
+#db = client.get_default_database()
+client = pymongo.MongoClient("mongodb://admin:P29069921@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 db = client.get_default_database()
-
 
 #get users' collection
 users = db["users"]
@@ -19,7 +20,7 @@ users.create_index("username")
 #get teams collection
 teams = db["teams"]
 
-
+#add user from register
 def add_user_to_db(username, password,email,fullname):
       users.insert({
             "username": username,
@@ -27,35 +28,47 @@ def add_user_to_db(username, password,email,fullname):
             "email"   : email,
             "fullname": fullname
         })
-    
+ 
+#check if username already exists    
 def check_user_in_db(username):
     # user = users.find({"username":username})
     user = users.find_one({"username":username})
     if user : 
         return True
 
-
+#check if the passowrd is correct
 def check_pass_in_db(username,password):
         user=users.find_one({"username":username})
         if user["password"] == password:
             return True
-        
-
-def check_exist_team(teamname,username):
+#get the teams list for a username        
+def getteams():
+    manager  = session.get('username')
+    teamslist = []
+    
+    obj = teams.find({"username":manager})
+    for team in obj:
+        teamslist.append(team["teamname"])
+   
+    return teamslist
+    
+    
+#check if a team already exists for this username    
+def check_exist_team(manager,teamname):
 
         team = teams.find_one({
     '$and': [
-        {'username': username},
+        {'username': manager},
         {'teamname': teamname} ]})
 
         if team:
             return True
         else :
             return False
-        
-def add_team(username,teamname,desc,taskid) :
+# create team for a username        
+def add_team(manager,teamname,desc,taskid) :
     teams.insert({
-            "username": username,
+            "username": manager,
             "teamname": teamname,
             "desc"   : desc,
             "taskid": taskid

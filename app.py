@@ -86,12 +86,15 @@ def teams():
       # use the host of the server
          # if (request.remote_addr != "127.0.0.1") :
          #     return render_template('error.html'), 404
-         # return render_template('teams.html')  
+         
+         # return teams_r()   
+         
     
     #for testing on heroku
     if (request.referrer != "https://ur-opinion.herokuapp.com/") :
       return render_template('error.html'), 404    
-    return render_template('teams.html')
+     
+    return teams_r() 
  
  
 #route to add new teams 
@@ -115,9 +118,9 @@ def addteam():
 @app.route('/newtask')
 def newtask():
       # use the host of the server
-         #if (request.remote_addr != "127.0.0.1") :
-             #return render_template('error.html'), 404
-         #return render_template('newtask.html')  
+         # if (request.remote_addr != "127.0.0.1") :
+         #     return render_template('error.html'), 404
+         # return render_template('newtask.html')  
     
     #for testing on heroku
     if (request.referrer != "https://ur-opinion.herokuapp.com/") :

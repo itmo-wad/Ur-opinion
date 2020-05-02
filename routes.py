@@ -39,19 +39,24 @@ def log_r(username,password):
                     
     return False
 
-
+#return teams list
+def teams_r():
+    
+    teamslist = getteams()
+    
+    return render_template('teams.html',teamslist = teamslist)  
 
 #add new team
 def addteam_r(teamname , desc , members):
     
    #split members by spaces 
    memlist = members.splitlines()
-   username  = session.get('username')
+   manager  = session.get('username')
    
-   if check_exist_team(teamname,username):
+   if check_exist_team(manager,teamname):
        flash('Team already exists!')
        return False
    
-   add_team(username,teamname,desc,"taskid") 
+   add_team(manager,teamname,desc,"taskid") 
    flash('Team was added successfully!')
    return True    
