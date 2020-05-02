@@ -57,6 +57,32 @@ def addteam_r(teamname , desc , members):
        flash('Team already exists!')
        return False
    
-   add_team(manager,teamname,desc,"taskid") 
-   flash('Team was added successfully!')
-   return True    
+   if add_team(manager,teamname,desc,"taskid",memlist) :
+       flash('Team was added successfully!')
+       return True    
+   
+   else:
+       flash("Unable to add the new team")
+       return False 
+   
+#for creating new tasks
+def newtask_r():
+    teamslist = getteams()
+    
+    return render_template('newtask.html',teamslist = teamslist)  
+
+#add new task
+def addtask_r(name , desc , team , datepub, eachperiod):
+    manager  = session.get('username')
+    
+    if check_exist_task(manager,name):
+        flash('Task already exists!')
+        return False
+
+    if add_task(manager,name,desc,team,datepub,eachperiod,"status","current_editor") :
+        flash('Task was added successfully!')
+        return True    
+    
+    else:
+        flash("Unable to add the new Task")
+        return False 

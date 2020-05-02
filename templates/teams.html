@@ -20,9 +20,13 @@
 
       <ol>
         {% for team in teamslist %}
-        <li><a href="#">{{team}}</a></li>
+        <li>
+          <a href="#">{{team}}</a>
+          <a href="#" style="right: 20px;  position: absolute;">REMOVE</a>
+        </li>
         {% endfor %}
       </ol>
+
 
     </div>
     <!-- /list teams -->

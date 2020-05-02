@@ -8,23 +8,62 @@
 </head>
 
 <body>
-  
+
   <span class="helper"></span>
 
+  <!-- basic content -->
   <div id="div_content" class="div_content form-style-teams-tasks">
 
     <h2 style="color: white; font-weight: bold; margin: 0;">Create New Task</h2>
 
-    <form method="POST" action="{{ url_for('reg')}}">
+    <form method="POST" action="{{ url_for('addtask')}}">
 
       <input type="text" id="taskname" name="taskname" placeholder="Add Task Name" autocomplete="off" />
 
       <input type="text" id="taskdesc" name="taskdesc" placeholder="Add task description" autocomplete="off" />
 
-      <input class="nav-link btninput" type="submit" id="submit" value="SAVE" onclick="return Validate(); " disabled />
+      <!-- teams list -->
+      <div class="divselect">
+        SELECT TEAM:
+        <div class="select">
+          <select name="slc_teams" id="slc_teams">
+            {% for team in teamslist %}
+            <option value="{{team}}" SELECTED>{{team}}</option>"
+            {% endfor %}
+          </select>
+        </div>
+      </div>
 
-      <div class="nav-link btndiv " onclick="hide_new_task()">Close</div>
+      <!-- /teams list -->
+
+      <!-- start the task or save for later
+      <p class="onoff">
+        <input type="checkbox" value="1" id="checkboxID">
+        <label for="checkboxID"></label>
+      </p> -->
+
+      <!-- date publish -->
+      <div class="divdate">
+        DATE TO PUBLISH:
+        <input type="date" name="datepublish" id="datepublish">
+      </div>
+      <!-- /date publish -->
+
+      <!-- deadline for each member-->
+      <div class="divdeadline">
+        INDIVIDUAL TIME:
+        <input type="number" id="eachperiod" name="eachperiod" value="1"> 
+        Days
+      </div>
+      <!-- /deadline for each member--->
+
+      <input class="nav-link btninput" type="submit" id="submit" value="SAVE" onclick="return Validate_new_task(); "  />
+
+      <div class="nav-link btndiv " onclick="hide_new_task()">CLOSE</div>
+
+      </form>
 
   </div>
+<!-- /  basic content -->
 
 </body>

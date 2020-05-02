@@ -84,17 +84,17 @@ def reg():
 @app.route('/teams')
 def teams():
       # use the host of the server
-         # if (request.remote_addr != "127.0.0.1") :
-         #     return render_template('error.html'), 404
+          #if (request.remote_addr != "127.0.0.1") :
+           #   return render_template('error.html'), 404
          
-         # return teams_r()   
+          #return teams_r()   
          
     
     #for testing on heroku
-    if (request.referrer != "https://ur-opinion.herokuapp.com/") :
-      return render_template('error.html'), 404    
+     if (request.referrer != "https://ur-opinion.herokuapp.com/") :
+       return render_template('error.html'), 404    
      
-    return teams_r() 
+     return teams_r() 
  
  
 #route to add new teams 
@@ -118,15 +118,34 @@ def addteam():
 @app.route('/newtask')
 def newtask():
       # use the host of the server
-         # if (request.remote_addr != "127.0.0.1") :
-         #     return render_template('error.html'), 404
-         # return render_template('newtask.html')  
+     #     if (request.remote_addr != "127.0.0.1") :
+      #        return render_template('error.html'), 404
+       #   return newtask_r()  
     
     #for testing on heroku
-    if (request.referrer != "https://ur-opinion.herokuapp.com/") :
-      return render_template('error.html'), 404    
-    return render_template('newtask.html')    
+     if (request.referrer != "https://ur-opinion.herokuapp.com/") :
+       return render_template('error.html'), 404    
+     return render_template('newtask.html')    
  
+    
+@app.route('/addtask',methods=['POST'])    
+def addtask():
+      #for loggined users
+    if session.get('logged_in'):
+          name = request.form.get('taskname').strip()
+          desc = request.form.get('taskdesc').strip()
+          team = request.form.get('slc_teams').strip()
+          datepub = request.form.get('datepublish').strip()
+          eachperiod = request.form.get('eachperiod').strip()
+          
+          addtask_r(name , desc , team , datepub, eachperiod)
+          
+          #session["msg"]="loadteams"
+          return redirect("/")
+       
+    else:
+        return redirect("/login", code=302)  
+    
     
 #logout page    
 @app.route('/logout')
