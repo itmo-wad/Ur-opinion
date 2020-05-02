@@ -1,10 +1,3 @@
-window.onload = function () {
-    var divtoload = $('#divtoload').text();
-    if (divtoload == "loadteams") {
-        $("#content").load("/teams");
-
-    }
-};
 
 /* show and hide div for creating a new team  */
 function show_new_team() {

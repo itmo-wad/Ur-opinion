@@ -1,3 +1,20 @@
+window.onload = function () {
+    var divtoload = $('#divtoload').text();
+    var alertmsg = $('#alertmsg').text();
+
+    if (divtoload == "loadteams") {
+        $("#content").load("/teams");
+
+    }
+    
+    if (alertmsg != ""){
+        alert(alertmsg);
+    }
+
+};
+
+
+
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
 function showdrop() {
