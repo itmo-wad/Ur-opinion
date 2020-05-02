@@ -393,10 +393,7 @@ body {
 /*End default styles*/
 
 .scrolling-wrapper {
-	padding: 20px;
-  	overflow-x: auto;
-  	overflow-y: hidden;
-  	white-space: nowrap;
+	margin: 5 0 5 0;
 }
 
 .scrolling-wrapper {
@@ -410,12 +407,10 @@ body {
 }
 
 .task-card {
-	display: inline-block;
-	width: 300px;
-	height: 400px;
-	outline: solid 1px red;
+	min-width: 270px;
+	min-height: 400px;
+	border: solid 1px red;
 	margin-right: 20px;
-	/*background: red;*/
 }
 
 .task-name, .task-decription, .task-deadline {
@@ -426,5 +421,14 @@ body {
 .task-name {
 	margin-top: 20px;
 	font-weight: 800;
-	overflow: hidden;
+	white-space: normal;
+	height: 50px;
+}
+
+.task-decription {
+	height: 100px;
+}
+
+.task-opinions {
+	height: 130px;
 }
