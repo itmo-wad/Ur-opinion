@@ -8,6 +8,7 @@
   <link rel="stylesheet" media="all" href="/static/css/style.css" />
   <link rel="stylesheet" type="text/css" href="/static/css/style_login.css">
   <link rel="stylesheet" type="text/css" href="/static/css/style_teams_tasks.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/style_cards.css">
 
   <script type="text/javascript" src="/static/js/reg.js"></script>
   <script type="text/javascript" src="/static/js/script.js"></script>
@@ -18,19 +19,20 @@
   <script>
     $(document).ready(function () {
       $("#btn_in_progress").click(function () {
-        $("#content").load("in_progress_page");
+        $("#cards").load("/cards");
+        $('html,body').animate({scrollTop: $("#cards").offset().top});
       });
 
       $("#btn_created_by_me").click(function () {
-        $("#content").load("created_by_me_page");
+        $("#cards").load("created_by_me_page");
       });
 
       $("#btn_shared_with_me").click(function () {
-        $("#content").load("shared_with_me_page");
+        $("#cards").load("shared_with_me_page");
       });
 
       $("#btn_archived").click(function () {
-        $("#content").load("archived_page");
+        $("#cards").load("archived_page");
       });
 
       $("#btn_new_task").click(function () {
@@ -38,7 +40,7 @@
       });
 
       $("#my_teams").click(function () {
-        $("#content").load("/teams");
+        $("#cards").load("/teams");
       });
     });
   </script>
@@ -104,7 +106,7 @@
           <!-- tasks in dashboard -->
           <div class="card-body p-0">
 
-            <button class="nav-link " id="btn_in_progress" data-remote="true">
+            <button class="nav-link " id="btn_in_progress" data-remote="true" href="#cards" >
               In Progress
             </button>
 
@@ -141,9 +143,9 @@
           <div class="w-100">
 
             <!-- Basic card -->
-            <div class="card border-left-1 border-left-blue-400 rounded-left-0">
+            <div class="basiccard border-left-1 border-left-blue-400 rounded-left-0">
 
-              <div class="card-body" id="content">
+              <div class="card-body" id="cards">
                 put tasks here
 
               </div>

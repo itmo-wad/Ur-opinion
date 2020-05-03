@@ -109,7 +109,7 @@
 	line-height: 200%;
 }
 
-
+/* list teams */
 .list-teams {
 	width: 410px;
 	margin: 0 auto;
@@ -178,6 +178,10 @@
 	color: blue;
 	cursor: pointer;
 }
+/* /list teams */
+
+
+/* select team  */
 .divselect {
 	text-align: left;
 	margin: 20px;
@@ -244,9 +248,10 @@ select {
 .select:hover::after {
 	color: #f39c12;
 }
+/* /select team */
 
 
-
+/* on off */
 .onoff {
 	margin-left: -27px;
 	display: -moz-inline-stack;
@@ -342,7 +347,9 @@ select {
 	background-color: #2c3e50;
 	color: white;
 }
+/* /on off */
 
+/* date publish */
 [type="date"]::-webkit-inner-spin-button {
 	display: none;
 }
@@ -373,3 +380,5 @@ select {
 	border-radius: 7px;
 	color: white;
 }
+
+/* /date publish */
