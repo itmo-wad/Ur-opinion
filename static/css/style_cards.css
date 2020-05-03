@@ -33,6 +33,7 @@
     -moz-perspective: 200rem;
     perspective: 200rem;
     margin: 2rem;
+    display: inline-block;
   }
   .card__side {
     height: 52rem;
