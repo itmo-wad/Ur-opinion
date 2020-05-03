@@ -8,9 +8,10 @@ import pymongo
 
 #client = pymongo.MongoClient("mongodb://<dbuser>:<password>@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 #db = client["dbname"]
-client = pymongo.MongoClient(os.environ.get('MongoDb', None))
+# client = pymongo.MongoClient(os.environ.get('MongoDb', None))
+# db = client.get_default_database()
+client = pymongo.MongoClient("mongodb://admin:P29069921@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 db = client.get_default_database()
-
 
 #get users' collection
 users = db["users"]
@@ -81,12 +82,11 @@ def check_exist_team(manager,teamname):
         
         
 # create team for a username        
-def add_team(manager,teamname,desc,taskid,memlist) :
+def add_team(manager,teamname,desc,memlist) :
     _id = teams.insert({
             "manager": manager,
             "teamname": teamname,
-            "desc"   : desc,
-            "taskid": taskid
+            "desc"   : desc            
         })
         
     #create members according the team

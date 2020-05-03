@@ -84,17 +84,17 @@ def reg():
 @app.route('/teams')
 def teams():
       # use the host of the server
-          #if (request.remote_addr != "127.0.0.1") :
-           #   return render_template('error.html'), 404
+          if (request.remote_addr != "127.0.0.1") :
+              return render_template('error.html'), 404
          
-          #return teams_r()   
+          return teams_r()   
          
     
     #for testing on heroku
-     if (request.referrer != "https://ur-opinion.herokuapp.com/") :
-       return render_template('error.html'), 404    
+    # if (request.referrer != "https://ur-opinion.herokuapp.com/") :
+    #   return render_template('error.html'), 404    
      
-     return teams_r() 
+    # return teams_r() 
  
  
 #route to add new teams 
@@ -112,20 +112,22 @@ def addteam():
        
     else:
         return redirect("/login", code=302)   
+
+
        
     
 #new task div    
 @app.route('/newtask')
 def newtask():
       # use the host of the server
-     #     if (request.remote_addr != "127.0.0.1") :
-      #        return render_template('error.html'), 404
-       #   return newtask_r()  
+          if (request.remote_addr != "127.0.0.1") :
+              return render_template('error.html'), 404
+          return newtask_r()  
     
     #for testing on heroku
-     if (request.referrer != "https://ur-opinion.herokuapp.com/") :
-       return render_template('error.html'), 404    
-     return newtask_r()   
+    # if (request.referrer != "https://ur-opinion.herokuapp.com/") :
+    #   return render_template('error.html'), 404    
+    # return newtask_r()   
  
     
 @app.route('/addtask',methods=['POST'])    

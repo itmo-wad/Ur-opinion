@@ -32,3 +32,10 @@ function Validate_new_task() {
 
     return true;
 };
+
+function show_teams() {
+    var test = document.getElementById("preview");
+    test.style.display = "none";
+    $("#content").load("/teams");
+
+};

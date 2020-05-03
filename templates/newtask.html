@@ -5,6 +5,14 @@
   <meta charset="utf-8">
   <!-- <link rel="stylesheet" type="text/css" href="/static/css/style_teams_tasks.css"> -->
   <!-- <script type="text/javascript" src="/static/js/script.js"></script> -->
+  <!-- <script>
+     $(document).ready(function () {
+         $("#showteams").click(function () {
+        $("#content").load("/teams");
+      });
+    });
+  </script> -->
+
 </head>
 
 <body>
@@ -32,6 +40,7 @@
             {% endfor %}
           </select>
         </div>
+        <a id="showteams" onclick="show_teams()" style="float: right;  margin: 10px; text-decoration: underline;">Edit My Teams</a>
       </div>
 
       <!-- /teams list -->

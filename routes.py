@@ -57,7 +57,7 @@ def addteam_r(teamname , desc , members):
        flash('Team already exists!')
        return False
    
-   if add_team(manager,teamname,desc,"taskid",memlist) :
+   if add_team(manager,teamname,desc,memlist) :
        flash('Team was added successfully!')
        return True    
    
