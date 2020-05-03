@@ -9,170 +9,220 @@
 
 
 .artboard {
-    display: contents;
-    flex-flow: row;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem;
-    height: 100%;
-    position: absolute;
-    overflow-x: auto ;
-    overflow-y: hidden;
-  }
-  @media (max-width: 37.5em) {
-    .artboard {
-      padding: 1rem;
-    }
-  }
-  
-  .card {
-    flex: initial;
-    position: relative;
-    height: 30rem;
-    width: 23rem;
-    -moz-perspective: 200rem;
-    perspective: 200rem;
-    margin: 2rem;
-    display: inline-block;
-  }
-  .card__side {
-    height: 52rem;
-    transition: all 0.8s ease;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    -webkit-backface-visibility: hidden;
-    /* We don't want to see the back part of the element. */
-    backface-visibility: hidden;
-    /* We don't want to see the back part of the element. */
-    border-radius: 3px;
-    overflow: hidden;
-    /* The image is overflowing the parent. */
-    box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.15);
-    height: 30rem;
-  }
-  .card__side--front {
-    background-image: linear-gradient(to right bottom, rgba(30, 11, 54, 0.65), rgba(202, 55, 130, 0.7)), url(https://cdn.spacetelescope.org/archives/images/screen/heic0406a.jpg);
-  }
-  .card__side--back {
-    background-color: #fff;
-    transform: rotateY(180deg);
-  }
-  .card:hover .card__side--back {
-    transform: rotateY(0);
-  }
-  .card:hover .card__side--front {
-    transform: rotateY(-180deg);
-  }
-  .card__theme {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    top: 54%;
-    width: 90%;
-    text-align: center;
-  }
-  .card__theme-box {
-    color: #fff;
-    margin-bottom: 8rem;
-  }
-  .card__subject {
-    font-family: "Inconsolata", monospace;
-    letter-spacing: 0.8rem;
-    font-size: 1rem;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-  .card__title {
-    font-family: "VT323", monospace;
-    text-transform: uppercase;
-    font-size: 3rem;
-    font-weight: 100;
-  }
-  .card__cover {
-    position: relative;
-    background-size: cover;
-    height: 7rem;
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    background-image: linear-gradient(to top right, rgba(30, 11, 54, 0.65), rgba(202, 55, 130, 0.65)), url(https://cdn.spacetelescope.org/archives/images/screen/heic0406a.jpg);
-  }
-  .card__heading {
-    text-align: center;
-    color: #fff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 75%;
-  }
-  .card__heading-span {
-    font-family: "VT323", monospace;
-    font-size: 2.2rem;
-    font-weight: 300;
-    text-transform: uppercase;
-    padding: 1rem 1.5rem;
-    color: #fff;
-  }
-  .card__details {
-    font-family: "Inconsolata", monospace;
-    padding: 4rem 2rem;
-  }
-  .card__details ul {
-    list-style: none;
-    width: 80%;
-    margin: 0 auto;
-  }
-  .card__details ul li {
-    text-align: center;
-    font-size: 1rem;
+  display: contents;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  height: 100%;
+  position: absolute;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+@media (max-width: 37.5em) {
+  .artboard {
     padding: 1rem;
   }
-  .card__details ul li:not(:last-child) {
-    border-bottom: 1px solid #eee;
+}
+
+.card {
+  flex: initial;
+  position: relative;
+  height: 30rem;
+  width: 23rem;
+  -moz-perspective: 200rem;
+  perspective: 200rem;
+  margin: 2rem;
+  display: inline-block;
+}
+
+.card__side {
+  height: 52rem;
+  transition: all 0.8s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  /* We don't want to see the back part of the element. */
+  backface-visibility: hidden;
+  /* We don't want to see the back part of the element. */
+  border-radius: 3px;
+  overflow: hidden;
+  /* The image is overflowing the parent. */
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.15);
+  height: 30rem;
+}
+
+.card__side--front {
+  background-image: linear-gradient(to right bottom, rgba(30, 11, 54, 0.65), rgba(202, 55, 130, 0.7)), url(https://cdn.spacetelescope.org/archives/images/screen/heic0406a.jpg);
+  border-radius: 20px;
+}
+
+.card__side--back {
+  background-color: #fff;
+  transform: rotateY(180deg);
+  border-radius: 20px;
+}
+
+.card:hover .card__side--back {
+  transform: rotateY(0);
+}
+
+.card:hover .card__side--front {
+  transform: rotateY(-180deg);
+}
+
+.card__theme {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 54%;
+  width: 90%;
+  text-align: center;
+}
+
+.card__theme-box {
+  color: #fff;
+  margin-bottom: 8rem;
+}
+
+.card__subject {
+  font-family: "Inconsolata", monospace;
+  /* letter-spacing: 0.8rem; */
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.card__title {
+  font-family: "VT323", monospace;
+  text-transform: uppercase;
+  font-size: 3rem;
+  font-weight: 100;
+}
+
+.card__cover {
+  position: relative;
+  background-size: cover;
+  height: 7rem;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-image: linear-gradient(to top right, rgba(30, 11, 54, 0.65), rgba(202, 55, 130, 0.65)), url(https://cdn.spacetelescope.org/archives/images/screen/heic0406a.jpg);
+}
+
+.card__heading {
+  text-align: center;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+}
+
+.card__heading-span {
+  font-family: "VT323", monospace;
+  font-size: 2.2rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  padding: 1rem 1.5rem;
+  color: #fff;
+}
+
+.card__details {
+  font-family: "Inconsolata", monospace;
+
+  top: 120px;
+  bottom: 40px;
+  position: absolute;
+  width: 100%;
+
+}
+
+.ul_details {
+  list-style: none;
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+  overflow: auto;
+
+}
+
+
+
+.ul_details li {
+  text-align: center;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+.ul_details li:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+@media only screen and (max-width: 37.5em),
+only screen and (hover: none) {
+  .card {
+    height: auto;
+    border-radius: 3px;
+    background-color: #fff;
+    box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.15);
   }
-  @media only screen and (max-width: 37.5em), only screen and (hover: none) {
-    .card {
-      height: auto;
-      border-radius: 3px;
-      background-color: #fff;
-      box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.15);
-    }
-    .card__side {
-      height: auto;
-      position: relative;
-      box-shadow: none;
-    }
-    .card__side--front {
-      clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
-    }
-    .card__side--back {
-      transform: rotateY(0);
-    }
-    .card:hover .card__side--front {
-      transform: rotateY(0);
-    }
-    .card__details {
-      padding: 3rem 2rem;
-    }
-    .card__theme {
-      position: relative;
-      top: 0;
-      left: 0;
-      transform: translate(0);
-      width: 100%;
-      padding: 5rem 4rem 1.5rem 4rem;
-      text-align: right;
-    }
-    .card__theme-box {
-      margin-bottom: 1.5rem;
-    }
-    .card__title {
-      font-size: 3rem;
-    }
+
+  .card__side {
+    height: auto;
+    position: relative;
+    box-shadow: none;
   }
-  
+
+  .card__side--front {
+    clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .card__side--back {
+    transform: rotateY(0);
+  }
+
+  .card:hover .card__side--front {
+    transform: rotateY(0);
+  }
+
+  .card__details {
+    padding: 3rem 2rem;
+  }
+
+  .card__theme {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: translate(0);
+    width: 100%;
+    padding: 5rem 4rem 1.5rem 4rem;
+    text-align: right;
+  }
+
+  .card__theme-box {
+    margin-bottom: 1.5rem;
+  }
+
+  .card__title {
+    font-size: 3rem;
+  }
+}
+
+.divtail {
+
+  bottom: 1px;
+  position: absolute;
+  background-image: linear-gradient(to top right, rgba(30, 11, 54, 0.65), rgba(202, 55, 130, 0.65)), url(https://cdn.spacetelescope.org/archives/images/screen/heic0406a.jpg);
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  color: antiquewhite;
+
+}

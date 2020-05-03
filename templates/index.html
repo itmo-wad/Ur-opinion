@@ -14,17 +14,24 @@
   <script type="text/javascript" src="/static/js/script.js"></script>
   <script type="text/javascript" src="/static/js/script_tasks.js"></script>
   <script type="text/javascript" src="/static/js/script_teams.js"></script>
+  <script type="text/javascript" src="/static/js/script_cards.js"></script>
+
   <script src="/static/js/jquery-3.5.0.min.js"></script>
 
   <script>
     $(document).ready(function () {
       $("#btn_in_progress").click(function () {
         $("#cards").load("/cards");
-        $('html,body').animate({scrollTop: $("#cards").offset().top});
+        $('html,body').animate({
+          scrollTop: $("#cards").offset().top
+        });
       });
 
       $("#btn_created_by_me").click(function () {
-        $("#cards").load("created_by_me_page");
+        $("#cards").load("/cards");
+        $('html,body').animate({
+          scrollTop: $("#cards").offset().top
+        });
       });
 
       $("#btn_shared_with_me").click(function () {
@@ -106,7 +113,7 @@
           <!-- tasks in dashboard -->
           <div class="card-body p-0">
 
-            <button class="nav-link " id="btn_in_progress" data-remote="true" href="#cards" >
+            <button class="nav-link " id="btn_in_progress" data-remote="true" href="#cards">
               In Progress
             </button>
 
@@ -187,11 +194,11 @@
   <div>
 
     <p id="divtoload" style="display:none;">{{msg}}</p>
-    
+
     {% for message in get_flashed_messages() %}
     <p id="alertmsg" style="display:none;">{{ message }}</p>
     {% endfor %}
-    
+
     <!-- {% with messages = get_flashed_messages() %}
     {% if messages %}
     <script>

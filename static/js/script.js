@@ -1,9 +1,14 @@
 window.onload = function () {
     var divtoload = $('#divtoload').text();
     var alertmsg = $('#alertmsg').text();
-
+   
     if (divtoload == "loadteams") {
-        $("#content").load("/teams");
+        $("#cards").load("/teams");
+
+    }
+    
+    if (divtoload == "loadtasks") {
+        $("#cards").load("/cards");
 
     }
     

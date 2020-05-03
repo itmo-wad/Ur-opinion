@@ -288,7 +288,7 @@ h6 {
 
     .loginlogo:hover {
         cursor: pointer;
-       
+
         outline-offset: -10px;
         transform: scale(1.2);
     }
@@ -686,7 +686,6 @@ body {
     padding: 1.25rem 1.25rem;
     -ms-flex-positive: 1;
     flex-grow: 1
-    
 }
 
 .content::after {
@@ -820,7 +819,7 @@ body {
     background: none;
     cursor: pointer;
     color: rgb(10, 224, 231);
-   
+
 
 }
 
