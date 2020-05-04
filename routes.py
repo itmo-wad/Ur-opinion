@@ -86,3 +86,41 @@ def addtask_r(name , desc , team , datepub, eachperiod):
     else:
         flash("Unable to add the new Task")
         return False 
+
+#function to return data to in progress option
+def in_progress_r():
+    return render_template("cards.html") 
+
+#function to return data to created by me option
+def created_by_me_r():
+    return render_template("cards.html") 
+
+#function to return data to shared with me option
+def shared_with_me_r():
+    return render_template('cards.html')
+    
+    
+# add idea
+def addidea_r(memidea,taskid):
+    
+    if (memidea == ""):
+        member = session.get("username")
+        return render_template("cards.html") 
+    
+    else:
+        writer = session.get("username")
+        
+        if addidea(memidea,writer,taskid,"status"):
+            
+           flash('Idea was added successfully!')
+           return True    
+    
+        else:
+           flash("Unable to add the new Idea")
+           return False 
+        
+    
+
+#function to return data to archived option
+def archived_r():
+    return render_template("cards.html") 

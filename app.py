@@ -3,6 +3,8 @@ import re
 import requests
 from logging.handlers import RotatingFileHandler
 import logging
+server="127.0.0.1"
+#server="https://ur-opinion.herokuapp.com/"
 
 from routes import *
 
@@ -84,17 +86,11 @@ def reg():
 @app.route('/teams')
 def teams():
       # use the host of the server
-          # if (request.remote_addr != "127.0.0.1") :
-          #     return render_template('error.html'), 404
+          if (request.remote_addr != server) :
+              return render_template('error.html'), 404
          
-          # return teams_r()   
-         
-    
-    #for testing on heroku
-    if (request.referrer != "https://ur-opinion.herokuapp.com/") :
-      return render_template('error.html'), 404    
+          return teams_r()   
      
-    return teams_r() 
  
  
 #route to add new teams 
@@ -120,14 +116,11 @@ def addteam():
 @app.route('/newtask')
 def newtask():
       # use the host of the server
-          # if (request.remote_addr != "127.0.0.1") :
-          #     return render_template('error.html'), 404
-          # return newtask_r()  
+          if (request.remote_addr != server) :
+              return render_template('error.html'), 404
+          return newtask_r()  
     
-    #for testing on heroku
-    if (request.referrer != "https://ur-opinion.herokuapp.com/") :
-      return render_template('error.html'), 404    
-    return newtask_r()   
+ 
  
     
 @app.route('/addtask',methods=['POST'])    
@@ -142,28 +135,67 @@ def addtask():
           
           addtask_r(name , desc , team , datepub, eachperiod)
           
-          #session["msg"]="loadteams"
+          session["msg"]="loadtasks"
           return redirect("/")
        
     else:
         return redirect("/login", code=302)  
  
     
-#Cards page    
-@app.route('/cards')
-def cards():
+#in progress   cards 
+@app.route('/progress')
+def in_progress():
            # use the host of the server
-          # if (request.remote_addr != "127.0.0.1") :
-          #     return render_template('error.html'), 404
+          if (request.remote_addr != server) :
+              return render_template('error.html'), 404
          
-          # return render_template("cards.html")   
+          return in_progress_r()
+  
+#created by me  cards
+@app.route('/created')
+def created_by_me():
+           # use the host of the server
+          if (request.remote_addr != server) :
+              return render_template('error.html'), 404
          
+          return created_by_me_r()
+      
+#shared with me  cards   
+@app.route('/shared')
+def shared_with_me():
+           # use the host of the server
+          if (request.remote_addr != server) :
+              return render_template('error.html'), 404
+                   
+          return shared_with_me_r()
+
+#create new idea from shared with me  
+@app.route('/newidea', methods=['POST'])
+def addidea():
     
-    #for testing on heroku
-    if (request.referrer != "https://ur-opinion.herokuapp.com/") :
-      return render_template('error.html'), 404    
-     
-    return   render_template("cards.html")
+           #for loggined users
+    if session.get('logged_in'):
+              memidea = request.form.get('memidea').strip()
+              taskid =  request.form.get('taskid').strip()
+              
+              addidea_r(memidea,taskid)
+              
+              session["msg"]="shared"
+              return redirect("/")
+      
+    else:
+        return redirect("/login", code=302)  
+
+      
+# archive cards
+@app.route('/archived')
+def archived():
+           # use the host of the server
+          if (request.remote_addr != server) :
+              return render_template('error.html'), 404
+         
+          return archived_r() 
+
     
     
 #logout page    

@@ -19,31 +19,37 @@
   <script src="/static/js/jquery-3.5.0.min.js"></script>
 
   <script>
-    $(document).ready(function () {
-      $("#btn_in_progress").click(function () {
-        $("#cards").load("/cards");
-        $('html,body').animate({
+    function scroll_to_cards( ){
+   $('html,body').animate({
           scrollTop: $("#cards").offset().top
         });
+    }
+    $(document).ready(function () {
+      $("#btn_in_progress").click(function () {
+        $("#cards").load("/progress");
+        scroll_to_cards();
+     
       });
 
       $("#btn_created_by_me").click(function () {
-        $("#cards").load("/cards");
-        $('html,body').animate({
-          scrollTop: $("#cards").offset().top
-        });
+        $("#cards").load("/created");
+        scroll_to_cards();
       });
 
       $("#btn_shared_with_me").click(function () {
-        $("#cards").load("shared_with_me_page");
+        $("#cards").load("/shared");
+        scroll_to_cards();
       });
 
       $("#btn_archived").click(function () {
-        $("#cards").load("archived_page");
+        $("#cards").load("/archived");
+        scroll_to_cards();
+
       });
 
       $("#btn_new_task").click(function () {
         $("#preview").load("/newtask");
+        
       });
 
       $("#my_teams").click(function () {

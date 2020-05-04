@@ -7,8 +7,8 @@ window.onload = function () {
 
     }
     
-    if (divtoload == "loadtasks") {
-        $("#cards").load("/cards");
+    if (divtoload == "shared") {
+        $("#cards").load("/shared");
 
     }
     

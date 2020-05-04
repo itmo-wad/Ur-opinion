@@ -8,9 +8,10 @@ import pymongo
 
 #client = pymongo.MongoClient("mongodb://<dbuser>:<password>@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 #db = client["dbname"]
-client = pymongo.MongoClient(os.environ.get('MongoDb', None))
+# client = pymongo.MongoClient(os.environ.get('MongoDb', None))
+# db = client.get_default_database()
+client = pymongo.MongoClient("mongodb://admin:P29069921@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 db = client.get_default_database()
-
 
 #get users' collection
 users = db["users"]
@@ -24,6 +25,9 @@ members = db["members"]
 
 #get tasks collection
 tasks = db["tasks"]
+
+#get ideas collection
+ideas = db["ideas"]
 
 #add user from register
 def add_user_to_db(username, password,email,fullname):
@@ -129,3 +133,16 @@ def add_task(manager,name,desc,team,datepub,eachperiod,status,currenteditor):
             "currenteditor":"currenteditor"
         })
     return True
+
+
+#craete new idea
+def addidea(memidea,writer,taskid,status):
+        _id = ideas.insert({
+            "idea": memidea,
+            "writer": writer,
+            "taskid"   : taskid,
+            "status": status
+        })
+    
+        return True
+    

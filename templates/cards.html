@@ -41,6 +41,7 @@
               <tr>
                 <th>Team Name: </th>
                 <th><span class="card__subject">Team Name</span></th>
+                
               </tr>
               <tr>
                 <td>Published Date: </td>
@@ -59,7 +60,7 @@
           </div>
 
           <!-- Tail -->
-          <div class="divtail" onclick="show_ideas()">
+          <div class="divtail" onclick="show_ideas(this)" id="taskidfromresponse">
             Show Ideas
           </div>
           <!-- Tail -->
@@ -99,7 +100,7 @@
     <!-- content to show -->
     <div id="div_content" class="div_content form-style-teams-tasks">
 
-      <h2 style="color: white; font-weight: bold; margin: 0;" onclick="Validate_new_idea();">Task Name</h2>
+      <h2 style="color: white; font-weight: bold; margin: 0;">Task Name</h2>
 
       <!-- Ideas -->
       <div id="listideas" style="height: 65%;  overflow: auto;">
@@ -139,15 +140,24 @@
       <!-- /Ideas -->
 
       <!-- Enter my idea -->
-      <div id="newidea" style="position: absolute; bottom: 60px; width: 100%;">
+      <form id="newidea" style=" width: 100%;"  method="POST" action="{{ url_for('addidea')}}">
         <input type="text" id="memidea" name="memidea" placeholder="Enter Your Idea Here" autocomplete="off" />
 
-      </div>
+
+           <!-- #hidden text to sttore taskid -->
+      <input type="text" id="taskid" name="taskid" value="" style="display: none;" />
+
+
+      <input class="nav-link btninput" type="submit" id="memidea" value="SAVE" onclick="return Validate_new_idea();" />
+
+      <div class="nav-link btndiv " onclick="hide_ideas()">CLOSE</div>
+
+      </form>
       <!-- Enter my idea -->
 
+   
 
-      <input class="nav-link btninput" type="submit" id="submit" value="SAVE" onclick="Validate_new_idea();" disabled />
-      <div class="nav-link btndiv " onclick="hide_ideas()">CLOSE</div>
+
 
 
 
