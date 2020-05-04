@@ -95,10 +95,11 @@
   font-size: 1rem;
   text-transform: uppercase;
   margin-bottom: 1rem;
+  color: black;
 }
 
 .card__title {
-  font-family: "VT323", monospace;
+
   text-transform: uppercase;
   font-size: 3rem;
   font-weight: 100;
@@ -126,7 +127,7 @@
 }
 
 .card__heading-span {
-  font-family: "VT323", monospace;
+
   font-size: 2.2rem;
   font-weight: 300;
   text-transform: uppercase;
@@ -137,14 +138,14 @@
 .card__details {
   font-family: "Inconsolata", monospace;
 
-  top: 120px;
-  bottom: 40px;
+  top: 100px;
   position: absolute;
   width: 100%;
+  height: 70%;
 
 }
 
-.ul_details {
+/* .ul_details {
   list-style: none;
   width: 100%;
   margin: 0 auto;
@@ -152,9 +153,6 @@
   overflow: auto;
 
 }
-
-
-
 .ul_details li {
   text-align: center;
   font-size: 1rem;
@@ -163,7 +161,7 @@
 
 .ul_details li:not(:last-child) {
   border-bottom: 1px solid #eee;
-}
+} */
 
 @media only screen and (max-width: 37.5em),
 only screen and (hover: none) {
@@ -224,5 +222,42 @@ only screen and (hover: none) {
   height: 40px;
   padding: 10px;
   color: antiquewhite;
+  text-align: center;
 
+}
+
+.divtail:hover {
+  box-shadow: 0 5px 35px 0px rgba(0, 0, 0, .1);
+  color: burlywood;
+  transform: scale(1.6);
+  cursor: pointer;
+  padding: 6px;
+}
+
+
+.table_details {
+
+  width: 100%;
+  height: 100%;
+  margin: 10px;
+  font-size: 10pt;
+
+}
+
+.table_ideas {
+  width: 100%;
+  height: 100%;
+}
+
+.table_ideas tr {
+  height: 70px;
+}
+
+.th_fullname {
+  width: 20%;
+}
+
+.th_idea {
+  text-align: left;
+  width: 80%;
 }

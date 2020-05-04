@@ -30,38 +30,37 @@
           <!-- opinions -->
           <div class="card__details">
 
-            <ul class="ul_details">
+            <!-- <ul class="ul_details">
               <li style=" text-align: left; font-size: 10pt;">
                 <span>Full name:</span>
                 <span>Opinion 1asdf adsfasdf ad</span>
-              </li>
+              </li>            
+            </ul> -->
 
-              <li style=" text-align: left; font-size: 10pt;">
-                <span>Full name:</span>
-                <span>Opinion 1asdf adsfasdf ad</span>
-              </li>
+            <table class="table_details">
+              <tr>
+                <th>Team Name: </th>
+                <th><span class="card__subject">Team Name</span></th>
+              </tr>
+              <tr>
+                <td>Published Date: </td>
+                <td><span class="card__subject">Published Date</span></td>
+              </tr>
+              <tr>
+                <td> Current Editor: </td>
+                <td><span class="card__subject">Ghadeer Darwesh</span></td>
+              </tr>
+              <tr>
+                <td> DeadLine: </td>
+                <td><span class="card__subject">DeadLine</span></td>
+              </tr>
+            </table>
 
-              <li style=" text-align: left; font-size: 10pt;">
-                <span>Full name:</span>
-                <span>Opinion 1asdf adsfasdf ad</span>
-              </li>
-
-              <li style=" text-align: left; font-size: 10pt;">
-                <span>Full name:</span>
-                <span>Opinion 1asdf adsfasdf ad</span>
-              </li>
-              <li style=" text-align: left; font-size: 10pt;">
-                <span>Full name:</span>
-                <span>Opinion 1asdf adsfasdf ad</span>
-              </li>
-
-            </ul>
           </div>
 
           <!-- Tail -->
-          <div class="divtail">
-            <span>Current Editor: </span>
-            <span>Ghadeer Darwesh</span>
+          <div class="divtail" onclick="show_ideas()">
+            Show Ideas
           </div>
           <!-- Tail -->
 
@@ -74,12 +73,9 @@
             <div class="card__theme-box">
 
               <p class="card__title">Task Name</p>
-              <br />
-              <br />
-              <p class="card__subject">Team Name</p>
-              <br />
-              <br />
-              <p class="card__subject">Description</p>
+
+              <p class="">Description</p>
+
             </div>
           </div>
         </div>
@@ -88,14 +84,80 @@
       </div>
       <!-- /one card -->
 
-
     </div>
     <!-- /main scroller -->
 
-
-
   </div>
   <!-- /all board -->
+
+
+
+  <!-- div to show ideas -->
+  <div id="preview_ideas" class="prev_block">
+    <span class="helper"></span>
+
+    <!-- content to show -->
+    <div id="div_content" class="div_content form-style-teams-tasks">
+
+      <h2 style="color: white; font-weight: bold; margin: 0;" onclick="Validate_new_idea();">Task Name</h2>
+
+      <!-- Ideas -->
+      <div id="listideas" style="height: 65%;  overflow: auto;">
+
+        <table class="table_ideas">
+          <tr>
+            <th class="th_fullname">Full Name: </th>
+            <th class="th_idea"><span class="card__subject">His idea</span></th>
+          </tr>
+          <tr>
+            <th class="th_fullname">Full Name: </th>
+            <th class="th_idea"><span class="card__subject">His idea</span></th>
+          </tr>
+          <tr>
+            <th class="th_fullname">Full Name: </th>
+            <th class="th_idea"><span class="card__subject">His idea</span></th>
+          </tr>
+          <tr>
+            <th class="th_fullname">Full Name: </th>
+            <th class="th_idea"><span class="card__subject">His idea</span></th>
+          </tr>
+          <tr>
+            <th class="th_fullname">Full Name: </th>
+            <th class="th_idea"><span class="card__subject">His idea</span></th>
+          </tr>
+          <tr>
+            <th class="th_fullname">Full Name: </th>
+            <th class="th_idea"><span class="card__subject">His idea</span></th>
+          </tr>
+          <tr>
+            <th class="th_fullname">Full Name: </th>
+            <th class="th_idea"><span class="card__subject">His idea</span></th>
+          </tr>
+        </table>
+
+      </div>
+      <!-- /Ideas -->
+
+      <!-- Enter my idea -->
+      <div id="newidea" style="position: absolute; bottom: 60px; width: 100%;">
+        <input type="text" id="memidea" name="memidea" placeholder="Enter Your Idea Here" autocomplete="off" />
+
+      </div>
+      <!-- Enter my idea -->
+
+
+      <input class="nav-link btninput" type="submit" id="submit" value="SAVE" onclick="Validate_new_idea();" disabled />
+      <div class="nav-link btndiv " onclick="hide_ideas()">CLOSE</div>
+
+
+
+    </div>
+    <!-- /content to show -->
+
+  </div>
+
+  <!-- /div to show ideas -->
+
 
 </body>
 
