@@ -60,6 +60,15 @@ def getteams():
         teamslist.append(team["teamname"])
    
     return teamslist
+
+#return teamid according member usernamename
+def getmemteam(member):
+    teamsidlist = []
+    obj = members.find({"username":member})
+    for team in obj:
+        teamsidlist.append(team["teamid"])
+   
+    return teamsidlist
  
 # #get team id for specific manager
 def getteamid(manager , teamname):
@@ -145,4 +154,43 @@ def addidea(memidea,writer,taskid,status):
         })
     
         return True
+
+#return tasks shared with me to a member
+def get_tasks_shared_with_me(member):
     
+    teamsidlist = getmemteam(member)
+    
+    taskslist = []
+    taskdic={}
+    
+    #returns list of dictionaries eachone contains details of a task 
+    for teamid in teamsidlist :
+        obj = tasks.find({"teamid":teamid})
+        for task in obj:
+            taskdic={}
+            taskdic["taskid"]=task["_id"]
+            taskdic["taskname"]=task["taskname"]
+            taskdic["desc"]=task["desc"]
+            taskdic["datepub"]=task["datepub"]
+            taskdic["eachperiod"]=task["eachperiod"]
+            taskdic["status"]=task["status"]     
+            taskdic["currenteditor"]=task["currenteditor"] 
+            
+        taskslist.append(taskdic)    
+ 
+    return taskslist
+    
+# values returned from previous function 
+# tasklist=[taskdic1,taskdic2,...]   
+#      taskdic1={"taskid":"taskid",
+#                 "name":"",
+#                 "desc":"desc",
+#                 "":"",
+#                 "":""          
+#     }   
+     
+# ideaslist= [idea1,idea2,..]
+#    idea1={"taskid":"",
+#           "full name":"full name",
+#           "idea":"idea"
+#            }

@@ -18,12 +18,14 @@
 
 
       <!-- one card -->
+
+      {% for task in taskslist %}
       <div class="card">
 
         <div class="card__side card__side--back">
           <div class="card__cover">
             <h4 class="card__heading">
-              <span class="card__heading-span">Task Name</span>
+              <span class="card__heading-span">{{task['taskname']}}</span>
             </h4>
           </div>
 
@@ -45,11 +47,11 @@
               </tr>
               <tr>
                 <td>Published Date: </td>
-                <td><span class="card__subject">Published Date</span></td>
+                <td><span class="card__subject">{{task['datepub']}}</span></td>
               </tr>
               <tr>
                 <td> Current Editor: </td>
-                <td><span class="card__subject">Ghadeer Darwesh</span></td>
+                <td><span class="card__subject">{{task['currenteditor']}}</span></td>
               </tr>
               <tr>
                 <td> DeadLine: </td>
@@ -60,7 +62,7 @@
           </div>
 
           <!-- Tail -->
-          <div class="divtail" onclick="show_ideas(this)" id="taskidfromresponse">
+          <div class="divtail" onclick="show_ideas(this)" id="{{task['taskid']}}">
             Show Ideas
           </div>
           <!-- Tail -->
@@ -73,9 +75,9 @@
           <div class="card__theme">
             <div class="card__theme-box">
 
-              <p class="card__title">Task Name</p>
+              <p class="card__title">{{task['taskname']}}</p>
 
-              <p class="">Description</p>
+              <p class="">{{task['desc']}}</p>
 
             </div>
           </div>
@@ -84,6 +86,7 @@
 
       </div>
       <!-- /one card -->
+      {% endfor %}
 
     </div>
     <!-- /main scroller -->

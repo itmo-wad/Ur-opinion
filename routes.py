@@ -97,7 +97,11 @@ def created_by_me_r():
 
 #function to return data to shared with me option
 def shared_with_me_r():
-    return render_template('cards.html')
+    member = session.get("username")
+    
+    taskslist = get_tasks_shared_with_me(member)
+    
+    return render_template('cards.html', taskslist=taskslist)
     
     
 # add idea
