@@ -78,7 +78,8 @@ def getteamid(manager , teamname):
         {'teamname': teamname} ]})
      
       return team.get("_id")    
-    
+ 
+ 
 #check if a team already exists for this username    
 def check_exist_team(manager,teamname):
 
@@ -155,7 +156,7 @@ def addidea(memidea,writer,taskid,status):
     
         return True
 
-#return tasks shared with me to a member
+#return tasks list for "shared with me" to a member
 def get_tasks_shared_with_me(member):
     
     teamsidlist = getmemteam(member)
@@ -163,34 +164,63 @@ def get_tasks_shared_with_me(member):
     taskslist = []
     taskdic={}
     
+    ideaslist=[]
+    ideadic={}
+    
     #returns list of dictionaries eachone contains details of a task 
+    
+    #for each team get all tasks id
     for teamid in teamsidlist :
         obj = tasks.find({"teamid":teamid})
+        
+        #for each task get all data
         for task in obj:
             taskdic={}
-            taskdic["taskid"]=task["_id"]
+            ideaslist=[]
+            taskdic["taskid"]=str(task["_id"])
             taskdic["taskname"]=task["taskname"]
             taskdic["desc"]=task["desc"]
             taskdic["datepub"]=task["datepub"]
             taskdic["eachperiod"]=task["eachperiod"]
             taskdic["status"]=task["status"]     
-            taskdic["currenteditor"]=task["currenteditor"] 
+            taskdic["currenteditor"]=task["currenteditor"]
             
-        taskslist.append(taskdic)    
- 
+            #for each task get all ideas and put in list of dictionaries
+            obj2 = ideas.find({"taskid":taskdic["taskid"]})
+           
+            
+            #for each idea get all data
+            for idea in obj2:
+                
+                ideadic={}
+                ideadic["idea"]=idea["idea"]
+                ideadic["writer"]=idea["writer"]
+                ideadic["status"]=idea["status"]    
+                
+                #add the dic to ideas list
+                ideaslist.append(ideadic)    
+                
+            
+            #add ideas list to task dic
+            taskdic["ideas"]= ideaslist
+            
+            # add task dic to tasks list
+            taskslist.append(taskdic)    
+   
     return taskslist
     
+
 # values returned from previous function 
+    
 # tasklist=[taskdic1,taskdic2,...]   
 #      taskdic1={"taskid":"taskid",
 #                 "name":"",
 #                 "desc":"desc",
 #                 "":"",
-#                 "":""          
+#                 "ideas":[idea1,idea2]          
 #     }   
      
-# ideaslist= [idea1,idea2,..]
-#    idea1={"taskid":"",
-#           "full name":"full name",
-#           "idea":"idea"
+#    idea1={ "idea":"idea",
+#            "writer":"writer"
+#            "status":"status"
 #            }

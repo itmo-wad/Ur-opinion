@@ -100,6 +100,11 @@
   <div id="preview_ideas" class="prev_block">
     <span class="helper"></span>
 
+    <!-- find the taskid for which the user clicked on -->
+    <!-- {% for task in taskslist %}
+    {% if task['taskid'] == '5eb011daa585a89d28de73e3' %} -->
+
+
     <!-- content to show -->
     <div id="div_content" class="div_content form-style-teams-tasks">
 
@@ -109,35 +114,15 @@
       <div id="listideas" style="height: 65%;  overflow: auto;">
 
         <table class="table_ideas">
+
+          <!-- make row for each idea in ideas list-->
+          <!-- {% for idea in task['ideas'] %} -->
           <tr>
-            <th class="th_fullname">Full Name: </th>
-            <th class="th_idea"><span class="card__subject">His idea</span></th>
+            <th class="th_fullname">Writer</th>
+            <th class="th_idea"><span class="card__subject">Idea</span></th>
           </tr>
-          <tr>
-            <th class="th_fullname">Full Name: </th>
-            <th class="th_idea"><span class="card__subject">His idea</span></th>
-          </tr>
-          <tr>
-            <th class="th_fullname">Full Name: </th>
-            <th class="th_idea"><span class="card__subject">His idea</span></th>
-          </tr>
-          <tr>
-            <th class="th_fullname">Full Name: </th>
-            <th class="th_idea"><span class="card__subject">His idea</span></th>
-          </tr>
-          <tr>
-            <th class="th_fullname">Full Name: </th>
-            <th class="th_idea"><span class="card__subject">His idea</span></th>
-          </tr>
-          <tr>
-            <th class="th_fullname">Full Name: </th>
-            <th class="th_idea"><span class="card__subject">His idea</span></th>
-          </tr>
-          <tr>
-            <th class="th_fullname">Full Name: </th>
-            <th class="th_idea"><span class="card__subject">His idea</span></th>
-          </tr>
-        </table>
+          <!-- {% endfor %} -->
+          </table>
 
       </div>
       <!-- /Ideas -->
@@ -156,17 +141,14 @@
       <div class="nav-link btndiv " onclick="hide_ideas()">CLOSE</div>
 
       </form>
-      <!-- Enter my idea -->
-
-   
-
-
-
-
+      <!-- /Enter my idea -->
 
     </div>
     <!-- /content to show -->
 
+<!-- 
+    {% endif %}
+    {% endfor %} -->
   </div>
 
   <!-- /div to show ideas -->

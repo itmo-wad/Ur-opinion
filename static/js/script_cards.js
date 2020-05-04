@@ -2,8 +2,10 @@ function show_ideas(ele) {
     var dev_block = document.getElementById("preview_ideas");
     dev_block.style.display = "block";
 
+    // write taskid to hidden input
     var taskid = ele.id;
     document.getElementById("taskid").value=taskid;
+
 
 };
 
