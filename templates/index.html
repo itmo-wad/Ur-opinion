@@ -204,20 +204,13 @@
 
     <p id="divtoload" style="display:none;">{{msg}}</p>
 
+    <p id="divusername" style="display:none;">{{username}}</p>
+
     {% for message in get_flashed_messages() %}
     <p id="alertmsg" style="display:none;">{{ message }}</p>
     {% endfor %}
 
-    <!-- {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <script>
-      var messages = {{messages | safe}};
-      for (var i = 0; i < messages.length; i++) {
-        alert(messages[i]);
-      }
-    </script>
-    {% endif %}
-    {% endwith %} -->
+
   </div>
   <!-- hidden data and alerts -->
 

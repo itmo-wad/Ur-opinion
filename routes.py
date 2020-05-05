@@ -10,7 +10,7 @@ def index_r():
     #get fullname
     username  = session.get('username')
     fullname = get_full_name(username)
-    return render_template('index.html',msg=msg,fullname=fullname) 
+    return render_template('index.html',msg=msg,username=username,fullname=fullname) 
 
 #login page
 def reg_r(username,password,email,fullname):

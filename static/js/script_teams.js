@@ -66,14 +66,24 @@ function Validate_new_team() {
 
 // add new member to the textarea
 function teams_add_mem() {
-    var username = $('#mem_add').val();
+    var currentusername = $('#divusername').text();
+    var member = $('#mem_add').val();
     var members = $('#mem_list').val();
-    if (username != "" && username.indexOf(' ') == -1) {
-        $('#mem_list').val(members + username + '\n');
+    
+    if (currentusername == member){
+        alert("Please don't add yourself to team members, you are the boss!!");
         $('#mem_add').val("");
+        return false;
+    }
+
+    if (member != "" && member.indexOf(' ') == -1) {
+        $('#mem_list').val(members + member + '\n');
+        $('#mem_add').val("");
+        return true;
     } else {
         alert("Check if the field empty or contains spaces");
         $('#mem_add').val("");
+        return false;
     }
 
 };
