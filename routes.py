@@ -6,7 +6,11 @@ from db import *
 def index_r():
     msg = session.get("msg")
     session["msg"]=""
-    return render_template('index.html',msg=msg) 
+    
+    #get fullname
+    username  = session.get('username')
+    fullname = get_full_name(username)
+    return render_template('index.html',msg=msg,fullname=fullname) 
 
 #login page
 def reg_r(username,password,email,fullname):

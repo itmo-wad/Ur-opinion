@@ -49,6 +49,14 @@ def check_pass_in_db(username,password):
         user=users.find_one({"username":username})
         if user["password"] == password:
             return True
+        
+#return full name of ausername
+def get_full_name(username):
+    user = users.find_one({"username":username})
+    if user : 
+       
+        return user.get("fullname")
+
 #get the teams list for a username        
 def getteams():
     manager  = session.get('username')
