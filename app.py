@@ -3,8 +3,8 @@ import re
 import requests
 from logging.handlers import RotatingFileHandler
 import logging
-server="127.0.0.1"
-#server="https://ur-opinion.herokuapp.com/"
+#server="127.0.0.1"
+server="https://ur-opinion.herokuapp.com/"
 
 from routes import *
 
