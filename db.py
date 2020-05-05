@@ -45,6 +45,8 @@ def check_user_in_db(username):
     user = users.find_one({"username":username})
     if user : 
         return True
+    else:
+        return False
 
 #check if the passowrd is correct
 def check_pass_in_db(username,password):
@@ -86,7 +88,8 @@ def getteamid(manager , teamname):
     '$and': [
         {'manager': manager},
         {'teamname': teamname} ]})
-     
+      
+      
       return team.get("_id")    
  
  
@@ -102,8 +105,8 @@ def check_exist_team(manager,teamname):
             return True
         else :
             return False
-        
-        
+   
+    
 # create team for a username        
 def add_team(manager,teamname,desc,memlist) :
     _id = teams.insert({
@@ -216,12 +219,18 @@ def get_tasks_shared_with_me(member):
             taskdic["status"]=task["status"]     
             taskdic["currenteditor"]=task["currenteditor"]
             
-            #for each task get all ideas and put in list of dictionaries
-            obj2 = ideas.find({"taskid":taskdic["taskid"]})
-           
+            #get the teamname for teamid
+            teamid = task["teamid"]
+            obj2 = teams.find_one({"_id":ObjectId(teamid)})
+            teamname = obj2.get("teamname")
+            taskdic["teamname"]=teamname
             
+            
+            #for each task get all ideas and put in list of dictionaries
+            obj3 = ideas.find({"taskid":taskdic["taskid"]})
+                       
             #for each idea get all data
-            for idea in obj2:
+            for idea in obj3:
                 
                 ideadic={}
                 ideadic["idea"]=idea["idea"]
@@ -229,11 +238,11 @@ def get_tasks_shared_with_me(member):
                 ideadic["status"]=idea["status"]    
                 
                 #add the dic to ideas list
-                ideaslist.append(ideadic)    
-                
+                ideaslist.append(ideadic)                    
             
             #add ideas list to task dic
             taskdic["ideas"]= ideaslist
+            
             
             # add task dic to tasks list
             taskslist.append(taskdic)    
@@ -248,6 +257,7 @@ def get_tasks_shared_with_me(member):
 #                 "name":"",
 #                 "desc":"desc",
 #                 "":"",
+#                 ""teamname:"teamname"
 #                 "ideas":[idea1,idea2]          
 #     }   
      
