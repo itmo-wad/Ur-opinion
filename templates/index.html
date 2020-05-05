@@ -19,16 +19,16 @@
   <script src="/static/js/jquery-3.5.0.min.js"></script>
 
   <script>
-    function scroll_to_cards( ){
-   $('html,body').animate({
-          scrollTop: $("#cards").offset().top
-        });
+    function scroll_to_cards() {
+      $('html,body').animate({
+        scrollTop: $("#cards").offset().top
+      });
     }
     $(document).ready(function () {
       $("#btn_in_progress").click(function () {
         $("#cards").load("/progress");
         scroll_to_cards();
-     
+
       });
 
       $("#btn_created_by_me").click(function () {
@@ -40,7 +40,7 @@
         $("#cards").load("/shared");
         scroll_to_cards();
 
-        
+
       });
 
       $("#btn_archived").click(function () {
@@ -51,7 +51,7 @@
 
       $("#btn_new_task").click(function () {
         $("#preview").load("/newtask");
-        
+
       });
 
       $("#my_teams").click(function () {
@@ -83,10 +83,12 @@
 
         <!--  account symbole -->
         <div class="dropdown">
+          
+          <div class="dropdownsub">
+            <button onclick="showdrop()" class="dropbtn">{{fullname}}</button>
 
-          <button onclick="showdrop()" class="dropbtn">{{fullname}}</button>
-
-          <img src="/static/img/login.png" class="loginlogo" onclick="showdrop()" />
+            <img src="/static/img/login.png" class="loginlogo" onclick="showdrop()" />
+          </div>
 
           <div id="myDropdown" class="dropdown-content">
             <a id="my_teams">My Teams</a>

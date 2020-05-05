@@ -288,13 +288,14 @@ h6 {
 
     }
 
+    /* 
     .loginlogo:hover {
         cursor: pointer;
 
         outline-offset: -10px;
         transform: scale(1.1);
         transition: all 0.4s ease 0s;
-    }
+    } */
 
     .navbar-expand-md .navbar-nav {
         -ms-flex-direction: row;
@@ -802,7 +803,15 @@ body {
     padding: 0 !important
 }
 
-
+.dropdownsub:hover {
+    transform: scale(1.1);
+    text-shadow: 0px 0px 6px;
+    -moz-box-shadow: 0px 5px 40px -10px;
+    transition: all 0.4s ease 0s;
+    background: none;
+    cursor: pointer;
+    color: rgb(171, 220, 221);
+}
 
 .dropbtn {
     background: none;
@@ -818,13 +827,13 @@ body {
 }
 
 .dropbtn:hover {
-    text-shadow: 0px 0px 6px;
+    /* text-shadow: 0px 0px 6px;
     -moz-box-shadow: 0px 5px 40px -10px;
     transition: all 0.4s ease 0s;
     background: none;
-    cursor: pointer;
+    cursor: pointer; */
     color: rgb(171, 220, 221);
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
 }
 
 
