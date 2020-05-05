@@ -131,9 +131,12 @@
 .list-teams ol li {
 	position: relative;
 	margin-bottom: 1.5em;
-	padding: 0.5em;
-	background-color: #F0D756;
+	/* background-color: #F0D756; */
+	background-image: linear-gradient(to right, rgba(9, 56, 57, 0), rgb(6, 39, 53));
+	padding: 14px;
 	padding-left: 58px;
+	height: 50px;
+	border-radius: 10px;
 }
 
 .list-teams a {
