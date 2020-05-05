@@ -84,3 +84,8 @@ function teams_clear_list() {
     $('#mem_list').val("");
 
 };
+
+
+function confirm_remove(){
+    return confirm('Are you sure you want remove the Team and all its tasks?')
+}

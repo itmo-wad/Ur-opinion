@@ -120,7 +120,19 @@ def addteam():
         return redirect("/login", code=302)   
 
 
+#route to remove a team 
+@app.route('/removeteam',methods=['POST'])    
+def removeteam():
+     #for loggined users
+    if session.get('logged_in'):
+          teamid = request.form.get('teamid').strip()
+          
+          removeteam_r(teamid)
+          session["msg"]="loadteams"
+          return redirect("/")
        
+    else:
+        return redirect("/login", code=302)        
     
 #new task div    
 @app.route('/newtask')
@@ -141,11 +153,11 @@ def addtask():
     if session.get('logged_in'):
           name = request.form.get('taskname').strip()
           desc = request.form.get('taskdesc').strip()
-          team = request.form.get('slc_teams').strip()
+          teamid = request.form.get('slc_teams').strip()
           datepub = request.form.get('datepublish').strip()
           eachperiod = request.form.get('eachperiod').strip()
           
-          addtask_r(name , desc , team , datepub, eachperiod)
+          addtask_r(name , desc , teamid , datepub, eachperiod)
           
           session["msg"]="loadtasks"
           return redirect("/")

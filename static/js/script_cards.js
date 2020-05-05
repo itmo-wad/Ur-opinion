@@ -27,8 +27,12 @@ function check_spaces(str) {
 };
 
 
-function Validate_new_idea(){
-    var memidea = $('#memidea').val();
+function Validate_new_idea(ele){
+    str = ele.id;
+    var taskid = str.substring(8, );
+
+    textareid = "memidea_"+taskid
+    var memidea = document.getElementById(textareid).value;
 
     if(check_spaces(memidea)){
         alert("Not allowed input !!");

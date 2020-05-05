@@ -43,7 +43,7 @@
               <tr>
                 <th>Team Name: </th>
                 <th><span class="card__subject">Team Name</span></th>
-                
+
               </tr>
               <tr>
                 <td>Published Date: </td>
@@ -85,69 +85,71 @@
         <!-- /the cover -->
 
 
-        
+
       </div>
       <!-- /one card -->
- 
 
 
- <!-- div to show ideas -->
- <div id="div_{{task['taskid']}}" class="prev_block">
-  <span class="helper"></span>
 
-  <!-- content to show -->
-  <div id="div_content" class="div_content form-style-teams-tasks">
+      <!-- div to show ideas -->
+      <div id="div_{{task['taskid']}}" class="prev_block">
+        <span class="helper"></span>
 
-    <h2 style="color: white; font-weight: bold; margin: 0;">{{task['taskname']}}</h2>
+        <!-- content to show -->
+        <div id="div_content" class="div_content form-style-teams-tasks">
 
-    <!-- Ideas -->
-    <div id="listideas" style="height: 60%;  overflow: auto;">
+          <h2 style="color: white; font-weight: bold; margin: 0;">{{task['taskname']}}</h2>
 
-     
-        <!-- make row for each idea in ideas list-->
-        {% for idea in task['ideas'] %}
+          <!-- Ideas -->
+          <div id="listideas" style="height: 60%;  overflow: auto;">
 
 
-        <div class="div_element">
-          <div class="th_fullname">{{idea['writer']}}  :</div>
-          <div class="th_idea"><span class="idea_span">{{idea['idea']}}</span></div>
+            <!-- make row for each idea in ideas list-->
+            {% for idea in task['ideas'] %}
+
+
+            <div class="div_element">
+              <div class="th_fullname">{{idea['writer']}} :</div>
+              <div class="th_idea"><span class="idea_span">{{idea['idea']}}</span></div>
+            </div>
+            {% endfor %}
+
+
+
+          </div>
+          <!-- /Ideas -->
+
+          <!-- Enter my idea -->
+          <form id="newidea" style=" width: 100%;" method="POST" action="{{ url_for('addidea')}}">
+            <textarea type="text" class="memidea" id="memidea_{{task['taskid']}}" name="memidea"
+              placeholder="Enter Your Idea Here" autocomplete="off"></textarea>
+
+
+            <!-- #hidden text to sttore taskid -->
+            <input type="text" id="taskid" name="taskid" value="{{task['taskid']}}" style="display: none; " />
+
+
+            <input class="nav-link btninput" type="submit" id="ideabtn_{{task['taskid']}}" value="SEND"
+              onclick="return Validate_new_idea(this);" />
+
+            <div class="nav-link btndiv" id="close_{{task['taskid']}}" onclick="hide_ideas(this)">CLOSE</div>
+
+          </form>
+          <!-- /Enter my idea -->
+
         </div>
-        {% endfor %}
- 
+        <!-- /content to show -->
 
-        
-    </div>
-    <!-- /Ideas -->
+      </div>
+      <!-- /div to show ideas -->
 
-    <!-- Enter my idea -->
-    <form id="newidea" style=" width: 100%;"  method="POST" action="{{ url_for('addidea')}}">
-      <textarea type="text" class="memidea" id="memidea" name="memidea" placeholder="Enter Your Idea Here" autocomplete="off" ></textarea>
-
-
-         <!-- #hidden text to sttore taskid -->
-    <input type="text" id="taskid" name="taskid" value="{{task['taskid']}}" style="display: none; " />
-
-
-    <input  class="nav-link btninput" type="submit" id="memidea" value="SEND" onclick="return Validate_new_idea();" />
-
-    <div class="nav-link btndiv" id="close_{{task['taskid']}}" onclick="hide_ideas(this)">CLOSE</div>
-
-    </form>
-    <!-- /Enter my idea -->
-
-  </div>
-  <!-- /content to show -->
-
-</div>
-<!-- /div to show ideas --> 
- 
       {% endfor %}
 
     </div>
     <!-- /main scroller -->
 
   </div>
-  <!-- /all board -->  
+  <!-- /all board -->
 
 </body>
 

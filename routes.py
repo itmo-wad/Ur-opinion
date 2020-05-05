@@ -68,6 +68,19 @@ def addteam_r(teamname , desc , members):
    else:
        flash("Unable to add the new team")
        return False 
+
+
+#remove team
+def removeteam_r(teamid):
+    
+    if remove_team(teamid) :
+       flash('Team was removed successfully!')
+       return True    
+   
+    else:
+       flash("Unable to remove the team")
+       return False 
+    
    
 #for creating new tasks
 def newtask_r():
@@ -76,14 +89,14 @@ def newtask_r():
     return render_template('newtask.html',teamslist = teamslist)  
 
 #add new task
-def addtask_r(name , desc , team , datepub, eachperiod):
+def addtask_r(name , desc , teamid , datepub, eachperiod):
     manager  = session.get('username')
     
     if check_exist_task(manager,name):
         flash('Task already exists!')
         return False
 
-    if add_task(manager,name,desc,team,datepub,eachperiod,"status","current_editor") :
+    if add_task(manager,name,desc,teamid ,datepub,eachperiod,"status","current_editor") :
         flash('Task was added successfully!')
         return True    
     

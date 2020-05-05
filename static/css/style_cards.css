@@ -255,10 +255,10 @@ only screen and (hover: none) {
   width: 100%;
 }
 
-.div_element{
+.div_element {
   height: 85px;
-  width: 100%;  
-  display: block;  
+  width: 100%;
+  display: block;
   box-shadow: 10px 2px 10px rgba(0, 0, 0, 0.22);
   border-radius: 10px;
   margin-top: 20px;
@@ -268,12 +268,12 @@ only screen and (hover: none) {
 .th_fullname {
   /* width: 100px; */
   width: 20%;
-float: left;
+  float: left;
   height: 100%;
   align-items: center;
-display: inline-grid;
-white-space: pre-line;
-overflow: auto;
+  display: inline-grid;
+  white-space: pre-line;
+  overflow: auto;
 
 }
 
@@ -285,25 +285,25 @@ overflow: auto;
   align-items: center;
   white-space: pre-line;
 
-  
+
 }
 
-.idea_span{
+.idea_span {
 
   height: 100%;
-margin-top: 15px;
-overflow: auto;
-display: block;
+  margin-top: 15px;
+  overflow: auto;
+  display: block;
 }
 
-.memidea{
+.memidea {
 
   box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.22);
-  border-radius: 10px;  
-  resize: none;  
-  padding: 10px;  
-  height: 65px;  
+  border-radius: 10px;
+  resize: none;
+  padding: 10px;
+  height: 65px;
   width: 95%;
-margin: 10px;
- 
+  margin: 10px;
+
 }

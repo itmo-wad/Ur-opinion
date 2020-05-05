@@ -172,7 +172,12 @@
 	right: 20px;
 	position: absolute;
 	color: red;
-	font-size: 10pt;
+	font-size: 11pt;
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+
 }
 
 .removeteam:hover {

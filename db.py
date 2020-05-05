@@ -2,6 +2,7 @@ from flask import Flask, render_template,request,send_from_directory,session,fla
 import re
 import os
 import pymongo
+from bson import ObjectId
 
 #connect to datatbase
 
@@ -64,8 +65,8 @@ def getteams():
     
     obj = teams.find({"manager":manager})
     for team in obj:
-        teamslist.append(team["teamname"])
-   
+        teamslist.append(team)
+        
     return teamslist
 
 #return teamid according member usernamename
@@ -74,7 +75,8 @@ def getmemteam(member):
     obj = members.find({"username":member})
     for team in obj:
         teamsidlist.append(team["teamid"])
-   
+        
+          
     return teamsidlist
  
 # #get team id for specific manager
@@ -110,16 +112,36 @@ def add_team(manager,teamname,desc,memlist) :
         })
         
     #create members according the team
+    #use the str to store id as string only
     for member in memlist:
         members.insert({
             "username": member,
-            "teamid": _id,
+            "teamid": str(_id),
             "userorder" : "",
             "deadline": "",
             "status": "",
             "seen":""
         })
         
+    return True
+
+#remove team
+# so remove all members and tasks related to theis team 
+def remove_team(teamid) :
+    
+    teams.remove({"_id":ObjectId(teamid)})
+    
+    members.remove({"teamid":teamid})
+    
+    #delete ideas of each task
+    obj = tasks.find({"teamid":str(teamid)})
+    
+    for task in obj:
+        ideas.remove({"taskid":str(task["_id"])})
+        
+    tasks.remove({"teamid":teamid})
+    
+    
     return True
 
 def check_exist_task(manager,name):
@@ -135,10 +157,11 @@ def check_exist_task(manager,name):
             return False
         
 #create task for a username
-def add_task(manager,name,desc,team,datepub,eachperiod,status,currenteditor):
+def add_task(manager,name,desc,teamid ,datepub,eachperiod,status,currenteditor):
     
-    teamid = getteamid(manager, team)
-    
+    print("gggggggggg")
+    print(teamid)
+     
     _id = tasks.insert({
             "manager": manager,
             "taskname": name,
