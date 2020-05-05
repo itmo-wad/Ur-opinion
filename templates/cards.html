@@ -62,7 +62,7 @@
           </div>
 
           <!-- Tail -->
-          <div class="divtail" onclick="show_ideas(this)" id="{{task['taskid']}}">
+          <div class="divtail" onclick="show_ideas(this)" id="btn_{{task['taskid']}}">
             Show Ideas
           </div>
           <!-- Tail -->
@@ -84,75 +84,70 @@
         </div>
         <!-- /the cover -->
 
+
+        
       </div>
       <!-- /one card -->
+ 
+
+
+ <!-- div to show ideas -->
+ <div id="div_{{task['taskid']}}" class="prev_block">
+  <span class="helper"></span>
+
+  <!-- content to show -->
+  <div id="div_content" class="div_content form-style-teams-tasks">
+
+    <h2 style="color: white; font-weight: bold; margin: 0;">{{task['taskname']}}</h2>
+
+    <!-- Ideas -->
+    <div id="listideas" style="height: 60%;  overflow: auto;">
+
+     
+        <!-- make row for each idea in ideas list-->
+        {% for idea in task['ideas'] %}
+
+
+        <div class="div_element">
+          <div class="th_fullname">{{idea['writer']}}  :</div>
+          <div class="th_idea"><span class="idea_span">{{idea['idea']}}</span></div>
+        </div>
+        {% endfor %}
+ 
+
+        
+    </div>
+    <!-- /Ideas -->
+
+    <!-- Enter my idea -->
+    <form id="newidea" style=" width: 100%;"  method="POST" action="{{ url_for('addidea')}}">
+      <input type="text" class="memidea" id="memidea" style=" background: #e3e8ec; height: 60px;" name="memidea" placeholder="Enter Your Idea Here" autocomplete="off" />
+
+
+         <!-- #hidden text to sttore taskid -->
+    <input type="text" id="taskid" name="taskid" value="{{task['taskid']}}" style="display: none; " />
+
+
+    <input  class="nav-link btninput" type="submit" id="memidea" value="SEND" onclick="return Validate_new_idea();" />
+
+    <div class="nav-link btndiv" id="close_{{task['taskid']}}" onclick="hide_ideas(this)">CLOSE</div>
+
+    </form>
+    <!-- /Enter my idea -->
+
+  </div>
+  <!-- /content to show -->
+
+</div>
+<!-- /div to show ideas --> 
+ 
       {% endfor %}
 
     </div>
     <!-- /main scroller -->
 
   </div>
-  <!-- /all board -->
-
-
-
-  <!-- div to show ideas -->
-  <div id="preview_ideas" class="prev_block">
-    <span class="helper"></span>
-
-    <!-- find the taskid for which the user clicked on -->
-    <!-- {% for task in taskslist %}
-    {% if task['taskid'] == '5eb011daa585a89d28de73e3' %} -->
-
-
-    <!-- content to show -->
-    <div id="div_content" class="div_content form-style-teams-tasks">
-
-      <h2 style="color: white; font-weight: bold; margin: 0;">Task Name</h2>
-
-      <!-- Ideas -->
-      <div id="listideas" style="height: 65%;  overflow: auto;">
-
-        <table class="table_ideas">
-
-          <!-- make row for each idea in ideas list-->
-          <!-- {% for idea in task['ideas'] %} -->
-          <tr>
-            <th class="th_fullname">Writer</th>
-            <th class="th_idea"><span class="card__subject">Idea</span></th>
-          </tr>
-          <!-- {% endfor %} -->
-          </table>
-
-      </div>
-      <!-- /Ideas -->
-
-      <!-- Enter my idea -->
-      <form id="newidea" style=" width: 100%;"  method="POST" action="{{ url_for('addidea')}}">
-        <input type="text" id="memidea" name="memidea" placeholder="Enter Your Idea Here" autocomplete="off" />
-
-
-           <!-- #hidden text to sttore taskid -->
-      <input type="text" id="taskid" name="taskid" value="" style="display: none;" />
-
-
-      <input class="nav-link btninput" type="submit" id="memidea" value="SAVE" onclick="return Validate_new_idea();" />
-
-      <div class="nav-link btndiv " onclick="hide_ideas()">CLOSE</div>
-
-      </form>
-      <!-- /Enter my idea -->
-
-    </div>
-    <!-- /content to show -->
-
-<!-- 
-    {% endif %}
-    {% endfor %} -->
-  </div>
-
-  <!-- /div to show ideas -->
-
+  <!-- /all board -->  
 
 </body>
 

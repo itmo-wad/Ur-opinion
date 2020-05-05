@@ -1,17 +1,20 @@
 function show_ideas(ele) {
-    var dev_block = document.getElementById("preview_ideas");
+    str = ele.id;
+    var taskid = str.substring(4, );
+   
+
+    var div_block_id = "div_"+taskid
+    var dev_block = document.getElementById(div_block_id);
+
     dev_block.style.display = "block";
-
-    // write taskid to hidden input
-    var taskid = ele.id;
-    document.getElementById("taskid").value=taskid;
-
-
 };
 
-function hide_ideas() {
+function hide_ideas(ele) {
+    str = ele.id;
+    var taskid = str.substring(6, );
 
-    var test = document.getElementById("preview_ideas");
+    var div_block_id = "div_"+taskid
+    var test = document.getElementById(div_block_id);
     test.style.display = "none";
 };
 
@@ -41,7 +44,7 @@ function hide_inpyt_new_idea(){
 
     if (newidea.style.display=="none"){
         newidea.style.display = "block";
-listideas.style.height="65%"
+listideas.style.height="60%"
 
     }
     else{

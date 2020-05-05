@@ -251,28 +251,54 @@ only screen and (hover: none) {
 
 .table_ideas tr {
   height: 70px;
+  display: table;
+  width: 100%;
 }
 
-.th_fullname {
-  width: 20%;
+.div_element{
+  height: 85px;
+  width: 100%;  
+  display: block;  
+  box-shadow: 10px 2px 10px rgba(0, 0, 0, 0.22);
+  border-radius: 10px;
+  margin-top: 20px;
+}
 
-  /* width: 20%;
+
+.th_fullname {
+  /* width: 100px; */
+  width: 20%;
+float: left;
   height: 100%;
-  float: left;
-  text-align: b;
-  padding: 25px; */
+  align-items: center;
+display: inline-grid;
+white-space: pre-line;
+overflow: auto;
 
 }
 
 .th_idea {
   text-align: left;
+  height: 100%;
   width: 80%;
+  display: inline-grid;
+  align-items: center;
+  white-space: pre-line;
 
+  
+}
 
-  /* text-align: left;
-width: 80%;
-height: 100%;
-position: absolute;
-float: right;
-padding: 20px; */
+.idea_span{
+
+  height: 100%;
+margin-top: 15px;
+overflow: auto;
+display: block;
+}
+
+.memidea{
+
+  text-align: center; 
+  border-radius: 20px; 
+ 
 }
