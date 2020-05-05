@@ -3,8 +3,16 @@ import re
 import requests
 from logging.handlers import RotatingFileHandler
 import logging
-#server="127.0.0.1"
-server="https://ur-opinion.herokuapp.com/"
+server="127.0.0.1"
+#server="https://ur-opinion.herokuapp.com/"
+def test_local_server():
+    #if (request.remote_addr == "127.0.0.1") :
+    if (request.referrer == "https://ur-opinion.herokuapp.com/") :    
+        return True
+    
+    else :
+        return False
+    
 
 from routes import *
 
@@ -86,10 +94,12 @@ def reg():
 @app.route('/teams')
 def teams():
       # use the host of the server
-          if (request.remote_addr != server) :
-              return render_template('error.html'), 404
+          if (test_local_server()) :
+              return teams_r() 
+              
+          return render_template('error.html'), 404
          
-          return teams_r()   
+            
      
  
  
@@ -116,9 +126,11 @@ def addteam():
 @app.route('/newtask')
 def newtask():
       # use the host of the server
-          if (request.remote_addr != server) :
-              return render_template('error.html'), 404
-          return newtask_r()  
+          if (test_local_server()) :
+              return  newtask_r()  
+              
+          return render_template('error.html'), 404
+          
     
  
  
@@ -146,28 +158,31 @@ def addtask():
 @app.route('/progress')
 def in_progress():
            # use the host of the server
-          if (request.remote_addr != server) :
-              return render_template('error.html'), 404
-         
-          return in_progress_r()
+          if (test_local_server()) :
+              return  in_progress_r() 
+              
+          return render_template('error.html'), 404
+          
   
 #created by me  cards
 @app.route('/created')
 def created_by_me():
            # use the host of the server
-          if (request.remote_addr != server) :
-              return render_template('error.html'), 404
-         
-          return created_by_me_r()
+          if (test_local_server()) :
+              return  created_by_me_r()
+              
+          return render_template('error.html'), 404
+     
       
 #shared with me  cards   
 @app.route('/shared')
 def shared_with_me():
            # use the host of the server
-          if (request.remote_addr != server) :
-              return render_template('error.html'), 404
-                   
-          return shared_with_me_r()
+          if (test_local_server()) :
+              return  shared_with_me_r()
+              
+          return render_template('error.html'), 404    
+
 
 #create new idea from shared with me  
 @app.route('/newidea', methods=['POST'])
@@ -191,11 +206,10 @@ def addidea():
 @app.route('/archived')
 def archived():
            # use the host of the server
-          if (request.remote_addr != server) :
-              return render_template('error.html'), 404
-         
-          return archived_r() 
-
+          if (test_local_server()) :
+              return  archived_r() 
+              
+          return render_template('error.html'), 404    
     
     
 #logout page    
