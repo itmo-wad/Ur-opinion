@@ -96,17 +96,18 @@
 
 .textarea_mem {
 	width: 100%;
-	height: 100%;
+	height: 130px;
 	text-align: center;
 	box-sizing: border-box;
 	outline: none;
 	font: 16px Arial, Helvetica, sans-serif;
 	border: none;
 	background: transparent;
-	overflow: hidden;
+	overflow: auto;
 	font-weight: bold;
 	color: black;
 	line-height: 200%;
+	resize: none;
 }
 
 /* list teams */

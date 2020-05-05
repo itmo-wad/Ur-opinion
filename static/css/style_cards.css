@@ -298,7 +298,12 @@ display: block;
 
 .memidea{
 
-  text-align: center; 
-  border-radius: 20px; 
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.22);
+  border-radius: 10px;  
+  resize: none;  
+  padding: 10px;  
+  height: 65px;  
+  width: 95%;
+margin: 10px;
  
 }
