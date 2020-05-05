@@ -21,12 +21,12 @@
       <ol>
         {% for team in teamslist %}
         <li>
-          <a href="#" >{{team['teamname']}}</a>
-<form method="POST" action="{{ url_for('removeteam')}}" style="display: inline;">
-          <input type="text" id="teamid" name="teamid" value="{{team['_id']}}" style="display: none; " />
+          <a href="#">{{team['teamname']}}</a>
+          <form method="POST" action="{{ url_for('removeteam')}}" style="display: inline;">
+            <input type="text" id="teamid" name="teamid" value="{{team['_id']}}" style="display: none; " />
 
-          <input class="removeteam" type="submit" id="submit" value="REMOVE"  onclick="return confirm_remove()" />
-        </form>
+            <input class="removeteam" type="submit" id="submit" value="REMOVE" onclick="return confirm_remove()" />
+          </form>
         </li>
         {% endfor %}
       </ol>

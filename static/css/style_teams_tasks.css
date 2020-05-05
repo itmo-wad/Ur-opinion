@@ -9,7 +9,8 @@
 }
 
 .form-style-teams-tasks h2 {
-	background: #2c3e50;
+	/* background: #2c3e50; */
+	background-image: linear-gradient(to right bottom, rgba(11, 10, 10, 0.65), rgba(5, 43, 47, 0.7)), url(/static/img/background2.jpg);
 	text-transform: uppercase;
 	font-family: 'Open Sans Condensed', sans-serif;
 	color: #fcf8f8;
@@ -19,6 +20,7 @@
 	margin: -30px -30px 30px -30px;
 	font-weight: bold;
 	font-family: "Times New Roman", Times, serif;
+	border-radius: 10px;
 }
 
 .form-style-teams-tasks input[type="text"],
@@ -71,6 +73,7 @@
 	transition: all 0.4s ease 0s;
 	background: none;
 	cursor: pointer;
+	color: white;
 }
 
 .btn_create_team:focus {
@@ -173,10 +176,10 @@
 	position: absolute;
 	color: red;
 	font-size: 11pt;
-    background: none;
-    border: none;
-    font-weight: bold;
-    font-family: "Times New Roman", Times, serif;
+	background: none;
+	border: none;
+	font-weight: bold;
+	font-family: "Times New Roman", Times, serif;
 
 }
 
@@ -191,7 +194,7 @@
 /* select team  */
 .divselect {
 	text-align: left;
-	margin: 20px;
+	margin-top: 40px;
 	margin-left: 10px;
 	font-weight: bold;
 }
@@ -205,8 +208,8 @@ select {
 	outline: 0;
 	box-shadow: none;
 	border: 0 !important;
-	background: #2c3e50;
-	background-image: none;
+	/* background: #2c3e50; */
+	background-image: linear-gradient(to right bottom, rgba(11, 10, 10, 0.65), rgba(5, 43, 47, 0.7)), url(/static/img/background2.jpg);
 
 }
 
@@ -227,6 +230,7 @@ select::-ms-expand {
 	border-radius: .25em;
 	left: 35px;
 	border-radius: 7px;
+	width: 250px;
 }
 
 select {
@@ -236,6 +240,11 @@ select {
 	cursor: pointer;
 }
 
+.select-selected {
+	background-color: rgb(143, 23, 107);
+}
+
+
 /* Arrow */
 .select::after {
 	content: '\25BC';
@@ -243,7 +252,8 @@ select {
 	top: 0;
 	right: 0;
 	padding: 0 1em;
-	background: #34495e;
+	background: #011d35;
+	;
 	cursor: pointer;
 	pointer-events: none;
 	-webkit-transition: .25s all ease;
@@ -352,8 +362,11 @@ select {
 	border-style: revert;
 	padding: 5px;
 	font-style: oblique;
-	background-color: #2c3e50;
+	/* background-color: #2c3e50; */
+	background-image: linear-gradient(to right bottom, rgba(11, 10, 10, 0.65), rgba(5, 43, 47, 0.7)), url(/static/img/background2.jpg);
 	color: white;
+	width: 220px;
+	height: 100%;
 }
 
 /* /on off */
@@ -370,24 +383,29 @@ select {
 
 .divdate {
 	text-align: left;
-	margin: 10px;
+	margin-left: 10px;
+	margin-top: 40px;
 	font-weight: bold;
+	height: 40px;
 }
 
 .divdeadline {
 	text-align: left;
 	font-weight: bold;
-	margin: 20px;
-	margin-left: 20px;
+	margin-top: 40px;
 	margin-left: 10px;
+	height: 40px;
 }
 
 .divdeadline input[type="number"] {
 	margin-left: 18px;
 	padding: 5px;
-	background-color: #2c3e50;
+	/* background-color: #2c3e50; */
+	background-image: linear-gradient(to right bottom, rgba(11, 10, 10, 0.65), rgba(5, 43, 47, 0.7)), url(/static/img/background2.jpg);
 	border-radius: 7px;
 	color: white;
+	width: 220px;
+	height: 100%;
 }
 
 /* /date publish */
