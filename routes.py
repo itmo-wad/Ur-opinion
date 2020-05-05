@@ -63,12 +63,15 @@ def addteam_r(teamname , desc , members):
    
    #check members
    nomembers=""
+   notfound = False
    for username in memlist:
        if (not check_user_in_db(username)):
            nomembers = nomembers + username +", "
-           
-   flash('Failed! No such usernames: ' + nomembers)
-   return False
+           notfound = True
+
+   if notfound :
+       flash('Failed! No such usernames: ' + nomembers)
+       return False
    
    if add_team(manager,teamname,desc,memlist) :
        flash('Team was added successfully!')
