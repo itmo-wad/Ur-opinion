@@ -9,10 +9,9 @@ from bson import ObjectId
 
 #client = pymongo.MongoClient("mongodb://<dbuser>:<password>@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 #db = client["dbname"]
-# client = pymongo.MongoClient(os.environ.get('MongoDb', None))
-# db = client.get_default_database()
-client = pymongo.MongoClient("mongodb://admin:P29069921@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
+client = pymongo.MongoClient(os.environ.get('MongoDb', None))
 db = client.get_default_database()
+
 
 #get users' collection
 users = db["users"]
@@ -216,6 +215,12 @@ def addidea(memidea,writer,taskid):
             "taskid"   : taskid,
             "status": 0
         })
+        
+        #change status of task of this member to 1 (finished for him)
+        taskmembers.update_one({
+    '$and': [
+        {'username': writer},
+        {'taskid': taskid} ]}, {"$set": {"status":1}})  
     
         return True
 
@@ -271,6 +276,14 @@ def get_tasks_shared_with_me(member):
             #add ideas list to task dic
             taskdic["ideas"]= ideaslist            
             
+            
+            #get the member status on this task(already added idea or not)
+            obj4  = taskmembers.find_one({
+      '$and': [
+         {'username': member},
+         {'taskid': str(task["_id"])} ]})  
+            taskdic["statusmem"]=obj4.get("status")
+                
             # add task dic to tasks list
             taskslist.append(taskdic)    
    
@@ -361,8 +374,6 @@ def get_tasks_in_progress(username):
  
     #get all shared tasks with status 0 (not finished yet)
     sharedtaskslist = get_tasks_shared_with_me(username)
-    print("gggggggggg")
-    print(sharedtaskslist)
     for task in sharedtaskslist:
         if task["status"]==0:
             taskslist.append(task)

@@ -7,7 +7,17 @@ function show_ideas(ele) {
     var dev_block = document.getElementById(div_block_id);
 
     dev_block.style.display = "block";
-};
+
+
+    // hide input and save button if an idea already added
+    var input_status = "statusmem_"+taskid
+    var status = document.getElementById(input_status).value;
+  
+    if (status == 1)  {
+// hide the input
+hide_input_idea_for_mem(taskid);
+    }
+    };
 
 function hide_ideas(ele) {
     str = ele.id;
@@ -42,18 +52,15 @@ function Validate_new_idea(ele){
     return true;
 }
 
-function hide_inpyt_new_idea(){
-    var newidea = document.getElementById("newidea");
-    var listideas = document.getElementById("listideas");
+function hide_input_idea_for_mem(taskid){
+    
+    var textarea = "memidea_"+taskid
+    document.getElementById(textarea).style.display="none";
 
-    if (newidea.style.display=="none"){
-        newidea.style.display = "block";
-listideas.style.height="60%"
+    var save="ideabtn_"+taskid    
+    document.getElementById(save).style.display="none";;
 
-    }
-    else{
-        newidea.style.display = "none";
-        listideas.style.height="75%"
-
-    }
+    var listideas = "listideas_" + taskid
+    document.getElementById(listideas).style.height="75%";
+   
 }

@@ -43,7 +43,10 @@
               <tr>
                 <th>Team Name: </th>
                 <th><span class="card__subject">{{task['teamname']}}</span></th>
-
+              </tr>
+              <tr>
+                <th>Team Manager: </th>
+                <th><span class="card__subject">{{task['manager']}}</span></th>
               </tr>
               <tr>
                 <td>Published Date: </td>
@@ -101,12 +104,11 @@
           <h2 style="color: white; font-weight: bold; margin: 0;">{{task['taskname']}}</h2>
 
           <!-- Ideas -->
-          <div id="listideas" style="height: 60%;  overflow: auto;">
+          <div id="listideas_{{task['taskid']}}" style="height: 60%;  overflow: auto;">
 
 
             <!-- make row for each idea in ideas list-->
             {% for idea in task['ideas'] %}
-
 
             <div class="div_element">
               <div class="th_fullname">{{idea['writer']}} :</div>
@@ -114,10 +116,11 @@
             </div>
             {% endfor %}
 
-
-
           </div>
           <!-- /Ideas -->
+
+          <!-- if member already added his idea, don't show input elements -->
+        
 
           <!-- Enter my idea -->
           <form id="newidea" style=" width: 100%;" method="POST" action="{{ url_for('addidea')}}">
@@ -125,9 +128,11 @@
               placeholder="Enter Your Comment Here" autocomplete="off"></textarea>
 
 
-            <!-- #hidden text to sttore taskid -->
+            <!-- #hidden text to store taskid -->
             <input type="text" id="taskid" name="taskid" value="{{task['taskid']}}" style="display: none; " />
 
+            <!-- hidden text to store status -->
+            <input type="text" id="statusmem_{{task['taskid']}}" name="statusmem" value="{{task['statusmem']}}" style="display: none; " />
 
             <input class="nav-link btninput" type="submit" id="ideabtn_{{task['taskid']}}" value="SEND"
               onclick="return Validate_new_idea(this);" />
