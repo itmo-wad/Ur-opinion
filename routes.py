@@ -118,6 +118,11 @@ def addtask_r(name , desc , teamid , datepub, eachperiod):
 
 #function to return data to in progress option
 def in_progress_r():
+    username = session.get("username")
+    
+    taskslist = get_tasks_in_progress(username)   
+    
+    return render_template('cards.html', taskslist=taskslist)
     return render_template("cards.html") 
 
 #function to return data to created by me option

@@ -240,6 +240,7 @@ def get_tasks_shared_with_me(member):
             ideaslist=[]
             taskdic["taskid"]=str(task["_id"])
             taskdic["taskname"]=task["taskname"]
+            taskdic["manager"]=task["manager"]
             taskdic["desc"]=task["desc"]
             taskdic["datepub"]=task["datepub"]
             taskdic["eachperiod"]=task["eachperiod"]
@@ -319,6 +320,7 @@ def get_tasks_created_by_me(manager):
             ideaslist=[]
             taskdic["taskid"]=str(task["_id"])
             taskdic["taskname"]=task["taskname"]
+            taskdic["manager"]=task["manager"]
             taskdic["desc"]=task["desc"]
             taskdic["datepub"]=task["datepub"]
             taskdic["eachperiod"]=task["eachperiod"]
@@ -350,5 +352,25 @@ def get_tasks_created_by_me(manager):
             
             # add task dic to tasks list
             taskslist.append(taskdic)    
+   
+    return taskslist    
+
+#return tasks list for "created by me" to a owner (status not matter)
+def get_tasks_in_progress(username):
+    taskslist = []
+ 
+    #get all shared tasks with status 0 (not finished yet)
+    sharedtaskslist = get_tasks_shared_with_me(username)
+    print("gggggggggg")
+    print(sharedtaskslist)
+    for task in sharedtaskslist:
+        if task["status"]==0:
+            taskslist.append(task)
+    
+    #get all created tasks with status 0 (not finished yet)
+    createdtaskslist = get_tasks_created_by_me(username)
+    for task in createdtaskslist:
+        if task["status"]==0:
+            taskslist.append(task)
    
     return taskslist    
