@@ -140,12 +140,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 75%;
+  width: 98%;
 }
 
 .card__heading-span {
 
-  font-size: 2.2rem;
+  font-size: 1.5rem;
   font-weight: 300;
   text-transform: uppercase;
   padding: 1rem 1.5rem;
