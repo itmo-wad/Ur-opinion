@@ -134,7 +134,7 @@ def removeteam():
     else:
         return redirect("/login", code=302)        
     
-#new task div    
+#when pressing new task button (to get the teams)   
 @app.route('/newtask')
 def newtask():
       # use the host of the server
@@ -159,7 +159,7 @@ def addtask():
           
           addtask_r(name , desc , teamid , datepub, eachperiod)
           
-          session["msg"]="loadtasks"
+          session["msg"]="loadcreatedtasks"
           return redirect("/")
        
     else:
@@ -167,6 +167,7 @@ def addtask():
  
     
 #in progress   cards 
+#show tasks shared and created with only status ( not finished yet)        
 @app.route('/progress')
 def in_progress():
            # use the host of the server
@@ -177,6 +178,7 @@ def in_progress():
           
   
 #created by me  cards
+# show tasks that I have created with status 0 or 1 (finished or not)         
 @app.route('/created')
 def created_by_me():
            # use the host of the server
@@ -187,6 +189,7 @@ def created_by_me():
      
       
 #shared with me  cards   
+#show tasks shared with mewith status 0 or 1(finished or not)      
 @app.route('/shared')
 def shared_with_me():
            # use the host of the server

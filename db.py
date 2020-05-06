@@ -21,8 +21,11 @@ users.create_index("username")
 #get teams collection
 teams = db["teams"]
 
-#get members collection
-members = db["members"]
+#get teammembers collection
+teammembers = db["teammembers"]
+
+#get taskmembers collection
+taskmembers = db["taskmembers"]
 
 #get tasks collection
 tasks = db["tasks"]
@@ -75,20 +78,28 @@ def getteams():
 #return teamid according member usernamename
 def getmemteam(member):
     teamsidlist = []
-    obj = members.find({"username":member})
+    obj = teammembers.find({"username":member})
     for team in obj:
-        teamsidlist.append(team["teamid"])
-        
+        teamsidlist.append(team["teamid"])        
           
     return teamsidlist
+
+#return members of a team
+def getteammembers(teamid):
+    memberslist = []
+    obj = teammembers.find({"teamid":teamid})
+    for member in obj:
+        memberslist.append(member["username"])        
+          
+    return memberslist
+
  
 # #get team id for specific manager
 def getteamid(manager , teamname):
       team = teams.find_one({
     '$and': [
         {'manager': manager},
-        {'teamname': teamname} ]})
-      
+        {'teamname': teamname} ]})      
       
       return team.get("_id")    
  
@@ -117,14 +128,11 @@ def add_team(manager,teamname,desc,memlist) :
         
     #create members according the team
     #use the str to store id as string only
+  
     for member in memlist:
-        members.insert({
+        teammembers.insert({
             "username": member,
-            "teamid": str(_id),
-            "userorder" : "",
-            "deadline": "",
-            "status": "",
-            "seen":""
+            "teamid": str(_id)
         })
         
     return True
@@ -135,7 +143,10 @@ def remove_team(teamid) :
     
     teams.remove({"_id":ObjectId(teamid)})
     
-    members.remove({"teamid":teamid})
+    teammembers.remove({"teamid":teamid})
+    
+    taskmembers.remove({"teamid":teamid})
+
     
     #delete ideas of each task
     obj = tasks.find({"teamid":str(teamid)})
@@ -143,10 +154,10 @@ def remove_team(teamid) :
     for task in obj:
         ideas.remove({"taskid":str(task["_id"])})
         
-    tasks.remove({"teamid":teamid})
-    
+    tasks.remove({"teamid":teamid})    
     
     return True
+
 
 def check_exist_task(manager,name):
     task = tasks.find_one({
@@ -160,8 +171,12 @@ def check_exist_task(manager,name):
     else :
             return False
         
+        
 #create task for a username
-def add_task(manager,name,desc,teamid ,datepub,eachperiod,status,currenteditor):
+#status in tasks means if task finished yet or not.     
+#status in taskmembers means if member has added his idea or not.            
+
+def add_task(manager,name,desc,teamid ,datepub,eachperiod,currenteditor):
     
 
     _id = tasks.insert({
@@ -171,26 +186,41 @@ def add_task(manager,name,desc,teamid ,datepub,eachperiod,status,currenteditor):
             "teamid": teamid,
             "datepub":datepub,
             "eachperiod" : eachperiod,
-            "status": "status",
+            "status": 0,
             "currenteditor":"currenteditor"
         })
+    
+    #get members of a team
+    memlist = getteammembers(teamid)
+    
+    for member in memlist:
+        taskmembers.insert({
+            "username":member,
+            "taskid" : str(_id),
+            "teamid":teamid,
+            "userorder":"userorder",
+            "deadline":"dealine",
+            "status":0,
+            "seen":"seen"
+            })    
+    
     return True
 
 
 #craete new idea
-def addidea(memidea,writer,taskid,status):
+# status means if idea accepted yet or not
+def addidea(memidea,writer,taskid):
         _id = ideas.insert({
             "idea": memidea,
             "writer": writer,
             "taskid"   : taskid,
-            "status": status
+            "status": 0
         })
     
         return True
 
-#return tasks list for "shared with me" to a member
-def get_tasks_shared_with_me(member):
-    
+#return tasks list for "shared with me" to a member (status not matter)
+def get_tasks_shared_with_me(member):    
     teamsidlist = getmemteam(member)
     
     taskslist = []
@@ -199,11 +229,10 @@ def get_tasks_shared_with_me(member):
     ideaslist=[]
     ideadic={}
     
-    #returns list of dictionaries eachone contains details of a task 
-    
+    #returns list of dictionaries eachone contains details of a task     
     #for each team get all tasks id
     for teamid in teamsidlist :
-        obj = tasks.find({"teamid":teamid})
+        obj = tasks.find({"teamid":teamid})       
         
         #for each task get all data
         for task in obj:
@@ -239,8 +268,7 @@ def get_tasks_shared_with_me(member):
                 ideaslist.append(ideadic)                    
             
             #add ideas list to task dic
-            taskdic["ideas"]= ideaslist
-            
+            taskdic["ideas"]= ideaslist            
             
             # add task dic to tasks list
             taskslist.append(taskdic)    
@@ -263,3 +291,64 @@ def get_tasks_shared_with_me(member):
 #            "writer":"writer"
 #            "status":"status"
 #            }
+#find tasks for teamid and not equals to unwantedstat
+# obj = tasks.find(
+#     {"$and": [
+#         {"teamid": teamid},
+#         {"status": {
+#             "$ne": 2
+#             }}
+#         ]}
+#     )    
+
+#return tasks list for "created by me" to a owner (status not matter)
+def get_tasks_created_by_me(manager):
+    taskslist = []
+    taskdic={}
+    
+    ideaslist=[]
+    ideadic={}
+    
+    #returns list of dictionaries eachone contains details of a task 
+    obj = tasks.find({"manager":manager})       
+       
+    #for each task get all data
+    for task in obj:
+            
+            taskdic={}
+            ideaslist=[]
+            taskdic["taskid"]=str(task["_id"])
+            taskdic["taskname"]=task["taskname"]
+            taskdic["desc"]=task["desc"]
+            taskdic["datepub"]=task["datepub"]
+            taskdic["eachperiod"]=task["eachperiod"]
+            taskdic["status"]=task["status"]     
+            taskdic["currenteditor"]=task["currenteditor"]
+            
+            #get the teamname for teamid
+            teamid = task["teamid"]
+            obj2 = teams.find_one({"_id":ObjectId(teamid)})
+            teamname = obj2.get("teamname")
+            taskdic["teamname"]=teamname            
+            
+            #for each task get all ideas and put in list of dictionaries
+            obj3 = ideas.find({"taskid":taskdic["taskid"]})
+                       
+            #for each idea get all data
+            for idea in obj3:
+                
+                ideadic={}
+                ideadic["idea"]=idea["idea"]
+                ideadic["writer"]=idea["writer"]
+                ideadic["status"]=idea["status"]    
+                
+                #add the dic to ideas list
+                ideaslist.append(ideadic)                    
+            
+            #add ideas list to task dic
+            taskdic["ideas"]= ideaslist            
+            
+            # add task dic to tasks list
+            taskslist.append(taskdic)    
+   
+    return taskslist    

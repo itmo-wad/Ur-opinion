@@ -7,8 +7,15 @@ window.onload = function () {
 
     }
     
+    if (divtoload == "loadcreatedtasks") {
+        $("#cards").load("/created");
+        high_light_tab("btn_created_by_me");
+
+    }
+
     if (divtoload == "shared") {
         $("#cards").load("/shared");
+        high_light_tab("btn_shared_with_me");
 
     }
     
@@ -38,4 +45,22 @@ window.onclick = function (event) {
             }
         }
     }
+}
+
+//remove underline
+function reset_heighlight_tab(tabid){
+    var tab = document.getElementById(tabid);
+    tab.style.textDecoration="none"
+}
+// highlight tab I'm in
+function high_light_tab(tabid){
+    reset_heighlight_tab("btn_in_progress");
+    reset_heighlight_tab("btn_created_by_me");
+    reset_heighlight_tab("btn_shared_with_me");
+    reset_heighlight_tab("btn_archived");    
+
+ //underline selected tab
+    var tab = document.getElementById(tabid);
+    tab.style.textDecoration="underline";
+
 }

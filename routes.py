@@ -108,7 +108,7 @@ def addtask_r(name , desc , teamid , datepub, eachperiod):
         flash('Task already exists!')
         return False
 
-    if add_task(manager,name,desc,teamid ,datepub,eachperiod,"status","current_editor") :
+    if add_task(manager,name,desc,teamid ,datepub,eachperiod,"current_editor") :
         flash('Task was added successfully!')
         return True    
     
@@ -122,14 +122,18 @@ def in_progress_r():
 
 #function to return data to created by me option
 def created_by_me_r():
-    return render_template("cards.html") 
+    manager = session.get("username")
+    
+    taskslist = get_tasks_created_by_me(manager)   
+    
+    return render_template('cards.html', taskslist=taskslist)
 
 #function to return data to shared with me option
 def shared_with_me_r():
     member = session.get("username")
     
     taskslist = get_tasks_shared_with_me(member)
-    
+        
     return render_template('cards.html', taskslist=taskslist)
     
     
@@ -143,7 +147,7 @@ def addidea_r(memidea,taskid):
     else:
         writer = session.get("username")
         
-        if addidea(memidea,writer,taskid,"status"):
+        if addidea(memidea,writer,taskid):
             
            flash('Idea was added successfully!')
            return True    

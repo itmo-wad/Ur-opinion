@@ -27,17 +27,20 @@
     $(document).ready(function () {
       $("#btn_in_progress").click(function () {
         $("#cards").load("/progress");
+        high_light_tab("btn_in_progress");
         scroll_to_cards();
 
       });
 
       $("#btn_created_by_me").click(function () {
         $("#cards").load("/created");
+        high_light_tab("btn_created_by_me");
         scroll_to_cards();
       });
 
       $("#btn_shared_with_me").click(function () {
         $("#cards").load("/shared");
+        high_light_tab("btn_shared_with_me");
         scroll_to_cards();
 
 
@@ -45,17 +48,22 @@
 
       $("#btn_archived").click(function () {
         $("#cards").load("/archived");
+        high_light_tab("btn_archived");
         scroll_to_cards();
 
       });
 
       $("#btn_new_task").click(function () {
         $("#preview").load("/newtask");
+        high_light_tab("");
+
 
       });
 
       $("#my_teams").click(function () {
         $("#cards").load("/teams");
+        high_light_tab("");
+
       });
     });
   </script>
