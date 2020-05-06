@@ -24,8 +24,10 @@ function Validate_new_task() {
     var name = $('#taskname').val();
     var desc = $('#taskdesc').val();
     var pub = $('#datepublish').val();
+    var selecteam = $('#slc_teams option:selected').text();
     var eachperiod = $('#eachperiod').val();
-    if (check_spaces(name) || check_spaces(desc) || check_spaces(pub) || check_spaces(eachperiod)) {
+    
+    if (check_spaces(name) || check_spaces(desc) || check_spaces(pub) || check_spaces(eachperiod) || check_spaces(selecteam)) {
         alert("Fill all fields!!");
         return false;
     }
