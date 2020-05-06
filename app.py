@@ -3,6 +3,16 @@ import re
 import requests
 from logging.handlers import RotatingFileHandler
 import logging
+server="127.0.0.1"
+#server="https://ur-opinion.herokuapp.com/"
+def test_local_server():
+    #if (request.remote_addr == "127.0.0.1") :
+    if (request.referrer == "https://ur-opinion.herokuapp.com/") :    
+        return True
+    
+    else :
+        return False
+    
 
 from routes import *
 
@@ -84,14 +94,13 @@ def reg():
 @app.route('/teams')
 def teams():
       # use the host of the server
-         # if (request.remote_addr != "127.0.0.1") :
-         #     return render_template('error.html'), 404
-         # return render_template('teams.html')  
-    
-    #for testing on heroku
-    if (request.referrer != "https://ur-opinion.herokuapp.com/") :
-      return render_template('error.html'), 404    
-    return render_template('teams.html')
+          if (test_local_server()) :
+              return teams_r() 
+              
+          return render_template('error.html'), 404
+         
+            
+     
  
  
 #route to add new teams 
@@ -109,21 +118,114 @@ def addteam():
        
     else:
         return redirect("/login", code=302)   
+
+
+#route to remove a team 
+@app.route('/removeteam',methods=['POST'])    
+def removeteam():
+     #for loggined users
+    if session.get('logged_in'):
+          teamid = request.form.get('teamid').strip()
+          
+          removeteam_r(teamid)
+          session["msg"]="loadteams"
+          return redirect("/")
        
+    else:
+        return redirect("/login", code=302)        
     
-#new task div    
+#when pressing new task button (to get the teams)   
 @app.route('/newtask')
 def newtask():
       # use the host of the server
-         if (request.remote_addr != "127.0.0.1") :
-             return render_template('error.html'), 404
-         return render_template('newtask.html')  
+          if (test_local_server()) :
+              return  newtask_r()  
+              
+          return render_template('error.html'), 404
+          
     
-    #for testing on heroku
-    #if (request.referrer != "https://ur-opinion.herokuapp.com/") :
-     # return render_template('error.html'), 404    
-   # return render_template('teams.html')    
  
+ 
+    
+@app.route('/addtask',methods=['POST'])    
+def addtask():
+      #for loggined users
+    if session.get('logged_in'):
+          name = request.form.get('taskname').strip()
+          desc = request.form.get('taskdesc').strip()
+          teamid = request.form.get('slc_teams').strip()
+          datepub = request.form.get('datepublish').strip()
+          eachperiod = request.form.get('eachperiod').strip()
+          
+          addtask_r(name , desc , teamid , datepub, eachperiod)
+          
+          session["msg"]="loadcreatedtasks"
+          return redirect("/")
+       
+    else:
+        return redirect("/login", code=302)  
+ 
+    
+#in progress   cards 
+#show tasks shared and created with only status ( not finished yet)        
+@app.route('/progress')
+def in_progress():
+           # use the host of the server
+          if (test_local_server()) :
+              return  in_progress_r() 
+              
+          return render_template('error.html'), 404
+          
+  
+#created by me  cards
+# show tasks that I have created with status 0 or 1 (finished or not)         
+@app.route('/created')
+def created_by_me():
+           # use the host of the server
+          if (test_local_server()) :
+              return  created_by_me_r()
+              
+          return render_template('error.html'), 404
+     
+      
+#shared with me  cards   
+#show tasks shared with mewith status 0 or 1(finished or not)      
+@app.route('/shared')
+def shared_with_me():
+           # use the host of the server
+          if (test_local_server()) :
+              return  shared_with_me_r()
+              
+          return render_template('error.html'), 404    
+
+
+#create new idea from shared with me  
+@app.route('/newidea', methods=['POST'])
+def addidea():
+    
+           #for loggined users
+    if session.get('logged_in'):
+              memidea = request.form.get('memidea').strip()
+              taskid =  request.form.get('taskid').strip()
+              
+              addidea_r(memidea,taskid)
+              
+              session["msg"]="shared"
+              return redirect("/")
+      
+    else:
+        return redirect("/login", code=302)  
+
+      
+# archive cards
+@app.route('/archived')
+def archived():
+           # use the host of the server
+          if (test_local_server()) :
+              return  archived_r() 
+              
+          return render_template('error.html'), 404    
+    
     
 #logout page    
 @app.route('/logout')
@@ -136,6 +238,10 @@ def logout():
 def page_not_found(e):
     return render_template('error.html'), 404
 
+#method not allowed    
+@app.errorhandler(405)
+def method_not_allowed(e):
+    return render_template('error.html'), 405
  
 @app.errorhandler(500)
 def internal_error(e):

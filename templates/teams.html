@@ -15,16 +15,39 @@
       <a class="btn_create_team" onclick="show_new_team()">Create New Team</a>
     </h2>
 
+    <!-- list teams -->
+    <div class="list-teams">
+
+      <ol>
+        {% for team in teamslist %}
+        <li>
+          <a >{{team['teamname']}}</a>
+          <form method="POST" action="{{ url_for('removeteam')}}" style="display: inline;">
+            <input type="text" id="teamid" name="teamid" value="{{team['_id']}}" style="display: none; " />
+
+            <input style="position: absolute; right: 20px; font-size: 11pt;" class="btn_create_team" type="submit" id="submit" value="REMOVE" onclick="return confirm_remove()" />
+          </form>
+        </li>
+        {% endfor %}
+      </ol>
+
+
+    </div>
+    <!-- /list teams -->
+
+
     <!-- div for new team-->
     <div id="preview_team" class="prev_block">
       <span class="helper"></span>
 
+      <!-- content to show -->
       <div id="div_content" class="div_content form-style-teams-tasks">
 
         <h2 style="color: white; font-weight: bold; margin: 0;">Create New Team</h2>
 
         <form method="POST" action="{{ url_for('addteam')}}" style=" height: 400px;">
 
+          <!-- basic content in form -->
           <div style="top: 0; height: 90%; overflow-y: auto;">
 
             <input type="text" id="teamname" name="teamname" placeholder="Add Team Name" autocomplete="off" />
@@ -35,6 +58,7 @@
             TEAM MEMBERS
             <br />
 
+            <!-- list of members -->
             <div class="div_new_mem" id="new_chq">
 
               <input type="text" id="mem_add" name="mem_add" placeholder="Add Username for a Team Member"
@@ -45,11 +69,14 @@
               <Span id="teams_add_mem" onclick="teams_add_mem()" class="nav-link">Add</Span>
               <!-- <input type="hidden" value="1" id="total_chq"> -->
             </div>
+            <!-- /list of members -->
 
             <textarea class="textarea_mem" id="mem_list" name="mem_list" placeholder="Team Members" autocomplete="off"
               readonly></textarea>
 
           </div>
+          <!-- /basic content in form -->
+
 
           <input class="nav-link btninput " type="submit" id="submit" value="SAVE"
             onclick="return Validate_new_team()" />
@@ -59,6 +86,8 @@
         </form>
 
       </div>
+      <!-- /content to show -->
+
     </div>
     <!-- /div for newteam -->
   </div>

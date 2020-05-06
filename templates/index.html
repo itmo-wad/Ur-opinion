@@ -8,37 +8,62 @@
   <link rel="stylesheet" media="all" href="/static/css/style.css" />
   <link rel="stylesheet" type="text/css" href="/static/css/style_login.css">
   <link rel="stylesheet" type="text/css" href="/static/css/style_teams_tasks.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/style_cards.css">
 
   <script type="text/javascript" src="/static/js/reg.js"></script>
   <script type="text/javascript" src="/static/js/script.js"></script>
   <script type="text/javascript" src="/static/js/script_tasks.js"></script>
   <script type="text/javascript" src="/static/js/script_teams.js"></script>
+  <script type="text/javascript" src="/static/js/script_cards.js"></script>
+
   <script src="/static/js/jquery-3.5.0.min.js"></script>
 
   <script>
+    function scroll_to_cards() {
+      $('html,body').animate({
+        scrollTop: $("#cards").offset().top
+      });
+    }
     $(document).ready(function () {
       $("#btn_in_progress").click(function () {
-        $("#content").load("in_progress_page");
+        $("#cards").load("/progress");
+        high_light_tab("btn_in_progress");
+        scroll_to_cards();
+
       });
 
       $("#btn_created_by_me").click(function () {
-        $("#content").load("created_by_me_page");
+        $("#cards").load("/created");
+        high_light_tab("btn_created_by_me");
+        scroll_to_cards();
       });
 
       $("#btn_shared_with_me").click(function () {
-        $("#content").load("shared_with_me_page");
+        $("#cards").load("/shared");
+        high_light_tab("btn_shared_with_me");
+        scroll_to_cards();
+
+
       });
 
       $("#btn_archived").click(function () {
-        $("#content").load("archived_page");
+        $("#cards").load("/archived");
+        high_light_tab("btn_archived");
+        scroll_to_cards();
+
       });
 
       $("#btn_new_task").click(function () {
         $("#preview").load("/newtask");
+        high_light_tab("");
+
+
       });
 
       $("#my_teams").click(function () {
-        $("#content").load("/teams");
+        $("#cards").load("/teams");
+        high_light_tab("");
+
       });
     });
   </script>
@@ -66,10 +91,12 @@
 
         <!--  account symbole -->
         <div class="dropdown">
+          
+          <div class="dropdownsub">
+            <button onclick="showdrop()" class="dropbtn">{{fullname}}</button>
 
-          <button onclick="showdrop()" class="dropbtn">Ghadeer Darwesh </button>
-
-          <img src="/static/img/login.png" class="loginlogo" onclick="showdrop()" />
+            <img src="/static/img/login.png" class="loginlogo" onclick="showdrop()" />
+          </div>
 
           <div id="myDropdown" class="dropdown-content">
             <a id="my_teams">My Teams</a>
@@ -104,7 +131,7 @@
           <!-- tasks in dashboard -->
           <div class="card-body p-0">
 
-            <button class="nav-link " id="btn_in_progress" data-remote="true">
+            <button class="nav-link " id="btn_in_progress" data-remote="true" href="#cards">
               In Progress
             </button>
 
@@ -141,22 +168,11 @@
           <div class="w-100">
 
             <!-- Basic card -->
-            <div class="card border-left-1 border-left-blue-400 rounded-left-0">
+            <div class="basiccard border-left-1 border-left-blue-400 rounded-left-0">
 
-              <div class="card-body" id="content">
-                put tasks here
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                <script>
-                  var messages = {{ messages | safe }};
-                  for (var i = 0; i < messages.length; i++) {
-                    alert(messages[i]);
-                  }
-                </script>
-                {% endif %}
-                {% endwith %}
-                <p id="divtoload" style="display:none;">{{msg}}</p>
+              <div class="card-body" id="cards">
 
+                Show info about Ur-Opinion here
 
               </div>
             </div>
@@ -192,6 +208,21 @@
 
   </div>
   <!-- /div for new task button-->
+
+  <!-- hidden data and alerts -->
+  <div>
+
+    <p id="divtoload" style="display:none;">{{msg}}</p>
+
+    <p id="divusername" style="display:none;">{{username}}</p>
+
+    {% for message in get_flashed_messages() %}
+    <p id="alertmsg" style="display:none;">{{ message }}</p>
+    {% endfor %}
+
+
+  </div>
+  <!-- hidden data and alerts -->
 
 </body>
 

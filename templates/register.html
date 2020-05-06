@@ -22,7 +22,7 @@
       <form method="POST" action="{{ url_for('reg')}}">
 
         <i class="fa fa-user icon"> </i>
-        <input type="text" id="username" name="username" placeholder="User Name" autocomplete="off" />
+        <input type="text" id="username" name="username" placeholder="Username" autocomplete="off" />
 
         <i class="fa fa-user icon"> </i>
         <input type="text" id="fullname" name="fullname" placeholder="Full Name" autocomplete="off" />
@@ -46,9 +46,10 @@
       </form>
 
       <div style="text-align: center;">
-        Or already have an account:
+        I already have an account:
         <br />
-        <a href="{{ url_for('index')}}" style="color: rgb(10, 18, 95); ">SIGN IN</a>
+        <br />
+        <a href="{{ url_for('index')}}" class="sign">SIGN IN</a>
 
       </div>
 

@@ -1,0 +1,161 @@
+<html>
+
+<head>
+  <title>Cards</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <!-- Add  js and css -->
+
+
+</head>
+
+<body>
+  <!-- all board -->
+  <div class="artboard">
+
+    <!-- main scroller -->
+    <div style="width: 100%; overflow-x: auto;  overflow-y: hidden;  white-space: nowrap;">
+
+
+      <!-- one card -->
+
+      {% for task in taskslist %}
+      <div class="card">
+
+        <div class="card__side card__side--back">
+          <div class="card__cover">
+            <h4 class="card__heading">
+              <span class="card__heading-span">{{task['taskname']}}</span>
+            </h4>
+          </div>
+
+          <!-- opinions -->
+          <div class="card__details">
+
+            <!-- <ul class="ul_details">
+              <li style=" text-align: left; font-size: 10pt;">
+                <span>Full name:</span>
+                <span>Opinion 1asdf adsfasdf ad</span>
+              </li>            
+            </ul> -->
+
+            <table class="table_details">
+              <tr>
+                <th>Team Name: </th>
+                <th><span class="card__subject">{{task['teamname']}}</span></th>
+              </tr>
+              <tr>
+                <th>Team Manager: </th>
+                <th><span class="card__subject">{{task['manager']}}</span></th>
+              </tr>
+              <tr>
+                <td>Published Date: </td>
+                <td><span class="card__subject">{{task['datepub']}}</span></td>
+              </tr>
+              <tr>
+                <td> Current Editor: </td>
+                <td><span class="card__subject">{{task['currenteditor']}}</span></td>
+              </tr>
+              <tr>
+                <td> DeadLine: </td>
+                <td><span class="card__subject">DeadLine</span></td>
+              </tr>
+            </table>
+
+          </div>
+
+          <!-- Tail -->
+          <div class="divtail" onclick="show_ideas(this)" id="btn_{{task['taskid']}}">
+            Show Ideas
+          </div>
+          <!-- Tail -->
+
+        </div>
+        <!-- /opinions -->
+
+        <!-- the cover -->
+        <div class="card__side card__side--front">
+          <div class="card__theme">
+            <div class="card__theme-box">
+
+              <p class="card__title">{{task['taskname']}}</p>
+
+              <p class="card__desc">{{task['desc']}}</p>
+
+            </div>
+          </div>
+        </div>
+        <!-- /the cover -->
+
+
+
+      </div>
+      <!-- /one card -->
+
+
+
+      <!-- div to show ideas -->
+      <div id="div_{{task['taskid']}}" class="prev_block">
+        <span class="helper"></span>
+
+        <!-- content to show -->
+        <div id="div_content" class="div_content form-style-teams-tasks">
+
+          <h2 style="color: white; font-weight: bold; margin: 0;">{{task['taskname']}}</h2>
+
+          <!-- Ideas -->
+          <div id="listideas_{{task['taskid']}}" style="height: 60%;  overflow: auto;">
+
+
+            <!-- make row for each idea in ideas list-->
+            {% for idea in task['ideas'] %}
+
+            <div class="div_element">
+              <div class="th_fullname">{{idea['writer']}} :</div>
+              <div class="th_idea"><span class="idea_span">{{idea['idea']}}</span></div>
+            </div>
+            {% endfor %}
+
+          </div>
+          <!-- /Ideas -->
+
+          <!-- if member already added his idea, don't show input elements -->
+        
+
+          <!-- Enter my idea -->
+          <form id="newidea" style=" width: 100%;" method="POST" action="{{ url_for('addidea')}}">
+            <textarea type="text" class="memidea" id="memidea_{{task['taskid']}}" name="memidea"
+              placeholder="Enter Your Comment Here" autocomplete="off"></textarea>
+
+
+            <!-- #hidden text to store taskid -->
+            <input type="text" id="taskid" name="taskid" value="{{task['taskid']}}" style="display: none; " />
+
+            <!-- hidden text to store status -->
+            <input type="text" id="statusmem_{{task['taskid']}}" name="statusmem" value="{{task['statusmem']}}" style="display: none; " />
+
+            <input class="nav-link btninput" type="submit" id="ideabtn_{{task['taskid']}}" value="SEND"
+              onclick="return Validate_new_idea(this);" />
+
+            <div class="nav-link btndiv" id="close_{{task['taskid']}}" onclick="hide_ideas(this)">CLOSE</div>
+
+          </form>
+          <!-- /Enter my idea -->
+
+        </div>
+        <!-- /content to show -->
+
+      </div>
+      <!-- /div to show ideas -->
+
+      {% endfor %}
+
+    </div>
+    <!-- /main scroller -->
+
+  </div>
+  <!-- /all board -->
+
+</body>
+
+</html>
