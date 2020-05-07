@@ -7,18 +7,22 @@ window.onload = function () {
 
     }
     
-    if (divtoload == "loadcreatedtasks") {
+    else if (divtoload == "loadcreatedtasks") {
         $("#cards").load("/created");
         high_light_tab("btn_created_by_me");
 
     }
 
-    if (divtoload == "shared") {
+    else if (divtoload == "shared") {
         $("#cards").load("/shared");
         high_light_tab("btn_shared_with_me");
 
     }
     
+    else {
+        $("#cards").load("/progress");
+        high_light_tab("btn_in_progress");
+    }
     if (alertmsg != ""){
         alert(alertmsg);
     }

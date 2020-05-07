@@ -9,9 +9,10 @@ from bson import ObjectId
 
 #client = pymongo.MongoClient("mongodb://<dbuser>:<password>@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 #db = client["dbname"]
-client = pymongo.MongoClient(os.environ.get('MongoDb', None))
+# client = pymongo.MongoClient(os.environ.get('MongoDb', None))
+# db = client.get_default_database()
+client = pymongo.MongoClient("mongodb://admin:P29069921@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 db = client.get_default_database()
-
 
 #get users' collection
 users = db["users"]
@@ -173,10 +174,11 @@ def check_exist_task(manager,name):
         
 #create task for a username
 #status in tasks means if task finished yet or not.     
-#status in taskmembers means if member has added his idea or not.            
+#status in taskmembers not used yet.            
 
 def add_task(manager,name,desc,teamid ,datepub,eachperiod,currenteditor):
     
+   #current user on user (0) 
 
     _id = tasks.insert({
             "manager": manager,
@@ -186,18 +188,19 @@ def add_task(manager,name,desc,teamid ,datepub,eachperiod,currenteditor):
             "datepub":datepub,
             "eachperiod" : eachperiod,
             "status": 0,
-            "currenteditor":"currenteditor"
+            "currenteditor":0
         })
     
     #get members of a team
     memlist = getteammembers(teamid)
     
+    #status 0 
     for member in memlist:
         taskmembers.insert({
             "username":member,
             "taskid" : str(_id),
             "teamid":teamid,
-            "userorder":"userorder",
+            "userorder":memlist.index(member),
             "deadline":"dealine",
             "status":0,
             "seen":"seen"
@@ -216,15 +219,28 @@ def addidea(memidea,writer,taskid):
             "status": 0
         })
         
-        #change status of task of this member to 1 (finished for him)
-        taskmembers.update_one({
-    '$and': [
-        {'username': writer},
-        {'taskid': taskid} ]}, {"$set": {"status":1}})  
-    
+    #     #change status of task of this member to 0 (finished for him)
+    #     #not used yet
+    #     taskmembers.update_one({
+    # '$and': [
+    #     {'username': writer},
+    #     {'taskid': taskid} ]}, {"$set": {"status":0}})  
+        
+        #don't change currenteditor if manager added a comment
+        manager = tasks.find_one({"_id":ObjectId(taskid)})
+        
+        if (manager.get("manager") != writer):
+            #get currenteditor of the task 
+            obj2 = tasks.find_one({"_id":ObjectId(taskid)})
+            currenteditor = obj2.get("currenteditor")
+            
+            #change currenteditor of task to assign to next
+            tasks.update_one({'_id': ObjectId(taskid)}, {"$set": {"currenteditor":currenteditor+1}})  
+        
         return True
 
 #return tasks list for "shared with me" to a member (status not matter)
+#member has the right to add an idea if current user = userorder
 def get_tasks_shared_with_me(member):    
     teamsidlist = getmemteam(member)
     
@@ -241,51 +257,82 @@ def get_tasks_shared_with_me(member):
         
         #for each task get all data
         for task in obj:
-            taskdic={}
-            ideaslist=[]
-            taskdic["taskid"]=str(task["_id"])
-            taskdic["taskname"]=task["taskname"]
-            taskdic["manager"]=task["manager"]
-            taskdic["desc"]=task["desc"]
-            taskdic["datepub"]=task["datepub"]
-            taskdic["eachperiod"]=task["eachperiod"]
-            taskdic["status"]=task["status"]     
-            taskdic["currenteditor"]=task["currenteditor"]
-            
-            #get the teamname for teamid
-            teamid = task["teamid"]
-            obj2 = teams.find_one({"_id":ObjectId(teamid)})
-            teamname = obj2.get("teamname")
-            taskdic["teamname"]=teamname
-            
-            
-            #for each task get all ideas and put in list of dictionaries
-            obj3 = ideas.find({"taskid":taskdic["taskid"]})
-                       
-            #for each idea get all data
-            for idea in obj3:
+            currentuser  = taskmembers.find_one({
+                   '$and': [
+                      {'username': member},
+                      {'taskid': str(task["_id"])} ]})  
                 
-                ideadic={}
-                ideadic["idea"]=idea["idea"]
-                ideadic["writer"]=idea["writer"]
-                ideadic["status"]=idea["status"]    
-                
-                #add the dic to ideas list
-                ideaslist.append(ideadic)                    
+                #show task in order 
+                #still show for user saw it (<=)
             
-            #add ideas list to task dic
-            taskdic["ideas"]= ideaslist            
-            
-            
-            #get the member status on this task(already added idea or not)
-            obj4  = taskmembers.find_one({
-      '$and': [
-         {'username': member},
-         {'taskid': str(task["_id"])} ]})  
-            taskdic["statusmem"]=obj4.get("status")
-                
-            # add task dic to tasks list
-            taskslist.append(taskdic)    
+            if (currentuser.get("userorder") <= task["currenteditor"] ):
+                      
+                    
+                    taskdic={}
+                    ideaslist=[]
+                    
+                                        
+                    taskdic["taskid"]=str(task["_id"])
+                    taskdic["taskname"]=task["taskname"]
+                    taskdic["manager"]=task["manager"]
+                    taskdic["desc"]=task["desc"]
+                    taskdic["datepub"]=task["datepub"]
+                    taskdic["eachperiod"]=task["eachperiod"]
+                    taskdic["status"]=task["status"]     
+                    
+                    
+                    #get the teamname for teamid
+                    teamid = task["teamid"]
+                    obj2 = teams.find_one({"_id":ObjectId(teamid)})
+                    teamname = obj2.get("teamname")
+                    taskdic["teamname"]=teamname
+                    
+                    
+                    #for each task get all ideas and put in list of dictionaries
+                    obj3 = ideas.find({"taskid":taskdic["taskid"]})
+                               
+                    #for each idea get all data
+                    for idea in obj3:
+                        
+                        ideadic={}
+                        ideadic["idea"]=idea["idea"]
+                        ideadic["writer"]=idea["writer"]
+                        ideadic["status"]=idea["status"]    
+                        
+                        #add the dic to ideas list
+                        ideaslist.append(ideadic)                    
+                    
+                    #add ideas list to task dic
+                    taskdic["ideas"]= ideaslist            
+                    
+                    
+              #       #get the member status on this task(already added idea or not)
+              #       obj4  = taskmembers.find_one({
+              # '$and': [
+              #    {'username': member},
+              #    {'taskid': str(task["_id"])} ]})  
+              #       taskdic["statusmem"]=obj4.get("status")
+                    
+                     #get the name of the current editor
+                    obj4 = taskmembers.find_one({
+                       '$and': [
+                          {'userorder': task["currenteditor"]},
+                          {'taskid': str(task["_id"])} ]})  
+                    
+                    if obj4:
+                        taskdic["currenteditor"]=obj4.get("username")
+                    
+                    else :
+                        taskdic["currenteditor"]=""       
+                   
+                    
+                    #add statusmem depending on the userorder
+                    taskdic["statusmem"]=0
+                    if (currentuser.get("userorder") == task["currenteditor"] ):
+                        taskdic["statusmem"]=1
+                        
+                    # add task dic to tasks list
+                    taskslist.append(taskdic)    
    
     return taskslist
     
@@ -360,9 +407,24 @@ def get_tasks_created_by_me(manager):
                 #add the dic to ideas list
                 ideaslist.append(ideadic)                    
             
+             #get the name of the current editor
+            obj4 = taskmembers.find_one({
+               '$and': [
+                  {'userorder': task["currenteditor"]},
+                  {'taskid': str(task["_id"])} ]})  
+            
+            if obj4:
+                taskdic["currenteditor"]=obj4.get("username")
+            
+            else :
+                taskdic["currenteditor"]=""
+            
+            
             #add ideas list to task dic
             taskdic["ideas"]= ideaslist            
             
+            #the manager has always the right to right comments
+            taskdic["statusmem"]=1
             # add task dic to tasks list
             taskslist.append(taskdic)    
    

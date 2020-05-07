@@ -154,11 +154,11 @@ def addidea_r(memidea,taskid):
         
         if addidea(memidea,writer,taskid):
             
-           flash('Idea was added successfully!')
+           flash('New comment was added successfully!')
            return True    
     
         else:
-           flash("Unable to add the new Idea")
+           flash("Unable to add the new comment")
            return False 
         
     

@@ -30,7 +30,8 @@
   flex: initial;
   position: relative;
   height: 30rem;
-  width: 23rem;
+  /* width: 23rem; */
+  width: 22.3rem;
   -moz-perspective: 200rem;
   perspective: 200rem;
   margin: 2rem;

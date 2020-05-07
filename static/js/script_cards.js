@@ -9,11 +9,11 @@ function show_ideas(ele) {
     dev_block.style.display = "block";
 
 
-    // hide input and save button if an idea already added
+    // hide input and save button if he has the rights to add
     var input_status = "statusmem_"+taskid
     var status = document.getElementById(input_status).value;
   
-    if (status == 1)  {
+    if (status == 0)  {
 // hide the input
 hide_input_idea_for_mem(taskid);
     }
