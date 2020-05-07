@@ -1,8 +1,21 @@
 /* show and hide div for new task  */
-function show_new_task(name, title, text) {
+function show_new_task() {
 
     var dev_block = document.getElementById("preview");
     dev_block.style.display = "block";
+
+
+    // var field = document.getElementById('datepublish');
+    // var date = new Date();
+    
+    // // Set the date
+    // field.value = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + 
+    //     '-' + date.getDate().toString().padStart(2, 0);
+
+    //     alert(field.value);
+
+    // set input date valur to today date
+    document.getElementById("datepublish").valueAsDate = new Date()
 };
 
 function hide_new_task() {
@@ -41,3 +54,4 @@ function show_teams() {
     $("#cards").load("/teams");
 
 };
+

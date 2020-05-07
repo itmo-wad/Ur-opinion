@@ -116,14 +116,31 @@ def addtask_r(name , desc , teamid , datepub, eachperiod):
         flash("Unable to add the new Task")
         return False 
 
+#remove task
+def removetask_r(taskid):
+        if remove_task(taskid) :
+            flash('Task was removed successfully!')
+            return True    
+   
+        else:
+           flash("Unable to remove the task")
+           return False 
+    
+    
+#return tasks
+def getcards(taskslist):
+    username = session.get("username")
+    return render_template('cards.html', taskslist=taskslist,username=username)
+
+    
 #function to return data to in progress option
 def in_progress_r():
     username = session.get("username")
     
-    taskslist = get_tasks_in_progress(username)   
+    taskslist = get_tasks_in_progress(username) 
     
-    return render_template('cards.html', taskslist=taskslist)
-    return render_template("cards.html") 
+    return getcards(taskslist)
+    
 
 #function to return data to created by me option
 def created_by_me_r():
@@ -131,7 +148,8 @@ def created_by_me_r():
     
     taskslist = get_tasks_created_by_me(manager)   
     
-    return render_template('cards.html', taskslist=taskslist)
+    return getcards(taskslist)
+
 
 #function to return data to shared with me option
 def shared_with_me_r():
@@ -139,7 +157,8 @@ def shared_with_me_r():
     
     taskslist = get_tasks_shared_with_me(member)
         
-    return render_template('cards.html', taskslist=taskslist)
+    return getcards(taskslist)
+
     
     
 # add idea
@@ -162,7 +181,6 @@ def addidea_r(memidea,taskid):
            return False 
         
     
-
 #function to return data to archived option
 def archived_r():
     return render_template("cards.html") 

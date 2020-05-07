@@ -139,7 +139,7 @@
   color: #fff;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 30%;
   transform: translate(-50%, -50%);
   width: 98%;
 }
@@ -276,7 +276,7 @@ only screen and (hover: none) {
 
 .div_element {
   height: 85px;
-  width: 100%;
+  width: 99%;
   display: block;
   box-shadow: 10px 2px 10px rgba(0, 0, 0, 0.22);
   border-radius: 10px;
@@ -293,6 +293,7 @@ only screen and (hover: none) {
   display: inline-grid;
   white-space: pre-line;
   overflow: auto;
+  margin-right: 3px;
 
 }
 

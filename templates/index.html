@@ -23,7 +23,11 @@
       $('html,body').animate({
         scrollTop: $("#cards").offset().top
       });
+
     }
+
+
+
     $(document).ready(function () {
       $("#btn_in_progress").click(function () {
         $("#cards").load("/progress");
@@ -56,7 +60,6 @@
       $("#btn_new_task").click(function () {
         $("#preview").load("/newtask");
         high_light_tab("");
-
 
       });
 
@@ -91,7 +94,7 @@
 
         <!--  account symbole -->
         <div class="dropdown">
-          
+
           <div class="dropdownsub">
             <button onclick="showdrop()" class="dropbtn">{{fullname}}</button>
 

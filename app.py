@@ -6,8 +6,8 @@ import logging
 server="127.0.0.1"
 #server="https://ur-opinion.herokuapp.com/"
 def test_local_server():
-    if (request.remote_addr == "127.0.0.1") :
-    #if (request.referrer == "https://ur-opinion.herokuapp.com/") :    
+    #if (request.remote_addr == "127.0.0.1") :
+    if (request.referrer == "https://ur-opinion.herokuapp.com/") :    
         return True
     
     else :
@@ -165,7 +165,21 @@ def addtask():
     else:
         return redirect("/login", code=302)  
  
-    
+
+#route to remove a task 
+@app.route('/removetask',methods=['POST'])    
+def removetask():
+    #for loggined users
+       if session.get('logged_in'):
+           taskid = request.form.get('taskid').strip()
+          
+           removetask_r(taskid)
+           session["msg"]="loadcreatedtasks"
+           return redirect("/")
+       
+       else:
+           return redirect("/login", code=302)  
+        
 #in progress   cards 
 #show tasks shared and created with only status ( not finished yet)        
 @app.route('/progress')

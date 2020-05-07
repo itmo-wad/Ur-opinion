@@ -25,7 +25,7 @@
           <form method="POST" action="{{ url_for('removeteam')}}" style="display: inline;">
             <input type="text" id="teamid" name="teamid" value="{{team['_id']}}" style="display: none; " />
 
-            <input style="position: absolute; right: 20px; font-size: 11pt;" class="btn_create_team" type="submit" id="submit" value="REMOVE" onclick="return confirm_remove()" />
+            <input style="position: absolute; right: 20px; font-size: 11pt;" class="btn_create_team" type="submit" id="submit" value="REMOVE" onclick="return confirm_remove_team()" />
           </form>
         </li>
         {% endfor %}

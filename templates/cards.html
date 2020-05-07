@@ -23,7 +23,18 @@
       <div class="card">
 
         <div class="card__side card__side--back">
+
           <div class="card__cover">
+
+            <!-- #send remove to server -->
+            {% if task['manager'] == username %}
+            <form method="POST" action="{{ url_for('removetask')}}" style="display: inline;">
+              <input type="text" id="taskid" name="taskid" value="{{task['taskid']}}" style="display: none; " />
+
+              <input style="position: absolute; right: 20px; top:20px; font-size: 11pt;" class="btn_create_team"
+                type="submit" id="submit" value="REMOVE TASK" onclick="return confirm_remove_task()" />
+            </form>
+            {% endif %}
             <h4 class="card__heading">
               <span class="card__heading-span">{{task['taskname']}}</span>
             </h4>
@@ -120,9 +131,10 @@
           <!-- /Ideas -->
 
           <!-- if member already added his idea, don't show input elements -->
-        
+
 
           <!-- Enter my idea -->
+          {% if task['statusmem']>0 or task['manager']==username %}
           <form id="newidea" style=" width: 100%;" method="POST" action="{{ url_for('addidea')}}">
             <textarea type="text" class="memidea" id="memidea_{{task['taskid']}}" name="memidea"
               placeholder="Enter Your Comment Here" autocomplete="off"></textarea>
@@ -132,14 +144,18 @@
             <input type="text" id="taskid" name="taskid" value="{{task['taskid']}}" style="display: none; " />
 
             <!-- hidden text to store status -->
-            <input type="text" id="statusmem_{{task['taskid']}}" name="statusmem" value="{{task['statusmem']}}" style="display: none; " />
+            <input type="text" id="statusmem_{{task['taskid']}}" name="statusmem" value="{{task['statusmem']}}"
+              style="display: none; " />
 
             <input class="nav-link btninput" type="submit" id="ideabtn_{{task['taskid']}}" value="SEND"
               onclick="return Validate_new_idea(this);" />
 
-            <div class="nav-link btndiv" id="close_{{task['taskid']}}" onclick="hide_ideas(this)">CLOSE</div>
 
           </form>
+
+          {% endif %}
+          <div class="nav-link btndiv" id="close_{{task['taskid']}}" onclick="hide_ideas(this)">CLOSE</div>
+
           <!-- /Enter my idea -->
 
         </div>

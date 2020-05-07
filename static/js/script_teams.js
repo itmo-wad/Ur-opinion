@@ -96,6 +96,6 @@ function teams_clear_list() {
 };
 
 
-function confirm_remove(){
+function confirm_remove_team(){
     return confirm('Are you sure you want remove the Team and all its tasks?')
 }

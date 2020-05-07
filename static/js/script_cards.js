@@ -10,13 +10,13 @@ function show_ideas(ele) {
 
 
     // hide input and save button if he has the rights to add
-    var input_status = "statusmem_"+taskid
-    var status = document.getElementById(input_status).value;
+//     var input_status = "statusmem_"+taskid
+//     var status = document.getElementById(input_status).value;
   
-    if (status == 0)  {
-// hide the input
-hide_input_idea_for_mem(taskid);
-    }
+//     if (status == 0)  {
+// // hide the input
+// hide_input_idea_for_mem(taskid);
+//     }
     };
 
 function hide_ideas(ele) {
@@ -52,15 +52,20 @@ function Validate_new_idea(ele){
     return true;
 }
 
-function hide_input_idea_for_mem(taskid){
+// function hide_input_idea_for_mem(taskid){
     
-    var textarea = "memidea_"+taskid
-    document.getElementById(textarea).style.display="none";
+//     var textarea = "memidea_"+taskid
+//     document.getElementById(textarea).style.display="none";
 
-    var save="ideabtn_"+taskid    
-    document.getElementById(save).style.display="none";;
+//     var save="ideabtn_"+taskid    
+//     document.getElementById(save).style.display="none";;
 
-    var listideas = "listideas_" + taskid
-    document.getElementById(listideas).style.height="75%";
+//     var listideas = "listideas_" + taskid
+//     document.getElementById(listideas).style.height="75%";
    
+// }
+
+
+function confirm_remove_task(){
+    return confirm('Are you sure you want remove the task?')
 }
