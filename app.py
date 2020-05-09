@@ -6,8 +6,8 @@ import logging
 server="127.0.0.1"
 #server="https://ur-opinion.herokuapp.com/"
 def test_local_server():
-    if (request.remote_addr == "127.0.0.1") :
-    #if (request.referrer == "https://ur-opinion.herokuapp.com/") :    
+    #f (request.remote_addr == "127.0.0.1") :
+    if (request.referrer == "https://ur-opinion.herokuapp.com/") :    
         return True
     
     else :
