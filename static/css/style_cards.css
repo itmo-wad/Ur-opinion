@@ -318,7 +318,7 @@ only screen and (hover: none) {
 
 .memidea {
 
-  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.22);
+  /* box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.22); */
   border-radius: 10px;
   resize: none;
   padding: 10px;
@@ -326,4 +326,10 @@ only screen and (hover: none) {
   width: 95%;
   margin: 10px;
 
+}
+
+.memidea:focus {
+  outline: none !important;
+  border: none;
+  box-shadow: 0px 0 10px #042951;
 }
