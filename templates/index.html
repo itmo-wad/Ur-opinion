@@ -10,66 +10,13 @@
   <link rel="stylesheet" type="text/css" href="/static/css/style_teams_tasks.css">
   <link rel="stylesheet" type="text/css" href="/static/css/style_cards.css">
 
+  <script src="/static/js/jquery-3.5.0.min.js"></script>
   <script type="text/javascript" src="/static/js/reg.js"></script>
   <script type="text/javascript" src="/static/js/script.js"></script>
-  <script type="text/javascript" src="/static/js/script_tasks.js"></script>
+  <!-- <script type="text/javascript" src="/static/js/script_tasks.js"></script> -->
   <script type="text/javascript" src="/static/js/script_teams.js"></script>
   <script type="text/javascript" src="/static/js/script_cards.js"></script>
 
-  <script src="/static/js/jquery-3.5.0.min.js"></script>
-
-  <script>
-    function scroll_to_cards() {
-      $('html,body').animate({
-        scrollTop: $("#cards").offset().top
-      });
-
-    }
-
-
-
-    $(document).ready(function () {
-      $("#btn_in_progress").click(function () {
-        $("#cards").load("/progress");
-        high_light_tab("btn_in_progress");
-        scroll_to_cards();
-
-      });
-
-      $("#btn_created_by_me").click(function () {
-        $("#cards").load("/created");
-        high_light_tab("btn_created_by_me");
-        scroll_to_cards();
-      });
-
-      $("#btn_shared_with_me").click(function () {
-        $("#cards").load("/shared");
-        high_light_tab("btn_shared_with_me");
-        scroll_to_cards();
-
-
-      });
-
-      $("#btn_archived").click(function () {
-        $("#cards").load("/archived");
-        high_light_tab("btn_archived");
-        scroll_to_cards();
-
-      });
-
-      $("#btn_new_task").click(function () {
-        $("#preview").load("/newtask");
-        high_light_tab("");
-
-      });
-
-      $("#my_teams").click(function () {
-        $("#cards").load("/teams");
-        high_light_tab("");
-
-      });
-    });
-  </script>
 
 </head>
 
@@ -154,7 +101,7 @@
 
           <!-- new task button -->
           <div class="header-elements d-none">
-            <button class="nav-link " id="btn_new_task" onclick="show_new_task()">
+            <button class="nav-link " id="btn_new_task">
               New Task
             </button> </div>
         </div>
@@ -208,7 +155,64 @@
 
   <!-- div for new task button-->
   <div id="preview" class="prev_block">
+    <span class="helper"></span>
 
+    <!-- basic content -->
+    <div id="div_content" class="div_content form-style-teams-tasks">
+
+      <h2 style="color: white; font-weight: bold; margin: 0;">Create New Task</h2>
+
+      <form method="POST" action="{{ url_for('addtask')}}">
+
+        <input type="text" id="taskname" name="taskname" placeholder="Add Task Name" autocomplete="off" />
+
+        <input type="text" id="taskdesc" name="taskdesc" placeholder="Add task description" autocomplete="off" />
+
+        <!-- teams list -->
+        <div class="divselect">
+          SELECT TEAM:
+          <div class="select">
+            <select name="slc_teams" id="slc_teams">
+              {% for team in teamslist %}
+              <option value="{{team['_id']}}" SELECTED>{{team["teamname"]}}</option>"
+              {% endfor %}
+            </select>
+          </div>
+          <a id="showteams" onclick="show_teams()"
+            style="float: right;  margin: 10px; text-decoration: underline; color: #011d35;">Edit My Teams</a>
+        </div>
+
+        <!-- /teams list -->
+
+        <!-- start the task or save for later
+        <p class="onoff">
+          <input type="checkbox" value="1" id="checkboxID">
+          <label for="checkboxID"></label>
+        </p> -->
+
+        <!-- date publish -->
+        <div class="divdate">
+          PUBLISHED DATE:
+          <input type="date" name="datepublish" id="datepublish" readonly>
+        </div>
+        <!-- /date publish -->
+
+        <!-- deadline for each member-->
+        <div class="divdeadline">
+          INDIVIDUAL TIME:
+          <input type="number" id="eachperiod" name="eachperiod" value="1">
+          Days
+        </div>
+        <!-- /deadline for each member--->
+
+        <input class="nav-link btninput" type="submit" id="submit" value="SAVE"
+          onclick="return Validate_new_task(); " />
+
+        <div class="nav-link btndiv " onclick="hide_new_task()">CLOSE</div>
+
+      </form>
+
+    </div>
   </div>
   <!-- /div for new task button-->
 

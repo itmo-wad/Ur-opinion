@@ -6,8 +6,8 @@ import logging
 server="127.0.0.1"
 #server="https://ur-opinion.herokuapp.com/"
 def test_local_server():
-    #if (request.remote_addr == "127.0.0.1") :
-    if (request.referrer == "https://ur-opinion.herokuapp.com/") :    
+    if (request.remote_addr == "127.0.0.1") :
+    #if (request.referrer == "https://ur-opinion.herokuapp.com/") :    
         return True
     
     else :
@@ -135,13 +135,13 @@ def removeteam():
         return redirect("/login", code=302)        
     
 #when pressing new task button (to get the teams)   
-@app.route('/newtask')
-def newtask():
-      # use the host of the server
-          if (test_local_server()) :
-              return  newtask_r()  
+# @app.route('/newtask')
+# def newtask():
+#       # use the host of the server
+#           if (test_local_server()) :
+#               return  newtask_r()  
               
-          return render_template('error.html'), 404
+#           return render_template('error.html'), 404
           
     
  

@@ -10,7 +10,8 @@ def index_r():
     #get fullname
     username  = session.get('username')
     fullname = get_full_name(username)
-    return render_template('index.html',msg=msg,username=username,fullname=fullname) 
+    teamslist = getteams()
+    return render_template('index.html',msg=msg,username=username,fullname=fullname,teamslist = teamslist) 
 
 #login page
 def reg_r(username,password,email,fullname):
@@ -95,10 +96,10 @@ def removeteam_r(teamid):
     
    
 #for creating new tasks
-def newtask_r():
-    teamslist = getteams()
+# def newtask_r():
+#     teamslist = getteams()
     
-    return render_template('newtask.html',teamslist = teamslist)  
+#     return render_template('newtask.html',teamslist = teamslist)  
 
 #add new task
 def addtask_r(name , desc , teamid , datepub, eachperiod):
