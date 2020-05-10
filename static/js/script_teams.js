@@ -99,3 +99,26 @@ function teams_clear_list() {
 function confirm_remove_team(){
     return confirm('Are you sure you want remove the Team and all its tasks?')
 }
+
+
+function hide_team(ele) {
+    str = ele.id;
+    var taskid = str.substring(6, );
+
+    var div_block_id = "div_"+taskid
+    var test = document.getElementById(div_block_id);
+    test.style.display = "none";
+};
+
+
+function show_team(ele) {
+    str = ele.id;
+    var taskid = str.substring(4, );
+   
+
+    var div_block_id = "div_"+taskid
+    var dev_block = document.getElementById(div_block_id);
+
+    dev_block.style.display = "block";
+
+    };

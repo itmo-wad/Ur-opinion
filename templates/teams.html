@@ -20,17 +20,12 @@
 
       <ol>
         {% for team in teamslist %}
-        <li>
-          <a >{{team['teamname']}}</a>
-          <form method="POST" action="{{ url_for('removeteam')}}" style="display: inline;">
-            <input type="text" id="teamid" name="teamid" value="{{team['_id']}}" style="display: none; " />
+        <li id="btn_{{team['teamid']}}" onclick="show_team(this);">
+          {{team['teamname']}}
 
-            <input style="position: absolute; right: 20px; font-size: 11pt;" class="btn_create_team" type="submit" id="submit" value="REMOVE" onclick="return confirm_remove_team()" />
-          </form>
         </li>
         {% endfor %}
       </ol>
-
 
     </div>
     <!-- /list teams -->
@@ -38,6 +33,7 @@
 
     <!-- div for new team-->
     <div id="preview_team" class="prev_block">
+
       <span class="helper"></span>
 
       <!-- content to show -->
@@ -90,4 +86,67 @@
 
     </div>
     <!-- /div for newteam -->
+
+
+
+    <!-- div to show team details -->
+    {% for team in teamslist %}
+    <div id="div_{{team['teamid']}}" class="prev_block">
+
+      <span class="helper"></span>
+
+      <!-- content to show -->
+      <div id="div_content" class="div_content form-style-teams-tasks">
+
+        <h2 style="color: white; font-weight: bold; margin: 0;">{{team['teamname']}}</h2>
+
+        <!-- team description -->
+        <br />
+        TEAM DESCRIPTION
+        <br />
+        <div style="height: 15%; overflow: auto;font-size: 12pt; margin: 10px; color: black;">
+          <p>
+            {{team['desc']}}
+          </p>
+        </div>
+        <!-- /team description -->
+
+        <!-- members -->
+        <br />
+        TEAM MEMBERS
+        <br />
+        <div id="listideas_{{team['teamid']}}" style="height: 40%; font-size: 12pt; overflow: auto; color: black;">
+
+          <!-- make row for each idea in ideas list-->
+          {% for member in team['members'] %}
+          <p style="margin: 10px;">{{member['username']}}</p>
+          {% endfor %}
+
+        </div>
+        <!-- /members -->
+
+        <!-- remove a team -->
+        <form method="POST" action="{{ url_for('removeteam')}}" style="display: inline;">
+
+          <input type="text" id="teamid" name="teamid" value="{{team['teamid']}}" style="display: none; " />
+
+
+          <input style="width:25%;" class="nav-link btninput" type="submit" id="remove_{{team['teamid']}}"
+            value="REMOVE TEAM" onclick="return confirm_remove_team(this);" />
+
+        </form>
+
+        <div class="nav-link btndiv" id="close_{{team['teamid']}}" onclick="hide_team(this)">CLOSE</div>
+
+        <!-- /remove a team -->
+
+      </div>
+      <!-- /content to show -->
+
+    </div>
+    <!-- /div to show team details -->
+
+    {% endfor %}
+
+
   </div>

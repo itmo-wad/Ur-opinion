@@ -107,7 +107,8 @@ a {
 
 a:hover {
     color: #0a6ebd;
-    text-decoration: none
+    text-decoration: none;
+    cursor: pointer;
 }
 
 img {

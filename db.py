@@ -68,11 +68,37 @@ def get_full_name(username):
 def getteams():
     manager  = session.get('username')
     teamslist = []
+    memberslist=[]
     
     obj = teams.find({"manager":manager})
     for team in obj:
-        teamslist.append(team)
+        teamdic={}    
+        members=[]
+        memberdic={}
+        memberslist=[]
+
         
+        #get info for each team
+        teamdic["teamid"]=str(team["_id"])
+        teamdic["manager"]=team["manager"]
+        teamdic["teamname"]=team["teamname"]
+        teamdic["desc"]=team["desc"]
+        
+        #get team members
+        members = teammembers.find({"teamid":str(team["_id"])})
+        
+        for member in members:
+            memberdic={}
+            memberdic["username"]=member.get("username")
+            memberdic["status"]=member.get("status")            
+
+            memberslist.append(memberdic)
+            
+        teamdic["members"]=memberslist   
+ 
+        teamslist.append(teamdic)       
+        
+       
     return teamslist
 
 #return teamid according member usernamename
@@ -87,7 +113,7 @@ def getmemteam(member):
 #return members of a team
 def getteammembers(teamid):
     memberslist = []
-    obj = teammembers.find({"teamid":teamid})
+    obj = teammembers.find({"teamid":str(teamid)})
     for member in obj:
         memberslist.append(member["username"])        
           
@@ -138,7 +164,8 @@ def add_team(manager,teamname,desc,memlist) :
     for member in memlist:
         teammembers.insert({
             "username": member,
-            "teamid": str(_id)
+            "teamid": str(_id),
+            "status":0
         })
         
         
