@@ -118,6 +118,11 @@
 
                     <p class="card__desc">{{task['desc']}}</p>
 
+                    <!-- for finished tasks -->
+                    {% if task['status']==1 %}
+                    <p style=" color: darkturquoise;">Task Finished</p>
+                    {% endif %}
+
                   </div>
                 </div>
               </div>
