@@ -9,9 +9,10 @@ from bson import ObjectId
 
 #client = pymongo.MongoClient("mongodb://<dbuser>:<password>@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 #db = client["dbname"]
-client = pymongo.MongoClient(os.environ.get('MongoDb', None))
+# client = pymongo.MongoClient(os.environ.get('MongoDb', None))
+# db = client.get_default_database()
+client = pymongo.MongoClient("mongodb://admin:P29069921@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 db = client.get_default_database()
-
 
 #get users' collection
 users = db["users"]
@@ -226,7 +227,6 @@ def add_task(manager,name,desc,teamid ,datepub,eachperiod,currenteditor):
     
     #get members of a team
     memlist = getteammembers(teamid)
-    
     #status 0 
     for member in memlist:
         taskmembers.insert({
