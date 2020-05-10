@@ -103,7 +103,13 @@ def getteamid(manager , teamname):
       
       return team.get("_id")    
  
- 
+
+#get number of team members
+def getcountteam(teamid):
+    count = teammembers.count({"teamid":teamid})
+    
+    return count
+         
 #check if a team already exists for this username    
 def check_exist_team(manager,teamname):
 
@@ -134,6 +140,7 @@ def add_team(manager,teamname,desc,memlist) :
             "username": member,
             "teamid": str(_id)
         })
+        
         
     return True
 
@@ -241,15 +248,24 @@ def addidea(memidea,writer,taskid):
     #     {'taskid': taskid} ]}, {"$set": {"status":0}})  
         
         #don't change currenteditor if manager added a comment
-        manager = tasks.find_one({"_id":ObjectId(taskid)})
+        obj2 = tasks.find_one({"_id":ObjectId(taskid)})
         
-        if (manager.get("manager") != writer):
+        if (obj2.get("manager") != writer):
             #get currenteditor of the task 
-            obj2 = tasks.find_one({"_id":ObjectId(taskid)})
-            currenteditor = obj2.get("currenteditor")
+            currenteditor = obj2.get("currenteditor") + 1
             
             #change currenteditor of task to assign to next
-            tasks.update_one({'_id': ObjectId(taskid)}, {"$set": {"currenteditor":currenteditor+1}})  
+            tasks.update_one({'_id': ObjectId(taskid)}, {"$set": {"currenteditor":currenteditor}})  
+            
+            
+            
+            #check if currenteditor = count of team member.. it means that the task finished
+            
+            #get the team of the task
+            teamid = obj2.get("teamid")
+            if (getcountteam(teamid)==currenteditor):
+                    tasks.update_one({'_id': ObjectId(taskid)}, {"$set": {"status":1}})  
+                         
         
         return True
 
@@ -451,7 +467,6 @@ def get_tasks_in_progress(username):
     #get only tasks with edition rights(for current user)
     sharedtaskslist = get_tasks_shared_with_me(username)
     for task in sharedtaskslist:
-        print(task["statusmem"])
         if (task["status"]==0 and task["statusmem"]==1  ):
             taskslist.append(task)
     
