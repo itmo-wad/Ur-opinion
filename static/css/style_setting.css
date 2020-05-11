@@ -1,31 +1,15 @@
-body {
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	margin: 0;
-}
-
-.container {
-	width: 100%;
-	height: 100%;
-	background-image: url(/static/img/background1.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
-	position: absolute;
-}
-
-.form-style {
+.form-style-setting {
 	font-family: 'Open Sans Condensed', arial, sans;
 	width: 500px;
 	padding: 30px;
 	background: #FFFFFF;
 	margin: 10px auto;
-	box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.22);
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
 	background: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(255, 255, 255) 20%);
 
 }
 
-.form-style h2 {
+.form-style-setting h2 {
 	/* background: #4D4D4D; */
 	background-image: linear-gradient(to right bottom, rgba(11, 10, 10, 0.65), rgba(5, 43, 47, 0.7)), url(/static/img/background2.jpg);
 	text-transform: uppercase;
@@ -38,9 +22,9 @@ body {
 	text-align: center;
 }
 
-.form-style input[type="text"],
-.form-style input[type="email"],
-.form-style input[type="password"] {
+.form-style-setting input[type="text"],
+.form-style-setting input[type="email"],
+.form-style-setting input[type="password"] {
 	box-sizing: border-box;
 	outline: none;
 	display: block;
@@ -57,8 +41,8 @@ body {
 
 }
 
-.form-style input[type="button"],
-.form-style input[type="submit"] {
+.form-style-setting input[type="button"],
+.form-style-setting input[type="submit"] {
 	box-shadow: 0px 10px 14px -7px #276873;
 	/* background:linear-gradient(to bottom, #599bb3 5%, #021214 100%); */
 	background-image: linear-gradient(to right bottom, rgba(11, 10, 10, 0.65), rgba(5, 43, 47, 0.7)), url(/static/img/background2.jpg);
@@ -77,14 +61,14 @@ body {
 	margin-right: 0px;
 }
 
-.form-style input[type="button"]:hover,
-.form-style input[type="submit"]:hover {
+.form-style-setting input[type="button"]:hover,
+.form-style-setting input[type="submit"]:hover {
 	background: linear-gradient(to bottom, #021214 5%, #599bb3 100%);
 	background-color: #021214;
 }
 
-.form-style input[type="button"]:active,
-.form-style input[type="submit"]:active {
+.form-style-setting input[type="button"]:active,
+.form-style-setting input[type="submit"]:active {
 	position: relative;
 	top: 1px;
 }

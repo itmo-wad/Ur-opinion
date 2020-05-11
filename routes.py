@@ -192,6 +192,25 @@ def addidea_r(memidea,taskid):
            return False 
         
     
-#function to return data to archived option
-def archived_r():
-    return render_template("cards.html") 
+#function to return data to setting
+def setting_r():
+    username = session.get("username")
+    settinglist= get_setting(username)
+    return render_template("setting.html",settinglist=settinglist)
+             
+#save settings
+def savesetting_r(current_pass,password,email,fullname):
+    username = session.get("username")
+    if check_pass_in_db(username, current_pass):
+        
+        if save_setting(password,email,fullname):        
+           flash('Setting saved successfully!')       
+           return True    
+    
+        else:
+           flash("Unable save new settings")
+           return False  
+       
+    else :
+           flash("Wrong Password!!")
+           return False  

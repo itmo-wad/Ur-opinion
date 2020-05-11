@@ -13,9 +13,7 @@ scheduler.start()
 
 #client = pymongo.MongoClient("mongodb://<dbuser>:<password>@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 #db = client["dbname"]
-# client = pymongo.MongoClient(os.environ.get('MongoDb', None))
-# db = client.get_default_database()
-client = pymongo.MongoClient("mongodb://admin:P29069921@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
+client = pymongo.MongoClient(os.environ.get('MongoDb', None))
 db = client.get_default_database()
 
 #get users' collection
@@ -566,3 +564,27 @@ def get_tasks_in_progress(username):
             taskslist.append(task)
    
     return taskslist    
+
+#get setting
+def get_setting(username):
+    settinglist={}
+    
+    obj = users.find_one({"username":username})
+    
+    settinglist["fullname"]=obj.get("fullname")
+    settinglist["email"]=obj.get("email")
+
+    return settinglist
+
+#save new setting
+def save_setting(password,email,fullname):  
+    username = session.get("username")    
+    
+    if password=="" :
+         users.update_one({'username': username}, {"$set": {"fullname":fullname, "email":email} })  
+
+    else:
+         users.update_one({'username': username}, {"$set": {"fullname":fullname, "email":email, "password":password} })  
+
+
+    return True

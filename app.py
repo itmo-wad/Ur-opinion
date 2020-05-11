@@ -6,8 +6,8 @@ import logging
 server="127.0.0.1"
 #server="https://ur-opinion.herokuapp.com/"
 def test_local_server():
-    if ( "127.0.0.1" in request.remote_addr ) :
-    #if ("ur-opinion.herokuapp.com" in request.referrer ) :    
+    #if ( "127.0.0.1" in request.remote_addr ) :
+    if ("ur-opinion.herokuapp.com" in request.referrer ) :    
         return True
     
     else :
@@ -260,7 +260,36 @@ def about():
               return render_template('about.html')
               
           return render_template('error.html'), 404
+
+#page setting
+@app.route('/setting')
+def setting():
+      # use the host of the server
+          if (test_local_server()) :
+              return setting_r()
+              
+          return render_template('error.html'), 404
+
+#page to save settings
+@app.route('/savesetting', methods=['POST'])
+def savesetting():
     
+    if session.get('logged_in'):
+              current_pass = request.form.get('current_pass')
+              email    = request.form.get('email').strip()
+              fullname = request.form.get('fullname').strip()
+              password = ""
+              if "password" in request.form:
+                  password = request.form.get('password')
+                  
+              savesetting_r(current_pass,password,email,fullname)
+              
+              return redirect("/")
+      
+    else:
+        return redirect("/login", code=302)  
+
+      
 #logout page    
 @app.route('/logout')
 def logout():

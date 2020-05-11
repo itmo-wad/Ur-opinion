@@ -53,7 +53,11 @@ function scroll_to_cards() {
   
       });
 
-
+      $("#setting").click(function () {
+        $("#cards").load("/setting");
+        high_light_tab("");
+  
+      });
   });
 
 
