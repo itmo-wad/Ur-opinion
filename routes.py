@@ -94,7 +94,6 @@ def removeteam_r(teamid):
        flash("Unable to remove the team")
        return False 
     
-   
 #for creating new tasks
 # def newtask_r():
 #     teamslist = getteams()
@@ -128,6 +127,18 @@ def removetask_r(taskid):
            return False 
     
     
+#skip current member
+def skipmember_r(taskid):
+    
+    if skip_member(taskid) :
+       flash('Current member was skipped successfully!')
+       return True    
+   
+    else:
+       flash("Unable to skip current member")
+       return False 
+    
+    
 #return tasks
 def getcards(taskslist):
     username = session.get("username")
@@ -148,7 +159,6 @@ def created_by_me_r():
     manager = session.get("username")
     
     taskslist = get_tasks_created_by_me(manager)   
-    
     return getcards(taskslist)
 
 

@@ -220,12 +220,9 @@ def check_exist_task(manager,name):
 
 
 #trigger for deadlines : move to next editor
-def next_editor(taskid):
-    
-        print("starttttttttttttt)")
+def next_editor(taskid):    
 
-        obj = tasks.find_one({"_id":ObjectId(taskid)})
-        
+        obj = tasks.find_one({"_id":ObjectId(taskid)})        
 
         #get currenteditor of the task 
         currenteditor = obj.get("currenteditor") + 1
@@ -247,7 +244,7 @@ def next_editor(taskid):
 
         return True
     
-    
+   
 #create task for a username
 #status in tasks means if task finished yet or not.     
 #status in taskmembers not used yet.            
@@ -306,7 +303,23 @@ def remove_task(taskid) :
     return True
 
 
-
+#skip current member
+def skip_member(taskid):
+   
+         #reset deadlines
+        #get eachperiod
+        
+        # interval= obj2.get("eachperiod")    
+        # if scheduler.get_job(taskid) is not None :
+        #     scheduler.remove_job(taskid)        
+        # scheduler.add_job(lambda: next_editor(taskid), 'interval', days=interval, id=taskid)        
+   
+        #move to the next editor
+        next_editor(taskid)        
+  
+        return True  
+    
+    
 #craete new idea
 # status means if idea accepted yet or not
 def addidea(memidea,writer,taskid):
@@ -329,22 +342,7 @@ def addidea(memidea,writer,taskid):
         obj2 = tasks.find_one({"_id":ObjectId(taskid)})
         
         if (obj2.get("manager") != writer):
-            #get currenteditor of the task 
-            currenteditor = obj2.get("currenteditor") + 1
             
-            #change currenteditor of task to assign to next
-            tasks.update_one({'_id': ObjectId(taskid)}, {"$set": {"currenteditor":currenteditor}})  
-            
-            
-            
-            #check if currenteditor = count of team member.. it means that the task finished
-            
-            #get the team of the task
-            teamid = obj2.get("teamid")
-            if (getcountteam(teamid)==currenteditor):
-                    tasks.update_one({'_id': ObjectId(taskid)}, {"$set": {"status":1}})  
-               
-                
             #reset deadlines
             
             #get eachperiod
@@ -353,6 +351,10 @@ def addidea(memidea,writer,taskid):
             #     scheduler.remove_job(taskid)        
             # scheduler.add_job(lambda: next_editor(taskid), 'interval', days=interval, id=taskid)        
         
+
+            #move to the next editor
+            next_editor(taskid)
+       
 
         return True
 
@@ -500,7 +502,7 @@ def get_tasks_created_by_me(manager):
             taskdic["desc"]=task["desc"]
             taskdic["datepub"]=task["datepub"]
             taskdic["eachperiod"]=task["eachperiod"]
-            taskdic["status"]=task["status"]     
+            taskdic["status"]=task["status"]          
             taskdic["currenteditor"]=task["currenteditor"]
             
             #get the teamname for teamid

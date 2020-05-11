@@ -37,12 +37,30 @@
               <!-- #send remove to server -->
               {% if task['manager'] == username %}
               <form method="POST" action="{{ url_for('removetask')}}" style="display: inline;">
-                <input type="text" id="taskid" name="taskid" value="{{task['taskid']}}" style="display: none; " />
+                <input type="text" id="removetaskid" name="taskid" value="{{task['taskid']}}" style="display: none; " />
 
                 <input style="position: absolute; right: 20px; top:20px; font-size: 11pt;" class="btn_create_team"
                   type="submit" id="submit" value="REMOVE TASK" onclick="return confirm_remove_task()" />
+
               </form>
+              <!-- /send remove to server -->
+
+              <!-- show skip member if manager and task not finished yet -->
+                {% if task['status']==0 %}
+              <!-- send to skip current editor -->
+              <form method="POST" action="{{ url_for('skipmember')}}" style="display: inline;">
+                <input type="text" id="skiptaskid" name="taskid" value="{{task['taskid']}}" style="display: none; " />
+
+                <input style="position: absolute; right: 20px; top:70px; font-size: 11pt;" class="btn_create_team"
+                  type="submit" id="submitskip" value="SKIP MEMBER" onclick="return confirm_skip_member()" />
+
+              </form>
+              <!-- /send to skip current editor -->
+                 {% endif %}
+
+
               {% endif %}
+
               <h4 class="card__heading">
                 <span class="card__heading-span">{{task['taskname']}}</span>
               </h4>

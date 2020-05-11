@@ -144,9 +144,7 @@ def removeteam():
 #           return render_template('error.html'), 404
           
     
- 
- 
-    
+   
 @app.route('/addtask',methods=['POST'])    
 def addtask():
       #for loggined users
@@ -179,6 +177,20 @@ def removetask():
        
        else:
            return redirect("/login", code=302)  
+
+#route to skip a member 
+@app.route('/skipmember',methods=['POST'])    
+def skipmember():
+     #for loggined users
+    if session.get('logged_in'):
+          taskid = request.form.get('taskid').strip()
+          
+          skipmember_r(taskid)
+          session["msg"]="loadcreatedtasks"
+          return redirect("/")
+       
+    else:
+        return redirect("/login", code=302)     
         
 #in progress   cards 
 #show tasks shared and created with only status ( not finished yet)        

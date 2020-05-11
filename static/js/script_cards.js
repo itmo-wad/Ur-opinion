@@ -60,3 +60,7 @@ function Validate_new_idea(ele){
 function confirm_remove_task(){
     return confirm('Are you sure you want remove the task?')
 }
+
+function confirm_skip_member(){
+    return confirm('Are you sure you want skip current member?')
+}
