@@ -1,6 +1,7 @@
 Flask==1.1.1
 pymongo==3.7.1
 requests==2.22.0
+apscheduler==3.6.3
 Click==7.0
 gunicorn==19.9.0
 itsdangerous==1.1.0

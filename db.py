@@ -3,9 +3,13 @@ import re
 import os
 import pymongo
 from bson import ObjectId
+from apscheduler.schedulers.background import BackgroundScheduler
+
+#start the scheduler
+scheduler = BackgroundScheduler()
+scheduler.start()
 
 #connect to datatbase
-
 
 #client = pymongo.MongoClient("mongodb://<dbuser>:<password>@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 #db = client["dbname"]
@@ -191,8 +195,13 @@ def remove_team(teamid) :
     for task in obj:
         ideas.remove({"taskid":str(task["_id"])})
         
+        #remove the scheduler if exists:
+        # if scheduler.get_job(str(task["_id"])) is not None:
+        #     scheduler.remove_job(str(task["_id"]))
+        
     tasks.remove({"teamid":teamid})    
     
+
     return True
 
 
@@ -208,11 +217,40 @@ def check_exist_task(manager,name):
     else :
             return False
         
+
+
+#trigger for deadlines : move to next editor
+def next_editor(taskid):
+    
+        print("starttttttttttttt)")
+
+        obj = tasks.find_one({"_id":ObjectId(taskid)})
         
+
+        #get currenteditor of the task 
+        currenteditor = obj.get("currenteditor") + 1
+        
+        #change currenteditor of task to assign to next
+        tasks.update_one({'_id': ObjectId(taskid)}, {"$set": {"currenteditor":currenteditor}})  
+        
+        
+        
+        #check if currenteditor = count of team member.. it means that the task finished
+        
+        #get the team of the task
+        teamid = obj.get("teamid")
+        if (getcountteam(teamid)==currenteditor):
+                tasks.update_one({'_id': ObjectId(taskid)}, {"$set": {"status":1}})
+                
+                #remove the scheduler
+                # scheduler.remove_job(str(taskid))                     
+
+        return True
+    
+    
 #create task for a username
 #status in tasks means if task finished yet or not.     
 #status in taskmembers not used yet.            
-
 def add_task(manager,name,desc,teamid ,datepub,eachperiod,currenteditor):
     
    #current user on user (0) 
@@ -242,6 +280,11 @@ def add_task(manager,name,desc,teamid ,datepub,eachperiod,currenteditor):
             "seen":"seen"
             })    
     
+    #run schedule to pass task to next member when finish his peroid
+    # interval = eachperiod
+    # scheduler.add_job(lambda: next_editor(str(_id)), 'interval', days=interval, id=str(_id))        
+    
+
     return True
 
 #remove task
@@ -254,7 +297,12 @@ def remove_task(taskid) :
     
     #delete ideas
     ideas.remove({"taskid":str(taskid)})
-            
+    
+
+    #remove the scheduler:
+    # if scheduler.get_job(taskid) is not None :
+    #    scheduler.remove_job(taskid)    
+   
     return True
 
 
@@ -268,6 +316,7 @@ def addidea(memidea,writer,taskid):
             "taskid"   : taskid,
             "status": 0
         })
+     
         
     #     #change status of task of this member to 0 (finished for him)
     #     #not used yet
@@ -294,8 +343,17 @@ def addidea(memidea,writer,taskid):
             teamid = obj2.get("teamid")
             if (getcountteam(teamid)==currenteditor):
                     tasks.update_one({'_id': ObjectId(taskid)}, {"$set": {"status":1}})  
-                         
+               
+                
+            #reset deadlines
+            
+            #get eachperiod
+            # interval= obj2.get("eachperiod")    
+            # if scheduler.get_job(taskid) is not None :
+            #     scheduler.remove_job(taskid)        
+            # scheduler.add_job(lambda: next_editor(taskid), 'interval', days=interval, id=taskid)        
         
+
         return True
 
 #return tasks list for "shared with me" to a member (status not matter)
