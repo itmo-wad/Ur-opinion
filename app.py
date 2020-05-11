@@ -3,6 +3,8 @@ import re
 import requests
 from logging.handlers import RotatingFileHandler
 import logging
+from datetime import date
+
 server="127.0.0.1"
 #server="https://ur-opinion.herokuapp.com/"
 def test_local_server():
@@ -152,7 +154,9 @@ def addtask():
           name = request.form.get('taskname').strip()
           desc = request.form.get('taskdesc').strip()
           teamid = request.form.get('slc_teams').strip()
-          datepub = request.form.get('datepublish').strip()
+          # datepub = request.form.get('datepublish').strip()
+          #get current date from server
+          datepub = str(date.today())
           eachperiod = request.form.get('eachperiod').strip()
           
           addtask_r(name , desc , teamid , datepub, eachperiod)

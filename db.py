@@ -1,6 +1,8 @@
 from flask import Flask, render_template,request,send_from_directory,session,flash
 import re
 import os
+from datetime import datetime
+from datetime import timedelta  
 import pymongo
 from bson import ObjectId
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -15,6 +17,7 @@ scheduler.start()
 #db = client["dbname"]
 client = pymongo.MongoClient(os.environ.get('MongoDb', None))
 db = client.get_default_database()
+
 
 #get users' collection
 users = db["users"]
@@ -238,8 +241,24 @@ def next_editor(taskid):
                 tasks.update_one({'_id': ObjectId(taskid)}, {"$set": {"status":1}})
                 
                 #remove the scheduler
-                # scheduler.remove_job(str(taskid))                     
+                # scheduler.remove_job(str(taskid))  
 
+   
+        #get info from current task
+        datepub = obj.get("datepub")
+        eachperiod = obj.get("eachperiod")
+        
+        #change to date type
+        date_object = datetime.strptime(datepub, '%Y-%m-%d').date()
+        deadline = date_object + timedelta(days=int(eachperiod))
+        
+        #change deadline for the next member
+        #get the next member and set new deadline for him  
+        taskmembers.update_one({'$and': [
+       {'userorder': currenteditor},
+       {'taskid': taskid} ]}, {"$set": {"deadline":str(deadline)}})
+        
+        
         return True
     
    
@@ -247,9 +266,9 @@ def next_editor(taskid):
 #status in tasks means if task finished yet or not.     
 #status in taskmembers not used yet.            
 def add_task(manager,name,desc,teamid ,datepub,eachperiod,currenteditor):
-    
-   #current user on user (0) 
 
+    
+   #current user on user (0)    
     _id = tasks.insert({
             "manager": manager,
             "taskname": name,
@@ -261,8 +280,17 @@ def add_task(manager,name,desc,teamid ,datepub,eachperiod,currenteditor):
             "currenteditor":0
         })
     
+  
     #get members of a team
     memlist = getteammembers(teamid)
+    
+   
+
+    #save the deadline for the first member
+    date_object = datetime.strptime(datepub, '%Y-%m-%d').date()
+    deadline = date_object + timedelta(days=int(eachperiod))
+    
+    
     #status 0 
     for member in memlist:
         taskmembers.insert({
@@ -270,10 +298,11 @@ def add_task(manager,name,desc,teamid ,datepub,eachperiod,currenteditor):
             "taskid" : str(_id),
             "teamid":teamid,
             "userorder":memlist.index(member),
-            "deadline":"dealine",
+            "deadline":str(deadline),
             "status":0,
             "seen":"seen"
-            })    
+            })   
+        deadline = deadline + timedelta(days=int(eachperiod))
     
     #run schedule to pass task to next member when finish his peroid
     # interval = eachperiod
@@ -435,11 +464,14 @@ def get_tasks_shared_with_me(member):
                     {'userorder': task["currenteditor"]},
                     {'taskid': str(task["_id"])} ]})  
               
+              #no obj4 if task finished
               if obj4:
                   taskdic["currenteditor"]=obj4.get("username")
+                  taskdic["deadline"]=obj4.get("deadline")
               
               else :
-                  taskdic["currenteditor"]=""       
+                  taskdic["currenteditor"]=""
+                  taskdic["deadline"]=""
              
               
               #add statusmem depending on the userorder
@@ -531,9 +563,13 @@ def get_tasks_created_by_me(manager):
             
             if obj4:
                 taskdic["currenteditor"]=obj4.get("username")
+                taskdic["deadline"]=obj4.get("deadline")
+
             
             else :
                 taskdic["currenteditor"]=""
+                taskdic["deadline"]=""
+
             
             
             #add ideas list to task dic

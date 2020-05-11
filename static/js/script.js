@@ -90,9 +90,9 @@ window.onload = function () {
     if (alertmsg != ""){
         alert(alertmsg);
     }
-
+    
+    // show current date in published date
     document.getElementById("datepublish").valueAsDate = new Date();
-
    
 };
 
