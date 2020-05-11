@@ -9,9 +9,10 @@ from bson import ObjectId
 
 #client = pymongo.MongoClient("mongodb://<dbuser>:<password>@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 #db = client["dbname"]
-client = pymongo.MongoClient(os.environ.get('MongoDb', None))
+# client = pymongo.MongoClient(os.environ.get('MongoDb', None))
+# db = client.get_default_database()
+client = pymongo.MongoClient("mongodb://admin:P29069921@ds141952.mlab.com:41952/heroku_kmd3257w?retryWrites=false&w=majority")
 db = client.get_default_database()
-
 
 #get users' collection
 users = db["users"]
@@ -64,7 +65,7 @@ def get_full_name(username):
         return user.get("fullname")
 
 #get the teams list for a username        
-def getteams():
+def getteams(details):
     manager  = session.get('username')
     teamslist = []
     memberslist=[]
@@ -79,21 +80,24 @@ def getteams():
         
         #get info for each team
         teamdic["teamid"]=str(team["_id"])
-        teamdic["manager"]=team["manager"]
         teamdic["teamname"]=team["teamname"]
-        teamdic["desc"]=team["desc"]
         
-        #get team members
-        members = teammembers.find({"teamid":str(team["_id"])})
-        
-        for member in members:
-            memberdic={}
-            memberdic["username"]=member.get("username")
-            memberdic["status"]=member.get("status")            
-
-            memberslist.append(memberdic)
+        #send details when click my teams
+        if (details=="details"):            
+            teamdic["manager"]=team["manager"]
+            teamdic["desc"]=team["desc"]
             
-        teamdic["members"]=memberslist   
+            #get team members
+            members = teammembers.find({"teamid":str(team["_id"])})
+            
+            for member in members:
+                memberdic={}
+                memberdic["username"]=member.get("username")
+                memberdic["status"]=member.get("status")            
+    
+                memberslist.append(memberdic)
+                
+            teamdic["members"]=memberslist   
  
         teamslist.append(teamdic)       
         

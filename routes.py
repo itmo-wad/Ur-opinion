@@ -10,7 +10,7 @@ def index_r():
     #get fullname
     username  = session.get('username')
     fullname = get_full_name(username)
-    teamslist = getteams()
+    teamslist = getteams("nodetails")
     return render_template('index.html',msg=msg,username=username,fullname=fullname,teamslist = teamslist) 
 
 #login page
@@ -47,7 +47,7 @@ def log_r(username,password):
 #return teams list
 def teams_r():
     
-    teamslist = getteams()
+    teamslist = getteams("details")
     
     return render_template('teams.html',teamslist = teamslist)  
 
