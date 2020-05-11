@@ -45,6 +45,15 @@ function scroll_to_cards() {
       high_light_tab("");
 
     });
+
+
+    $("#about").click(function () {
+        $("#cards").load("/about");
+        high_light_tab("");
+  
+      });
+
+
   });
 
 

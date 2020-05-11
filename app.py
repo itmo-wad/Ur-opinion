@@ -251,6 +251,15 @@ def archived():
               
           return render_template('error.html'), 404    
     
+
+#page about
+@app.route('/about')
+def about():
+      # use the host of the server
+          if (test_local_server()) :
+              return render_template('about.html')
+              
+          return render_template('error.html'), 404
     
 #logout page    
 @app.route('/logout')
