@@ -200,7 +200,7 @@ def shared_with_me():
 
 # create new idea from shared with me
 @app.route('/newidea', methods=['POST'])
-def add_idea():
+def addidea():
     # for loggined users
     if session.get('logged_in'):
         memidea = request.form.get('memidea').strip()
@@ -239,7 +239,7 @@ def setting():
 
 # page to save settings
 @app.route('/savesetting', methods=['POST'])
-def save_setting():
+def savesetting():
     if session.get('logged_in'):
         current_pass = request.form.get('current_pass')
         email = request.form.get('email').strip()
