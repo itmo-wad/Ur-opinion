@@ -7,8 +7,8 @@ import logging
 from datetime import date
 
 def test_local_server():
-    if ( "127.0.0.1" in request.remote_addr ) :
-    #if ("ur-opinion.herokuapp.com" in request.referrer ) :    
+    #if ( "127.0.0.1" in request.remote_addr ) :
+    if ("ur-opinion.herokuapp.com" in request.referrer ) :    
         return True
     
     else :
