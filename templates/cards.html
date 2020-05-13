@@ -83,7 +83,7 @@
                 </tr>
                 <tr>
                   <th>Team Manager: </th>
-                  <th><span class="card__subject">{{task['manager']}}</span></th>
+                  <th><span class="card__subject">{{task['fullname_manager']}}</span></th>
                 </tr>
                 <tr>
                   <td>Published Date: </td>
@@ -91,7 +91,7 @@
                 </tr>
                 <tr>
                   <td> Current Editor: </td>
-                  <td><span class="card__subject">{{task['currenteditor']}}</span></td>
+                  <td><span class="card__subject">{{task['fullname_currenteditor']}}</span></td>
                 </tr>
                 <tr>
                   <td> DeadLine: </td>
@@ -170,7 +170,7 @@
                   {% for idea in task['ideas'] %}
 
                   <div class="div_element">
-                    <div class="th_fullname">{{idea['writer']}} :</div>
+                    <div class="th_fullname">{{idea['fullname_writer']}} :</div>
                     <div class="th_idea"><span class="idea_span">{{idea['idea']}}</span></div>
                   </div>
                   {% endfor %}
