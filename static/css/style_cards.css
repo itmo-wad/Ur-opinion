@@ -1,0 +1,346 @@
+/* Reset */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.artboard {
+  display: contents;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  height: 100%;
+  position: absolute;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+@media (max-width: 37.5em) {
+  .artboard {
+    padding: 1rem;
+  }
+}
+
+.card {
+  flex: initial;
+  position: relative;
+  height: 30rem;
+  /* width: 23rem; */
+  width: 22.3rem;
+  -moz-perspective: 200rem;
+  perspective: 200rem;
+  margin: 2rem;
+  display: inline-block;
+}
+
+.card__side {
+  height: 52rem;
+  transition: all 0.8s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  /* We don't want to see the back part of the element. */
+  backface-visibility: hidden;
+  /* We don't want to see the back part of the element. */
+  border-radius: 3px;
+  overflow: hidden;
+  /* The image is overflowing the parent. */
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.15);
+  height: 30rem;
+}
+
+.card__side--front {
+  /* background-image: linear-gradient(to right bottom, rgba(30, 11, 54, 0.65), rgba(202, 55, 130, 0.7)), url(https://cdn.spacetelescope.org/archives/images/screen/heic0406a.jpg); */
+  /* background-image: linear-gradient(to right bottom, rgba(11, 10, 10, 0.65), rgba(5, 43, 47, 0.7)), url(/static/img/background2.jpg); */
+  border-radius: 20px;
+}
+
+
+.card_background_manager {
+  background-image: linear-gradient(to right bottom, rgba(11, 10, 10, 0.65), rgba(5, 43, 47, 0.7)), url(/static/img/background2.jpg);
+
+}
+
+.card_background_member {
+  background-image: linear-gradient(to right bottom, rgba(30, 11, 54, 0.65), rgba(202, 55, 130, 0.7)), url(https://cdn.spacetelescope.org/archives/images/screen/heic0406a.jpg);
+
+}
+
+.card__side--back {
+  background-color: #fff;
+  transform: rotateY(180deg);
+  border-radius: 20px;
+}
+
+.card:hover .card__side--back {
+  transform: rotateY(0);
+}
+
+.card:hover .card__side--front {
+  transform: rotateY(-180deg);
+}
+
+.card__theme {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* top: 54%; */
+  height: 90%;
+  width: 90%;
+  text-align: center;
+}
+
+.card__theme-box {
+  color: #fff;
+  margin-bottom: 8rem;
+  height: 100%;
+}
+
+.card__subject {
+  font-family: "Inconsolata", monospace;
+  /* letter-spacing: 0.8rem; */
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  color: black;
+}
+
+.card__title {
+
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 100;
+  height: 30%;
+  white-space: pre-line;
+  overflow: hidden;
+  padding-top: 30px;
+  color: lavenderblush;
+}
+
+.card__desc {
+  height: 70%;
+  padding: 20px;
+  text-align: left;
+  white-space: pre-line;
+  overflow: hidden;
+}
+
+.card__cover {
+  position: relative;
+  background-size: cover;
+  height: 7rem;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  /* background-image: linear-gradient(to top right, rgba(30, 11, 54, 0.65), rgba(202, 55, 130, 0.65)), url(https://cdn.spacetelescope.org/archives/images/screen/heic0406a.jpg); */
+  /* background-image: linear-gradient(to right bottom, rgba(11, 10, 10, 0.65), rgba(5, 43, 47, 0.7)), url(/static/img/background2.jpg); */
+}
+
+.card__heading {
+  text-align: center;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  width: 98%;
+}
+
+.card__heading-span {
+
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  padding: 1rem 1.5rem;
+  color: #fff;
+}
+
+.card__details {
+  font-family: "Inconsolata", monospace;
+
+  top: 100px;
+  position: absolute;
+  width: 100%;
+  height: 70%;
+
+}
+
+/* .ul_details {
+  list-style: none;
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+  overflow: auto;
+
+}
+.ul_details li {
+  text-align: center;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+.ul_details li:not(:last-child) {
+  border-bottom: 1px solid #eee;
+} */
+
+@media only screen and (max-width: 37.5em),
+only screen and (hover: none) {
+  .card {
+    height: auto;
+    border-radius: 3px;
+    background-color: #fff;
+    box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.15);
+  }
+
+  .card__side {
+    height: auto;
+    position: relative;
+    box-shadow: none;
+  }
+
+  .card__side--front {
+    clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .card__side--back {
+    transform: rotateY(0);
+  }
+
+  .card:hover .card__side--front {
+    transform: rotateY(0);
+  }
+
+  .card__details {
+    padding: 3rem 2rem;
+  }
+
+  .card__theme {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: translate(0);
+    width: 100%;
+    padding: 5rem 4rem 1.5rem 4rem;
+    text-align: right;
+  }
+
+  .card__theme-box {
+    margin-bottom: 1.5rem;
+  }
+
+  .card__title {
+    font-size: 3rem;
+  }
+}
+
+.divtail {
+
+  bottom: 1px;
+  position: absolute;
+  /* background-image: linear-gradient(to top right, rgba(30, 11, 54, 0.65), rgba(202, 55, 130, 0.65)), url(https://cdn.spacetelescope.org/archives/images/screen/heic0406a.jpg); */
+  /* background-image: linear-gradient(to right bottom, rgba(11, 10, 10, 0.65), rgba(5, 43, 47, 0.7)), url(/static/img/background2.jpg); */
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  color: antiquewhite;
+  text-align: center;
+
+}
+
+.divtail:hover {
+  box-shadow: 0 5px 35px 0px rgba(0, 0, 0, .1);
+  color: burlywood;
+  transform: scale(1.6);
+  cursor: pointer;
+  padding: 6px;
+}
+
+
+.table_details {
+
+  width: 100%;
+  height: 100%;
+  margin-left: 10px;
+  font-size: 10pt;
+
+}
+
+.table_ideas {
+  width: 100%;
+  height: 100%;
+}
+
+.table_ideas tr {
+  height: 70px;
+  display: table;
+  width: 100%;
+}
+
+.div_element {
+  height: 85px;
+  width: 99%;
+  display: block;
+  box-shadow: 10px 2px 10px rgba(0, 0, 0, 0.22);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+
+.th_fullname {
+  /* width: 100px; */
+  width: 20%;
+  float: left;
+  height: 100%;
+  align-items: center;
+  display: inline-grid;
+  white-space: pre-line;
+  overflow: auto;
+  margin-right: 3px;
+
+}
+
+.th_idea {
+  text-align: left;
+  height: 100%;
+  width: 80%;
+  display: inline-grid;
+  align-items: center;
+  white-space: pre-line;
+
+
+}
+
+.idea_span {
+
+  height: 100%;
+  margin-top: 15px;
+  overflow: auto;
+  display: block;
+}
+
+.memidea {
+
+  /* box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.22); */
+  border-radius: 10px;
+  resize: none;
+  padding: 10px;
+  height: 65px;
+  width: 95%;
+  margin: 10px;
+
+}
+
+.memidea:focus {
+  outline: none !important;
+  border: none;
+  box-shadow: 0px 0 10px #042951;
+}

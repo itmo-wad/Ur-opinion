@@ -1,0 +1,51 @@
+<html>
+
+<head>
+  <title>Login</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <!-- Add  js and css -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/style_login.css">
+
+
+</head>
+
+<body>
+
+  <div class="container">
+
+
+    <div class="form-style">
+      <h2>Login to Ur-opinion</h2>
+
+      <form method="POST" action="{{ url_for('log')}}">
+
+        <i class="fa fa-user icon"> </i>
+        <input type="text" name="username" placeholder="Username" autocomplete="off" />
+
+
+        <i class="fa fa-key icon"> </i>
+        <input type="password" name="password" placeholder="Password" />
+
+
+        {% for message in get_flashed_messages() %}
+        <p class="error">{{ message }}</p>
+        {% endfor %}
+
+        <input type="submit" value="Login" style="margin-right: 0;" />
+
+
+      </form>
+      <div style="text-align: center;">
+        I don't have an account yet?
+        <br />
+        <br />
+        <a href="/reg" class="sign">SIGN UP</a>
+
+        <!-- <a href="{{ url_for('reg')}}" class="sign">SIGN UP</a> -->
+      </div>
+
+    </div>
+  </div>

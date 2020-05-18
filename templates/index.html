@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Ur-Opinion</title>
+
+  <link rel="stylesheet" media="all" href="/static/css/style.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="/static/css/style_login.css"> -->
+  <link rel="stylesheet" type="text/css" href="/static/css/style_teams_tasks.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/style_cards.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/about.css">
+  <link rel="stylesheet" media="all" href="/static/css/style_setting.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+  <script src="/static/js/jquery-3.5.0.min.js"></script>
+  <script type="text/javascript" src="/static/js/setting.js"></script>
+  <script type="text/javascript" src="/static/js/script.js"></script>
+  <!-- <script type="text/javascript" src="/static/js/script_tasks.js"></script> -->
+  <script type="text/javascript" src="/static/js/script_teams.js"></script>
+  <script type="text/javascript" src="/static/js/script_cards.js"></script>
+
+
+</head>
+
+<body>
+
+  <!-- Main navbar -->
+  <div class="navbar navbar-expand-md navbar-dark bg-indigo navbar-static">
+
+    <!-- Header with logo -->
+    <a class="navbar-brand" href="{{ url_for('index')}}">
+      <img src="/static/img/logo.png" class="logo" />
+      <span>
+        Ur-Opinion
+      </span>
+    </a>
+    <!-- /header with logo -->
+
+    <!-- Navbar content -->
+    <div class="collapse navbar-collapse" id="navbar-mobile">
+
+      <ul class="navbar-nav ml-auto">
+
+        <!--  account symbole -->
+        <div class="dropdown">
+
+          <div class="dropdownsub">
+            <button onclick="showdrop()" class="dropbtn">{{fullname}}</button>
+
+            <img src="/static/img/login.png" class="loginlogo" onclick="showdrop()" />
+          </div>
+
+          <div id="myDropdown" class="dropdown-content">
+            <a id="my_teams">My Teams</a>
+            <a id="setting">Account settings</a>
+            <a id="about">About</a>
+            <a href="/logout">Logout</a>
+          </div>
+
+        </div>
+
+        </li>
+      </ul>
+    </div>
+    <!-- /navbar content -->
+  </div>
+  <!-- /main navbar -->
+
+  <!-- Page content -->
+  <div class="page-content">
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+
+      <!-- dashboad  -->
+      <div class="page-header page-header-light">
+        <div class="page-header-content header-elements-md-inline">
+          <div class="page-title d-flex">
+            <h4> <span class="font-weight-semibold">Tasks Dashboard</span> </h4>
+            <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+          </div>
+
+          <!-- tasks in dashboard -->
+          <div class="card-body p-0">
+
+            <button class="nav-link " id="btn_in_progress" data-remote="true" href="#cards">
+              In Progress
+            </button>
+
+            <button class="nav-link " id="btn_created_by_me" data-remote="true">
+              Created By Me
+            </button>
+
+            <button class="nav-link " id="btn_shared_with_me" data-remote="true">
+              Shared With Me
+            </button>
+
+            <button class="nav-link " id="btn_archived" data-remote="true" style="display: none;">
+              Archived
+            </button>
+
+          </div>
+
+          <!-- new task button -->
+          <div class="header-elements d-none">
+            <button class="nav-link " id="btn_new_task">
+              New Task
+            </button> </div>
+        </div>
+      </div>
+
+
+      <!-- Content area -->
+      <div class="content">
+        <!-- Inner container -->
+
+        <div class="d-md-flex align-items-md-start">
+
+          <!-- Right content -->
+          <div class="w-100">
+
+            <!-- Basic card -->
+            <div class="basiccard border-left-1 border-left-blue-400 rounded-left-0">
+
+              <div class="card-body" id="cards">
+
+                Show info about Ur-Opinion here
+
+              </div>
+            </div>
+            <!-- /basic card -->
+          </div>
+          <!-- /right content -->
+        </div>
+        <!-- /inner container -->
+      </div>
+      <!-- /content area -->
+
+      <!-- Footer -->
+      <div class="navbar navbar-expand-lg navbar-light">
+
+        <div class="navbar-collapse collapse" id="navbar-footer">
+          <span class="navbar-text">
+            ITMO WAD 2020
+          </span>
+
+        </div>
+      </div>
+
+      <!-- /footer -->
+
+    </div>
+    <!-- /main content -->
+
+  </div>
+  <!-- /page content -->
+
+  <!-- div for new task button-->
+  <div id="preview" class="prev_block">
+    <span class="helper"></span>
+
+    <!-- basic content -->
+    <div id="div_content" class="div_content form-style-teams-tasks">
+
+      <h2 style="color: white; font-weight: bold; margin: 0;">Create New Task</h2>
+
+      <form method="POST" action="{{ url_for('addtask')}}">
+
+        <input type="text" id="taskname" name="taskname" placeholder="Add Task Name" autocomplete="off" />
+
+        <input type="text" id="taskdesc" name="taskdesc" placeholder="Add task description" autocomplete="off" />
+
+        <!-- teams list -->
+        <div class="divselect">
+          SELECT TEAM:
+          <div class="select">
+            <select name="slc_teams" id="slc_teams">
+              {% for team in teamslist %}
+              <option value="{{team['teamid']}}" SELECTED>{{team["teamname"]}}</option>"
+              {% endfor %}
+            </select>
+          </div>
+          <a id="showteams" onclick="show_teams()"
+            style="float: right;  margin: 10px; text-decoration: underline; color: #011d35;">Edit My Teams</a>
+        </div>
+
+        <!-- /teams list -->
+
+        <!-- start the task or save for later
+        <p class="onoff">
+          <input type="checkbox" value="1" id="checkboxID">
+          <label for="checkboxID"></label>
+        </p> -->
+
+        <!-- date publish -->
+        <div class="divdate">
+          PUBLISHED DATE:
+          <input type="date" name="datepublish" id="datepublish" readonly>
+        </div>
+        <!-- /date publish -->
+
+        <!-- deadline for each member-->
+        <div class="divdeadline">
+          INDIVIDUAL TIME:
+          <input type="number" id="eachperiod" name="eachperiod" value="1">
+          Days
+        </div>
+        <!-- /deadline for each member--->
+
+        <input class="nav-link btninput" type="submit" id="submit" value="SAVE"
+          onclick="return Validate_new_task(); " />
+
+        <div class="nav-link btndiv " onclick="hide_new_task()">CLOSE</div>
+
+      </form>
+
+    </div>
+  </div>
+  <!-- /div for new task button-->
+
+  <!-- hidden data and alerts -->
+  <div>
+
+    <p id="divtoload" style="display:none;">{{msg}}</p>
+
+    <p id="divusername" style="display:none;">{{username}}</p>
+
+    {% for message in get_flashed_messages() %}
+    <p id="alertmsg" style="display:none;">{{ message }}</p>
+    {% endfor %}
+
+
+  </div>
+  <!-- hidden data and alerts -->
+
+</body>
+
+</html>

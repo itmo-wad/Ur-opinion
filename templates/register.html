@@ -1,0 +1,59 @@
+<html>
+
+<head>
+  <title>Register</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <!-- Add  js and css -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/style_login.css">
+  <script type="text/javascript" src="/static/js/reg.js"></script>
+
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="form-style">
+      <h2>Sign up to Ur-Opinion</h2>
+
+      <form method="POST" action="{{ url_for('reg')}}">
+
+        <i class="fa fa-user icon"> </i>
+        <input type="text" id="username" name="username" placeholder="Username" autocomplete="off" />
+
+        <i class="fa fa-user icon"> </i>
+        <input type="text" id="fullname" name="fullname" placeholder="Full Name" autocomplete="off" />
+
+        <i class="fa fa-envelope icon"> </i>
+        <input type="email" id="email" name="email" placeholder="Your Email" autocomplete="off" />
+
+        <i class="fa fa-key icon"> </i>
+        <input type="password" id="pass" name="password" placeholder="Password" />
+
+        <i class="fa fa-key icon"> </i>
+        <input type="password" id="c_pass" name="re_password" placeholder="Repeat Password" onchange="AlertPass()" />
+
+        {% for message in get_flashed_messages() %}
+        <p class="error">{{ message }}</p>
+        {% endfor %}
+
+        <input type="submit" id="submit" value="Register" onclick="return Validate();" style="margin-right: 0;" />
+
+
+      </form>
+
+      <div style="text-align: center;">
+        I already have an account:
+        <br />
+        <br />
+        <a href="{{ url_for('index')}}" class="sign">SIGN IN</a>
+
+      </div>
+
+
+
+    </div>
+  </div>

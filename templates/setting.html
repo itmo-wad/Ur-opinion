@@ -1,0 +1,67 @@
+<html>
+
+<head>
+  <title>Register</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+
+<body>
+
+  <div style="margin: 0 auto;">
+    <div class="form-style-setting">
+      <h2>ACCOUNT SETTINGS</h2>
+
+      <form method="POST" action="{{ url_for('savesetting')}}" style="text-align: center;">
+
+        FullName
+        <br />
+        <div style="text-align: left;">
+          <i class="fa fa-user icon"> </i>
+          <input type="text" id="fullname" name="fullname" value="{{settinglist['fullname']}}" placeholder="Full Name"
+            autocomplete="off" onchange="active_save();" />
+        </div>
+
+        <br />
+        Email
+        <br />
+        <div style="text-align: left;">
+          <i class="fa fa-envelope icon"> </i>
+          <input type="email" id="email" name="email" value="{{settinglist['email']}}" placeholder="Your Email"
+            autocomplete="off" onchange="active_save();" />
+        </div>
+
+
+        <br />
+        New Password
+        <br />
+        <div style="text-align: left;">
+          <i class="fa fa-key icon"> </i>
+          <input type="password" id="pass" name="password" placeholder="New Password" onchange="active_save();" />
+        </div>
+
+
+        <br />
+        Repeat Passowrd
+        <br />
+        <div style="text-align: left;">
+          <i class="fa fa-key icon"> </i>
+          <input type="password" id="c_pass" name="re_password" placeholder="Repeat Password" onchange="AlertPass()" />
+        </div>
+
+        <!-- store current password -->
+        <input type="password" id="current_pass" name="current_pass" style="display: none;" />
+
+
+        {% for message in get_flashed_messages() %}
+        <p class="error">{{ message }}</p>
+        {% endfor %}
+
+        <input type="submit" id="setting_submit" value="SAVE" onclick="return validate_setting();"
+          style="margin-right: 0; display: none;" />
+
+
+      </form>
+
+    </div>
+  </div>

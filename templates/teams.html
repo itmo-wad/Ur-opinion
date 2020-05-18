@@ -1,0 +1,152 @@
+<html>
+
+<head>
+  <title>My Teams</title>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" type="text/css" href="/static/css/style_teams_tasks.css"> -->
+  <!-- <script type="text/javascript" src="/static/js/script.js"></script> -->
+</head>
+
+<body>
+
+  <div class="form-style-teams-tasks">
+
+    <h2>My Teams
+      <a class="btn_create_team" onclick="show_new_team()">Create New Team</a>
+    </h2>
+
+    <!-- list teams -->
+    <div class="list-teams">
+
+      <ol>
+        {% for team in teamslist %}
+        <li id="btn_{{team['teamid']}}" onclick="show_team(this);">
+          {{team['teamname']}}
+
+        </li>
+        {% endfor %}
+      </ol>
+
+    </div>
+    <!-- /list teams -->
+
+
+    <!-- div for new team-->
+    <div id="preview_team" class="prev_block">
+
+      <span class="helper"></span>
+
+      <!-- content to show -->
+      <div id="div_content" class="div_content form-style-teams-tasks">
+
+        <h2 style="color: white; font-weight: bold; margin: 0;">Create New Team</h2>
+
+        <form method="POST" action="{{ url_for('addteam')}}" style=" height: 400px;">
+
+          <!-- basic content in form -->
+          <div style="top: 0; height: 90%; overflow-y: auto;">
+
+            <input type="text" id="teamname" name="teamname" placeholder="Add Team Name" autocomplete="off" />
+
+            <input type="text" id="teamdesc" name="teamdesc" placeholder="Add Team description" autocomplete="off" />
+
+            <br />
+            TEAM MEMBERS
+            <br />
+
+            <!-- list of members -->
+            <div class="div_new_mem" id="new_chq">
+
+              <input type="text" id="mem_add" name="mem_add" placeholder="Add Username for a Team Member"
+                autocomplete="off" />
+
+              <Span id="teams_clear_list" onclick="teams_clear_list()" class="nav-link"> Clear</Span>
+
+              <Span id="teams_add_mem" onclick="teams_add_mem()" class="nav-link">Add</Span>
+              <!-- <input type="hidden" value="1" id="total_chq"> -->
+            </div>
+            <!-- /list of members -->
+
+            <textarea class="textarea_mem" id="mem_list" name="mem_list" placeholder="Team Members" autocomplete="off"
+              readonly></textarea>
+
+          </div>
+          <!-- /basic content in form -->
+
+
+          <input class="nav-link btninput " type="submit" id="submit" value="SAVE"
+            onclick="return Validate_new_team()" />
+
+          <div class="nav-link btndiv " onclick="hide_new_team()">CLOSE</div>
+
+        </form>
+
+      </div>
+      <!-- /content to show -->
+
+    </div>
+    <!-- /div for newteam -->
+
+
+
+    <!-- div to show team details -->
+    {% for team in teamslist %}
+    <div id="div_{{team['teamid']}}" class="prev_block">
+
+      <span class="helper"></span>
+
+      <!-- content to show -->
+      <div id="div_content" class="div_content form-style-teams-tasks">
+
+        <h2 style="color: white; font-weight: bold; margin: 0;">{{team['teamname']}}</h2>
+
+        <!-- team description -->
+        <br />
+        TEAM DESCRIPTION
+        <br />
+        <div style="height: 15%; overflow: auto;font-size: 12pt; margin: 10px; color: black;">
+          <p>
+            {{team['desc']}}
+          </p>
+        </div>
+        <!-- /team description -->
+
+        <!-- members -->
+        <br />
+        TEAM MEMBERS
+        <br />
+        <div id="listideas_{{team['teamid']}}" style="height: 40%; font-size: 12pt; overflow: auto; color: black;">
+
+          <!-- make row for each idea in ideas list-->
+          {% for member in team['members'] %}
+          <p style="margin: 10px;">{{member['username']}}</p>
+          {% endfor %}
+
+        </div>
+        <!-- /members -->
+
+        <!-- remove a team -->
+        <form method="POST" action="{{ url_for('removeteam')}}" style="display: inline;">
+
+          <input type="text" id="teamid" name="teamid" value="{{team['teamid']}}" style="display: none; " />
+
+
+          <input style="width:25%;" class="nav-link btninput" type="submit" id="remove_{{team['teamid']}}"
+            value="REMOVE TEAM" onclick="return confirm_remove_team(this);" />
+
+        </form>
+
+        <div class="nav-link btndiv" id="close_{{team['teamid']}}" onclick="hide_team(this)">CLOSE</div>
+
+        <!-- /remove a team -->
+
+      </div>
+      <!-- /content to show -->
+
+    </div>
+    <!-- /div to show team details -->
+
+    {% endfor %}
+
+
+  </div>
