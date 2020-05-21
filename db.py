@@ -16,6 +16,7 @@ scheduler.start()
 client = pymongo.MongoClient(os.environ.get('MongoDb', None))
 db = client.get_default_database()
 
+
 #get users' collection
 users = db["users"]
 users.create_index("username")
@@ -588,7 +589,8 @@ def get_tasks_in_progress(username):
 #get setting
 def get_setting(username):
     settinglist={}
-    
+    settinglist["username"]=username
+
     obj = users.find_one({"username":username})
     
     settinglist["fullname"]=obj.get("fullname")
