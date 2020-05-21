@@ -12,10 +12,8 @@ scheduler = BackgroundScheduler()
 scheduler.start()
 
 #connect to datatbase
-
 client = pymongo.MongoClient(os.environ.get('MongoDb', None))
 db = client.get_default_database()
-
 
 #get users' collection
 users = db["users"]

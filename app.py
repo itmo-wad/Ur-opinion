@@ -8,7 +8,7 @@ import logging
 from datetime import date
 
 def test_local_server():
-    
+    #if ( "127.0.0.1" in request.remote_addr ) :
     if ("ur-opinion.herokuapp.com" in request.referrer ) :    
         return True
     
@@ -300,18 +300,17 @@ def logout():
 def page_not_found(e):
     return render_template('error.html'), 404
 
-#method not allowed    
-@app.errorhandler(405)
-def method_not_allowed(e):
-    return render_template('error.html'), 405
- 
-@app.errorhandler(500)
-def internal_error(e):
-    requests.post("https://notify.bot.codex.so/u/1L9N0D7I", {"message": f"*Exception* on the server: '{str(e)}'" , "parse_mode":"Markdown"})
-    #Team 3
-    #requests.post("https://notify.bot.codex.so/u/8B2LDPRZ", {"message": f"*Exception* on the server: '{str(e)}'" , "parse_mode":"Markdown"})
-    return str(e), 500
-    
+
+#handle all other errors:
+@app.errorhandler(Exception)
+def all_exception_handler(e):
+    #return str(e), 500
+   if request.url :
+       error_url = request.url
+       requests.post("https://notify.bot.codex.so/u/1L9N0D7I", {"message": f"*Exception* on the server: '{str(e)}' \n URL :'{error_url}'" , "parse_mode":"Markdown"})
+   return render_template('error.html'), 404
+
+
 # logging     
 handler = logging.handlers.RotatingFileHandler('logs/app.log',maxBytes=32 , backupCount=2)
 handler.setLevel(logging.DEBUG)
