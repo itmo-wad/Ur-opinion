@@ -1,13 +1,14 @@
 from routes import *
 from flask import Flask, render_template,request,redirect
 import re
+import os
 import requests
 from logging.handlers import RotatingFileHandler
 import logging
 from datetime import date
 
 def test_local_server():
-    #if ( "127.0.0.1" in request.remote_addr ) :
+    
     if ("ur-opinion.herokuapp.com" in request.referrer ) :    
         return True
     
@@ -19,8 +20,8 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 #secret key for the session
-app.secret_key = "super secret key"
-
+#set value from environment in heroku
+app.secret_key = os.environ.get('SecretKey', None)
 
 @app.route('/favicon.ico')
 def favicon():
