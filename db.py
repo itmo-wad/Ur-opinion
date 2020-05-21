@@ -12,7 +12,6 @@ scheduler = BackgroundScheduler()
 scheduler.start()
 
 #connect to datatbase
-
 client = pymongo.MongoClient(os.environ.get('MongoDb', None))
 db = client.get_default_database()
 
@@ -588,7 +587,8 @@ def get_tasks_in_progress(username):
 #get setting
 def get_setting(username):
     settinglist={}
-    
+    settinglist["username"]=username
+
     obj = users.find_one({"username":username})
     
     settinglist["fullname"]=obj.get("fullname")
