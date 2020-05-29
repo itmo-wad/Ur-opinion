@@ -30,7 +30,7 @@ def favicon():
 
 @app.before_request
 def clear_trailing():
-    rp = request.path 
+    rp = request.path
     if rp != '/' and rp.endswith('/'):
         return redirect(rp[:-1])
     if rp.endswith("index"):
@@ -42,8 +42,7 @@ def clear_trailing():
 def index():    
       #check if the user logged in, if not redirect to login html
     if session.get('logged_in'):
-         return index_r()          
-          
+         return index_r()
     else:
         return redirect("/login", code=302)
    
@@ -59,14 +58,13 @@ def log():
     else:
          #post method
         if request.method == 'POST':
-                username = request.form.get('username').strip()
-                password = request.form.get('password')
-                if log_r(username,password) :
-                    return redirect("/")
-                
+            username = request.form.get('username').strip()
+            password = request.form.get('password')
+            if is_user_exists_in_db(username, password) :
+                return redirect("/")
+
         #if get method , or wrog logging in 
         return render_template('login.html')
-    
 
 #register page
 @app.route('/register', methods=['GET','POST'])
@@ -74,19 +72,21 @@ def reg():
      #for loggined users
     if session.get('logged_in'):
          return redirect("/")
-    
     # otherwise
     else:
         #post method
         if request.method == 'POST':
-                username = request.form.get('username').strip()
-                password = request.form.get('password')
-                email    = request.form.get('email').strip()
-                fullname = request.form.get('fullname').strip()
-                if reg_r(username,password,email,fullname):
-                     return redirect("/login")
-                 
-         #if get method , or user already exists        
+            username = request.form.get('username').strip()
+            password = request.form.get('password')
+            email    = request.form.get('email').strip()
+            fullname = request.form.get('fullname').strip()
+            if reg_r(username,password,email,fullname):
+                print('here')
+                return redirect("/login")
+            else:
+                print("error")
+
+         #if get method , or user already exists
         return render_template('register.html')  
 
 
@@ -98,7 +98,7 @@ def teams():
               return teams_r() 
               
           return render_template('error.html'), 404
-  
+
             
 #route to add new teams 
 @app.route('/addteam',methods=['POST'])    

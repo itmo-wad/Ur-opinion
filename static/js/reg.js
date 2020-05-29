@@ -3,7 +3,6 @@ function AlertPass() {
     var confirmPassword = document.getElementById("c_pass").value;
     if (password != confirmPassword) {
         alert("Passwords do not match.");
-       
     }
 }
 
@@ -39,7 +38,6 @@ function Validate() {
         alert("Passwords do not match.");
         return false;       
     }
-
  
     return true;
 }
