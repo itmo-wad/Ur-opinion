@@ -1,11 +1,10 @@
-from flask import Flask, render_template,request,send_from_directory,session,flash
-import re
-import os
-from datetime import datetime
-from datetime import timedelta  
+import re, os
 import pymongo
+from flask import Flask, render_template,request,send_from_directory,session,flash
+from datetime import datetime, timedelta
 from bson import ObjectId
 from apscheduler.schedulers.background import BackgroundScheduler
+from flask_bcrypt import generate_password_hash, check_password_hash
 
 #start the scheduler
 scheduler = BackgroundScheduler()
@@ -35,14 +34,13 @@ tasks = db["tasks"]
 ideas = db["ideas"]
 
 #add user from register
-def add_user_to_db(username, password,email,fullname):
-      users.insert({
-            "username": username,
-            "password": password,
-            "email"   : email,
-            "fullname": fullname
-        })
- 
+def add_user_to_db(username, password, email, fullname):
+    users.insert({
+        "username": username,
+        "password": generate_password_hash(password).decode('utf8'),
+        "email": email,
+        "fullname": fullname
+    })
     
 #check if username already exists    
 def check_user_in_db(username):
@@ -56,16 +54,14 @@ def check_user_in_db(username):
 
 #check if the passowrd is correct
 def check_pass_in_db(username,password):
-        user=users.find_one({"username":username})
-        if user["password"] == password:
-            return True
+    user = users.find_one({ "username": username })
+    return check_password_hash(user["password"], password)
   
       
 #return full name of ausername
 def get_full_name(username):
     user = users.find_one({"username":username})
-    if user : 
-       
+    if user:
         return user.get("fullname")
 
 
@@ -600,11 +596,13 @@ def get_setting(username):
 def save_setting(password,email,fullname):  
     username = session.get("username")    
     
-    if password=="" :
-         users.update_one({'username': username}, {"$set": {"fullname":fullname, "email":email} })  
-
+    if password == "" :
+         users.update_one({'username': username}, {"$set": {"fullname":fullname, "email":email} })
     else:
-         users.update_one({'username': username}, {"$set": {"fullname":fullname, "email":email, "password":password} })  
+         users.update_one(
+             {'username': username},
+             {"$set": {"fullname": fullname, "email" :email, "password": generate_password_hash(password).decode('utf8')}}
+         )
 
 
     return True

@@ -15,31 +15,31 @@ def index_r():
 
 
 #login page
-def reg_r(username,password,email,fullname):    
+def reg_r(username, password, email, fullname):
     #check if user already exsits
     if check_user_in_db(username) :
-                     flash('Username aleady exists!')
-                     session['logged_in'] = False
-                     return False
+         flash('Username aleady exists!')
+         session['logged_in'] = False
+         return False
     else:
-        add_user_to_db(username, password,email,fullname)
+        add_user_to_db(username, password, email, fullname)
         session['logged_in'] = False
         return True
     
 
 #register page
-def log_r(username,password):
+def is_user_exists_in_db(username, password):
     if check_user_in_db(username):
-            if check_pass_in_db(username, password):
-                session['logged_in'] = True
-                session['username'] = username
-                return True
-            else :
-                flash('Wrong Password!')
-                session['logged_in'] = False
-    else:
-            flash('User not exsit!!')
+        if check_pass_in_db(username, password):
+            session['logged_in'] = True
+            session['username'] = username
+            return True
+        else :
+            flash('Wrong Password!')
             session['logged_in'] = False
+    else:
+        flash('User not exists!!')
+        session['logged_in'] = False
                     
     return False
 
@@ -197,8 +197,7 @@ def savesetting_r(current_pass,password,email,fullname):
         
         if save_setting(password,email,fullname):        
            flash('Setting saved successfully!')       
-           return True    
-    
+           return True
         else:
            flash("Unable save new settings")
            return False  
