@@ -81,10 +81,7 @@ def reg():
             email    = request.form.get('email').strip()
             fullname = request.form.get('fullname').strip()
             if reg_r(username,password,email,fullname):
-                print('here')
                 return redirect("/login")
-            else:
-                print("error")
 
          #if get method , or user already exists
         return render_template('register.html')  
