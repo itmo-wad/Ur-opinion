@@ -231,6 +231,7 @@
 
     {% for message in get_flashed_messages() %}
     <p id="alertmsg" style="display:none;">{{ message }}</p>
+    <div id="toast"><div id="img">INFO</div><div id="desc">{{ message }}</div></div>
     {% endfor %}
 
 

@@ -88,7 +88,10 @@ window.onload = function () {
         high_light_tab("btn_in_progress");
     }
     if (alertmsg != ""){
-        alert(alertmsg);
+        //alert(alertmsg);
+	var x = document.getElementById("toast")
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
     }
     
     // show current date in published date
